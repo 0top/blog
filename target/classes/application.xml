@@ -16,6 +16,7 @@
        
 
     <import resource="classpath:spring-druid.xml"/>
+    <import resource="classpath:spring-tx.xml"/>
     
     <context:component-scan base-package="top.zerotop.blog.dao"/>  
     <context:component-scan base-package="top.zerotop.blog.service"/>
