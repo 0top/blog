@@ -92,7 +92,7 @@
           scope="prototype">
         <property name="patterns">
             <list>
-                <value>com.yunzhi.blog.service.*</value> 
+                <value>top.zerotop.blog.service.*</value> 
             </list>
         </property>
     </bean>
