@@ -14,7 +14,7 @@
 
     <mvc:annotation-driven />
     <!-- 扫描controller包，使注解生效 -->
-    <context:component-scan base-package="top.zerotop.blog.controller"/>
+    <context:component-scan base-package="top.zerotop.blog.controller.api"/>
     
     
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
