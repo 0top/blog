@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc 
+       http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+       
+    <bean id="AdminRealm" class="top.zerotop.blog.AdminRealm">
+        <property name="authorizationCachingEnabled" value="false"/> 
+    </bean>
+    
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+         <property name="authenticator" ref="CustomModularRealmAuthenticator"/>
+         <property name="authorizer" ref="AdminRealm"/>
+        <property name="sessionManager" ref="sessionManager" />  
+    </bean>
+    
+    <!-- 会话管理器 -->  
+    <bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">  
+        <!-- session的失效时长，单位毫秒 -->  
+        <property name="globalSessionTimeout" value="1800000"/>  
+        <!-- 删除失效的session --> 
+        <property name="deleteInvalidSessions" value="true"/>  
+        <property name="sessionDAO" ref="sessionDAO"/>
+            
+        <property name="sessionValidationInterval" value="1000000"/>    
+    </bean>
+
+    <!-- Shiro的Web过滤器 -->
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <property name="securityManager" ref="securityManager" />
+        <property name="loginUrl" value="/login.jsp" />
+        <property name="unauthorizedUrl" value="/unauthor.jsp" />
+        <property name="filterChainDefinitions">
+            <value>
+                /admin = roles[admin]
+                /admin/** = authc  
+                /** = anon
+            </value>
+        </property>
+    </bean>
+    
+     <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">  
+        <property name="securityManager" ref="securityManager"/>
+    </bean> 
+    
+ </beans>
