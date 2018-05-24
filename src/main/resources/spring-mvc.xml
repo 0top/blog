@@ -16,10 +16,24 @@
     <!-- 扫描controller包，使注解生效 -->
     <context:component-scan base-package="top.zerotop.blog.controller.api"/>
     
+    <!-- 配置视图解析器，将ModelAndView及字符串解析为据图界面 -->
+    <bean  class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+        p:viewClass="org.springframework.web.servlet.view.JstlView"
+        p:prefix="/WEB-INF/views/"
+        p:suffix=".jsp"
+    />
     
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <property name="maxUploadSize" value="10240000"/>
         <property name="defaultEncoding" value="UTF-8"/>
     </bean>
     
+    <!--  shiro lifecycle -->
+    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
+  
+    <!-- Enable shiro Annotations for Spring-configured beans.  Only run after  
+         the lifecycleBeanProcessor has run: -->  
+    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"  
+          depends-on="lifecycleBeanPostProcessor"/>
+          
 </beans>
