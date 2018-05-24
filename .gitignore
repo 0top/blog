@@ -1,3 +1,5 @@
-blog/
+/blog/
+
 /target/
+
 .settings
