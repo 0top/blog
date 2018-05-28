@@ -2,6 +2,7 @@ package top.zerotop.blog.controller.api;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,6 +33,7 @@ public class ArticleController extends BaseController {
 		
 	}
 	
+	@RequiresRoles("admin")
 	@RequestMapping(value = "/article/insert", produces="application/json;charset=utf-8")
 	public @ResponseBody String insertArticle(HttpServletRequest req){
 	

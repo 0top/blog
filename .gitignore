@@ -1,5 +1,7 @@
 /blog/
 
-/target/
+/src/test/
+
+target/
 
 .settings
