@@ -13,7 +13,7 @@ public interface AdminMapper {
 
     Admin selectByPrimaryKey(Integer id);
     
-    Admin selectByUsernameAndPassword(@Param("username")String username,@Param("password")String password);
+    Admin selectByUsernameAndPassword(@Param("username")String username, @Param("password")String password);
 
     int updateByPrimaryKeySelective(Admin record);
 
