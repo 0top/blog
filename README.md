@@ -23,5 +23,14 @@ teamblog
 
 
 ####
+####
 
 前端请看: https://github.com/chimWang/blog
+
+
+######
+######
+使用：
+新创建一个maven项目，替换pom.xml文件下载依赖
+修改web.xml，将src/main下文件夹替换之后。
+直接打包成war文件，部署到tomcat上即可
