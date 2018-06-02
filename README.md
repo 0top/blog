@@ -24,4 +24,4 @@ teamblog
 
 ####
 
-前端请看: https://github.com/e-lain/blog-1
+前端请看: https://github.com/chimWang/blog
