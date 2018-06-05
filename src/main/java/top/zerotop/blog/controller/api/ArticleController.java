@@ -26,6 +26,11 @@ public class ArticleController extends BaseController {
 	@Autowired
 	private BlogService blogService;
 
+	/**
+	 * 获取单篇文章内容
+	 * @param id
+	 * @return
+	 */
 	@RequestMapping(value = "/article/get/{id}", produces="application/json;charset=utf-8")
 	public @ResponseBody Article getArticleById(@PathVariable("id")long id){
 		
@@ -33,6 +38,11 @@ public class ArticleController extends BaseController {
 		
 	}
 	
+	/**
+	 * 只有管理员可添加文章
+	 * @param req
+	 * @return
+	 */
 	@RequiresRoles("admin")
 	@RequestMapping(value = "/article/insert", produces="application/json;charset=utf-8")
 	public @ResponseBody String insertArticle(HttpServletRequest req){
