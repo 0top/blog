@@ -15,7 +15,7 @@ public interface ArticleMapper {
 
     Article selectByPrimaryKey(Long id);
     
-    List<Article> listArticle(@Param("pagenum")int pagenum, @Param("pagesize")int pagesize);
+    List<Article> listArticle(@Param("startpage")int startpage, @Param("endpage")int endpage);
 
     int updateByPrimaryKeySelective(Article record);
 

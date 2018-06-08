@@ -59,7 +59,6 @@ public class ArticleController extends BaseController {
 		return JSON.toJSONString(article);
 	}
 	
-	@RequiresRoles("admin")
 	@RequestMapping(value = "/article/list", produces="application/json;charset=utf-8")
 	public @ResponseBody String listArticle(HttpServletRequest req){
 	

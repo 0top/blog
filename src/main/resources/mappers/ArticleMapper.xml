@@ -32,7 +32,7 @@
     ,
     <include refid="Blob_Column_List" />
     from article
-    limit #{pagenum}, #{pagesize}
+    limit #{startpage}, #{endpage}
   </select>
   
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >

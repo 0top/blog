@@ -21,7 +21,13 @@ public class BlogServiceImpl implements BlogService {
 
 	@Override
 	public List<Article> listArticle(int pagenum, int pagesize) {
-		return articleDao.listArticle(pagenum, pagesize);
+		
+		if(pagenum <= 1){
+			pagenum = 1;
+		}
+		int startpage = (pagenum-1)*pagesize;
+		
+		return articleDao.listArticle(startpage, startpage + pagesize);
 	}
 
 	@Override
