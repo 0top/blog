@@ -15,4 +15,6 @@ public interface BlogService {
 	public Article getArticleById(long id);
 	
 	public int insertArticle(Article article);
+	
+	public int updateArticleSelective(Article article);
 }

@@ -17,6 +17,7 @@ import top.zerotop.blog.controller.BaseController;
 import top.zerotop.blog.entity.Article;
 import top.zerotop.blog.serivce.BlogService;
 import top.zerotop.blog.util.PageConstrant;
+import top.zerotop.blog.util.ReMap;
 import top.zerotop.blog.util.ReqJson;
 
 /**
@@ -57,6 +58,18 @@ public class ArticleController extends BaseController {
 		article.setId(id);
 		
 		return JSON.toJSONString(article);
+	}
+	
+	@RequiresRoles("admin")
+	@RequestMapping(value = "/article/update", produces="application/json;charset=utf-8")
+	public @ResponseBody String updateArticle(HttpServletRequest req){
+	
+		String json = ReqJson.Json(req);
+		Article article = JSON.parseObject(json, Article.class);
+		
+		blogService.updateArticleSelective(article);
+		
+		return ReMap.ResultMap(0, "更新成功", null);
 	}
 	
 	@RequestMapping(value = "/article/list", produces="application/json;charset=utf-8")

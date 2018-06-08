@@ -40,4 +40,9 @@ public class BlogServiceImpl implements BlogService {
 		return articleDao.insertSelective(article);
 	}
 
+	@Override
+	public int updateArticleSelective(Article article) {
+		return articleDao.updateByPrimaryKeySelective(article);
+	}
+
 }
