@@ -10,7 +10,7 @@ import top.zerotop.blog.entity.Article;
  */
 public interface BlogService {
 
-	public List<Article> listArticle();
+	public List<Article> listArticle(int pagenum, int pagesize);
 	
 	public Article getArticleById(long id);
 	

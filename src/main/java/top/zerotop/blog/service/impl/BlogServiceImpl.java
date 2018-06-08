@@ -20,9 +20,8 @@ public class BlogServiceImpl implements BlogService {
 	private ArticleMapper articleDao;
 
 	@Override
-	public List<Article> listArticle() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Article> listArticle(int pagenum, int pagesize) {
+		return articleDao.listArticle(pagenum, pagesize);
 	}
 
 	@Override

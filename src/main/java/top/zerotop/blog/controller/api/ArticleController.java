@@ -1,5 +1,7 @@
 package top.zerotop.blog.controller.api;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.shiro.authz.annotation.RequiresRoles;
@@ -14,6 +16,7 @@ import com.alibaba.fastjson.JSON;
 import top.zerotop.blog.controller.BaseController;
 import top.zerotop.blog.entity.Article;
 import top.zerotop.blog.serivce.BlogService;
+import top.zerotop.blog.util.PageConstrant;
 import top.zerotop.blog.util.ReqJson;
 
 /**
@@ -56,4 +59,14 @@ public class ArticleController extends BaseController {
 		return JSON.toJSONString(article);
 	}
 	
+	@RequiresRoles("admin")
+	@RequestMapping(value = "/article/list", produces="application/json;charset=utf-8")
+	public @ResponseBody String listArticle(HttpServletRequest req){
+	
+		int pagenum = Integer.parseInt(req.getParameter("pagenum"));
+		
+		List<Article> articleList = blogService.listArticle(pagenum, PageConstrant.pagesize);
+		
+		return JSON.toJSONString(articleList);
+	}
 }
