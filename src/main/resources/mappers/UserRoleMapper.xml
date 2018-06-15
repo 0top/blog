@@ -17,6 +17,14 @@
     from user_role
     where id = #{id,jdbcType=BIGINT}
   </select>
+  
+  <select id="selectRoleNameByUserId" >
+    select role_name from role r, user_role ur
+    where ur.user_id = #{id}
+          and r.id = ur.role_id
+  </select>
+  
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from user_role
     where id = #{id,jdbcType=BIGINT}

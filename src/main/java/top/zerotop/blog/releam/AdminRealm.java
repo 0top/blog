@@ -1,16 +1,21 @@
 package top.zerotop.blog.releam;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import top.zerotop.blog.dao.AdminMapper;
+import top.zerotop.blog.dao.UserRoleMapper;
 import top.zerotop.blog.entity.Admin;
 
 /**
@@ -22,6 +27,9 @@ public class AdminRealm extends AuthorizingRealm {
 	@Autowired
 	private AdminMapper adminDao;
 	
+	@Autowired
+	private UserRoleMapper userRoleDao;
+	
 	public String getName(){
 		return "AdminRealm";
 	}
@@ -29,7 +37,19 @@ public class AdminRealm extends AuthorizingRealm {
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
 		System.out.println("授权");
-		return null;
+		
+		 Admin admin = (Admin) principals.getPrimaryPrincipal();
+		
+		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
+		Set<String> roles = new HashSet<String>();
+		
+		for(String s: userRoleDao.selectRoleNameByUserId(admin.getId())){
+			roles.add(s);
+		}
+		
+		info.setRoles(roles);
+		
+		return info;
 	}
 
 	@Override
