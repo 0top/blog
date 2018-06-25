@@ -25,6 +25,11 @@ import top.zerotop.blog.util.ReqJson;
 @Controller
 public class UserService {
 	
+	/**
+	 * 管理员登录
+	 * @param req
+	 * @return
+	 */
 	@RequestMapping(value = "/admin/login", produces = "application/json;charset=utf-8")
 	public @ResponseBody String adminLogin(HttpServletRequest req) {
 
@@ -33,6 +38,11 @@ public class UserService {
 		Admin admin = JSONObject.parseObject(json, Admin.class);
 
 		Subject subject = SecurityUtils.getSubject();
+		
+		if(subject.isAuthenticated()==true&&subject.getPrincipal().equals(admin.getUsername())){
+			return ReMap.ResultMap(0, "当前用户已登录", null);
+		}
+		
 		UsernamePasswordToken token = new UsernamePasswordToken(admin.getUsername(), admin.getPassword());
 		try {
 			token.setRememberMe(true);
@@ -48,6 +58,22 @@ public class UserService {
 		
 
 		return ReMap.ResultMap(0, "登录成功", null);
+	}
+	
+	/**
+	 * 管理员登出
+	 * @return
+	 */
+	@RequestMapping(value="/admin/logout", produces="application/json;charset=utf-8")
+	public @ResponseBody String adminLoginOut(){
+		
+		Subject subject = SecurityUtils.getSubject();
+		
+		if(subject.isAuthenticated()==true){
+			subject.logout();
+		}
+		
+		return ReMap.ResultMap(0, "退出登录成功", null);
 	}
 
 }

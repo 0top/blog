@@ -39,7 +39,6 @@ public class ArticleController extends BaseController {
 	public @ResponseBody Article getArticleById(@PathVariable("id")long id){
 		
 		return blogService.getArticleById(id);
-		
 	}
 	
 	/**
@@ -60,6 +59,11 @@ public class ArticleController extends BaseController {
 		return JSON.toJSONString(article);
 	}
 	
+	/**
+	 * 更新文章
+	 * @param req
+	 * @return
+	 */
 	@RequiresRoles("admin")
 	@RequestMapping(value = "/article/update", produces="application/json;charset=utf-8")
 	public @ResponseBody String updateArticle(HttpServletRequest req){
@@ -72,6 +76,11 @@ public class ArticleController extends BaseController {
 		return ReMap.ResultMap(0, "更新成功", null);
 	}
 	
+	/**
+	 * 获取文章列表
+	 * @param req
+	 * @return
+	 */
 	@RequestMapping(value = "/article/list", produces="application/json;charset=utf-8")
 	public @ResponseBody String listArticle(HttpServletRequest req){
 	
