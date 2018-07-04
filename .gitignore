@@ -5,3 +5,4 @@
 target/
 
 .settings
+target/m2e-jee/web-resources/META-INF/maven/top.zerotop/blog/pom.xml
