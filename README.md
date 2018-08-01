@@ -11,7 +11,8 @@ teamblog
 
 >技术栈：  
 >前端采用vue.js  
->后端ssm--spring+spring mvc+mybatis
+>后端ssm
+>spring+spring mvc+mybatis
 
 ----------
 
