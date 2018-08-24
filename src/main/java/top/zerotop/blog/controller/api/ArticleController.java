@@ -48,7 +48,7 @@ public class ArticleController extends BaseController {
 	 */
 	@RequiresRoles("admin")
 	@RequestMapping(value = "/article/insert", produces="application/json;charset=utf-8")
-	public @ResponseBody String insertArticle(HttpServletRequest req){
+	public @ResponseBody String insertArticle(HttpServletRequest req) throws Exception{
 	
 		String json = ReqJson.Json(req);
 		Article article = JSON.parseObject(json, Article.class);
