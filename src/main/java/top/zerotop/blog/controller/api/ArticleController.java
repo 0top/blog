@@ -25,6 +25,7 @@ import top.zerotop.blog.util.ReqJson;
  *@createDate 创建时间: 2018年5月21日下午8:42:50
  */
 @Controller
+@RequestMapping(value = "/article", produces = "application/json;charset=utf-8")
 public class ArticleController extends BaseController {
 	
 	@Autowired
@@ -35,7 +36,7 @@ public class ArticleController extends BaseController {
 	 * @param id
 	 * @return
 	 */
-	@RequestMapping(value = "/article/get/{id}", produces="application/json;charset=utf-8")
+	@RequestMapping(value = "/get/{id}", produces="application/json;charset=utf-8")
 	public @ResponseBody Article getArticleById(@PathVariable("id")long id){
 		
 		return blogService.getArticleById(id);
@@ -47,7 +48,7 @@ public class ArticleController extends BaseController {
 	 * @return
 	 */
 	@RequiresRoles("admin")
-	@RequestMapping(value = "/article/insert", produces="application/json;charset=utf-8")
+	@RequestMapping(value = "/insert", produces="application/json;charset=utf-8")
 	public @ResponseBody String insertArticle(HttpServletRequest req) throws Exception{
 	
 		String json = ReqJson.Json(req);
@@ -65,7 +66,7 @@ public class ArticleController extends BaseController {
 	 * @return
 	 */
 	@RequiresRoles("admin")
-	@RequestMapping(value = "/article/update", produces="application/json;charset=utf-8")
+	@RequestMapping(value = "/update", produces="application/json;charset=utf-8")
 	public @ResponseBody String updateArticle(HttpServletRequest req){
 	
 		String json = ReqJson.Json(req);
@@ -81,7 +82,7 @@ public class ArticleController extends BaseController {
 	 * @param req
 	 * @return
 	 */
-	@RequestMapping(value = "/article/list", produces="application/json;charset=utf-8")
+	@RequestMapping(value = "/list", produces="application/json;charset=utf-8")
 	public @ResponseBody String listArticle(HttpServletRequest req){
 	
 		int pagenum = Integer.parseInt(req.getParameter("pagenum"));

@@ -23,6 +23,7 @@ import top.zerotop.blog.util.ReqJson;
  * @createDate 创建时间: 2018年5月31日下午11:29:14
  */
 @Controller
+@RequestMapping(value = "/admin", produces = "application/json;charset=utf-8")
 public class UserService {
 	
 	/**
@@ -30,7 +31,7 @@ public class UserService {
 	 * @param req
 	 * @return
 	 */
-	@RequestMapping(value = "/admin/login", produces = "application/json;charset=utf-8")
+	@RequestMapping(value = "/login", produces = "application/json;charset=utf-8")
 	public @ResponseBody String adminLogin(HttpServletRequest req) {
 
 		String json = ReqJson.Json(req);
@@ -64,7 +65,7 @@ public class UserService {
 	 * 管理员登出
 	 * @return
 	 */
-	@RequestMapping(value="/admin/logout", produces="application/json;charset=utf-8")
+	@RequestMapping(value="/logout", produces="application/json;charset=utf-8")
 	public @ResponseBody String adminLoginOut(){
 		
 		Subject subject = SecurityUtils.getSubject();

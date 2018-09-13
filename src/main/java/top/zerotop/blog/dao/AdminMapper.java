@@ -4,7 +4,8 @@ import org.apache.ibatis.annotations.Param;
 
 import top.zerotop.blog.entity.Admin;
 
-public interface AdminMapper {
+public interface AdminMapper{
+
     int deleteByPrimaryKey(Integer id);
 
     int insert(Admin record);

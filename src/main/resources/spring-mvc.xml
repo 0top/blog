@@ -17,7 +17,7 @@
     <context:component-scan base-package="top.zerotop.blog.controller.api"/>
     <context:component-scan base-package="top.zerotop.config"/>
 
-    
+
     <!-- 配置视图解析器，将ModelAndView及字符串解析为据图界面 -->
     <bean  class="org.springframework.web.servlet.view.InternalResourceViewResolver"
         p:viewClass="org.springframework.web.servlet.view.JstlView"
