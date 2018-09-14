@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="top.zerotop.blog.dao.ArticleMapper" >
-  <resultMap id="BaseResultMap" type="top.zerotop.blog.entity.Article" >
+  <resultMap id="BaseResultMap" type="top.zerotop.blog.domain.Article" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="title" property="title" jdbcType="VARCHAR" />
     <result column="author" property="author" jdbcType="VARCHAR" />
     <result column="img_url" property="imgUrl" jdbcType="VARCHAR" />
     <result column="digest" property="digest" jdbcType="VARCHAR" />
   </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="top.zerotop.blog.entity.Article" extends="BaseResultMap" >
+  <resultMap id="ResultMapWithBLOBs" type="top.zerotop.blog.domain.Article" extends="BaseResultMap" >
     <result column="content" property="content" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
@@ -37,7 +37,7 @@
     delete from article
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="top.zerotop.blog.entity.Article" >
+  <insert id="insert" parameterType="top.zerotop.blog.domain.Article" >
     insert into article (id, title, author, 
       img_url, digest, content
       )
@@ -45,7 +45,7 @@
       #{imgUrl,jdbcType=VARCHAR}, #{digest,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="top.zerotop.blog.entity.Article" >
+  <insert id="insertSelective" parameterType="top.zerotop.blog.domain.Article" >
     <selectKey resultType="java.lang.Integer" keyProperty="id">
         SELECT LAST_INSERT_ID()
     </selectKey>
@@ -88,7 +88,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="top.zerotop.blog.entity.Article" >
+  <update id="updateByPrimaryKeySelective" parameterType="top.zerotop.blog.domain.Article" >
     update article
     <set >
       <if test="title != null" >
@@ -109,7 +109,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="top.zerotop.blog.entity.Article" >
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="top.zerotop.blog.domain.Article" >
     update article
     set title = #{title,jdbcType=VARCHAR},
       author = #{author,jdbcType=VARCHAR},
@@ -118,7 +118,7 @@
       content = #{content,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="top.zerotop.blog.entity.Article" >
+  <update id="updateByPrimaryKey" parameterType="top.zerotop.blog.domain.Article" >
     update article
     set title = #{title,jdbcType=VARCHAR},
       author = #{author,jdbcType=VARCHAR},
