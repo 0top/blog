@@ -1,4 +1,4 @@
-package top.zerotop.blog.exception;
+package top.zerotop.exception;
 /**
  *@author 作者: zerotop
  *@createDate 创建时间: 2018年8月24日下午10:20:43

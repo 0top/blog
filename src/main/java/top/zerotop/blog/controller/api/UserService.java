@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
 
-import top.zerotop.blog.entity.Admin;
+import top.zerotop.blog.domain.Admin;
 import top.zerotop.blog.util.ReMap;
 import top.zerotop.blog.util.ReqJson;
 

@@ -1,4 +1,4 @@
-package top.zerotop.blog.entity;
+package top.zerotop.blog.domain;
 
 public class Article {
     private Long id;
@@ -59,5 +59,17 @@ public class Article {
 
     public void setContent(String content) {
         this.content = content == null ? null : content.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "Article{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", author='" + author + '\'' +
+                ", imgUrl='" + imgUrl + '\'' +
+                ", digest='" + digest + '\'' +
+                ", content='" + content + '\'' +
+                '}';
     }
 }

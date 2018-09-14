@@ -1,6 +1,6 @@
 package top.zerotop.blog.serivce;
 
-import top.zerotop.blog.entity.Admin;
+import top.zerotop.blog.domain.Admin;
 
 /**
  *@author 作者: zerotop

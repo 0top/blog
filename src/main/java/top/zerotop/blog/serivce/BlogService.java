@@ -2,7 +2,7 @@ package top.zerotop.blog.serivce;
 
 import java.util.List;
 
-import top.zerotop.blog.entity.Article;
+import top.zerotop.blog.domain.Article;
 
 /**
  *@author 作者: zerotop
