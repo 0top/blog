@@ -9,6 +9,7 @@
        
 
     <import resource="classpath:spring-druid.xml"/>
+    <import resource="spring-mvc.xml"/>
     <import resource="classpath:spring-tx.xml"/>
     <import resource="spring-tx.xml"/>
     <import resource="shiro.xml"/>

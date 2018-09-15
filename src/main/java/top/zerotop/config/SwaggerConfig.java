@@ -20,16 +20,16 @@ public class SwaggerConfig {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(productApiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("top.zerotop.controller"))
+                .apis(RequestHandlerSelectors.basePackage("top.zerotop.blog.controller"))
                 .paths(PathSelectors.any())
                 .build();
     }
 
     private ApiInfo productApiInfo() {
         return new ApiInfoBuilder()
-                .title("wechat接口测试")
+                .title("blog接口测试")
                 .description("接口测试")
-                .termsOfServiceUrl("http://localhost:8088/wechat" )
+                .termsOfServiceUrl("http://localhost:8088/blog" )
                 .contact(new Contact("zerotop", "https://0top.github.io", ""))
                 .version("2.0")
                 .build();
