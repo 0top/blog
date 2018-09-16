@@ -2,7 +2,7 @@ package top.zerotop.blog.dao;
 
 import org.apache.ibatis.annotations.Param;
 
-import top.zerotop.blog.entity.Admin;
+import top.zerotop.blog.domain.Admin;
 
 public interface AdminMapper{
 

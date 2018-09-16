@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-import top.zerotop.blog.entity.Article;
+import top.zerotop.blog.domain.Article;
 
 public interface ArticleMapper {
     int deleteByPrimaryKey(Long id);

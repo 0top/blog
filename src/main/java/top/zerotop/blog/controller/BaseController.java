@@ -13,7 +13,9 @@ import top.zerotop.blog.util.ReMap;
 public abstract class BaseController {
 	
 	@ExceptionHandler({Exception.class})
-	public @ResponseBody String unknowException(){
+	public @ResponseBody String unknowException(Exception e){
+
+		e.printStackTrace();
 		
 		return ReMap.ResultMap(1, "请求出错", null);
 	}

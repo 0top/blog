@@ -2,7 +2,7 @@ package top.zerotop.blog.dao;
 
 import java.util.List;
 
-import top.zerotop.blog.entity.UserRole;
+import top.zerotop.blog.domain.UserRole;
 
 public interface UserRoleMapper {
     int deleteByPrimaryKey(Long id);
