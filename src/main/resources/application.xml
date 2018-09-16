@@ -17,6 +17,5 @@
     <context:property-placeholder location="classpath:druid.properties"/>
     
     <context:component-scan base-package="top.zerotop.blog.dao"/>  
-    <context:component-scan base-package="top.zerotop.blog.service"/>
-    
+
 </beans>
