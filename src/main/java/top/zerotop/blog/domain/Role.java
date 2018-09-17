@@ -1,4 +1,4 @@
-package top.zerotop.blog.entity;
+package top.zerotop.blog.domain;
 
 import java.util.Date;
 

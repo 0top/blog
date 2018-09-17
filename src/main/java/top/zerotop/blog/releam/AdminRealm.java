@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import top.zerotop.blog.dao.AdminMapper;
 import top.zerotop.blog.dao.UserRoleMapper;
-import top.zerotop.blog.entity.Admin;
+import top.zerotop.blog.domain.Admin;
 
 /**
  *@author 作者: zerotop
