@@ -17,7 +17,7 @@
   <sql id="Blob_Column_List" >
     content
   </sql>
-  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     ,
@@ -33,20 +33,20 @@
     limit #{startpage}, #{endpage}
   </select>
   
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from article
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="top.zerotop.blog.domain.Article" >
-    insert into article (id, title, author, 
+    insert into article (id, title, author,
       img_url, digest, content
       )
     values (#{id,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR}, 
       #{imgUrl,jdbcType=VARCHAR}, #{digest,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="top.zerotop.blog.domain.Article" >
-    <selectKey resultType="java.lang.Integer" keyProperty="id">
+  <insert id="insertSelective" useGeneratedKeys = "true" parameterType="top.zerotop.blog.domain.Article" >
+    <selectKey resultType="int"  keyProperty="id">
         SELECT LAST_INSERT_ID()
     </selectKey>
     insert into article
@@ -68,9 +68,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=BIGINT},
-      </if>
       <if test="title != null" >
         #{title,jdbcType=VARCHAR},
       </if>
@@ -78,7 +75,7 @@
         #{author,jdbcType=VARCHAR},
       </if>
       <if test="imgUrl != null" >
-        #{img_url,jdbcType=VARCHAR},
+        #{imgUrl,jdbcType=VARCHAR},
       </if>
       <if test="digest != null" >
         #{digest,jdbcType=VARCHAR},
@@ -88,6 +85,7 @@
       </if>
     </trim>
   </insert>
+
   <update id="updateByPrimaryKeySelective" parameterType="top.zerotop.blog.domain.Article" >
     update article
     <set >
