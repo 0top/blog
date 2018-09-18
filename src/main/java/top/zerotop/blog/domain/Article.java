@@ -1,7 +1,7 @@
 package top.zerotop.blog.domain;
 
 public class Article {
-    private Long id;
+    private int id;
 
     private String title;
 
@@ -13,11 +13,11 @@ public class Article {
 
     private String content;
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -37,12 +37,12 @@ public class Article {
         this.author = author == null ? null : author.trim();
     }
 
-    public String getThumbnail() {
+    public String getImgUrl() {
         return imgUrl;
     }
 
-    public void setThumbnail(String thumbnail) {
-        this.imgUrl = thumbnail == null ? null : thumbnail.trim();
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 
     public String getDigest() {

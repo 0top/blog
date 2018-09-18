@@ -7,13 +7,13 @@ import org.apache.ibatis.annotations.Param;
 import top.zerotop.blog.domain.Article;
 
 public interface ArticleMapper {
-    int deleteByPrimaryKey(Long id);
+    int deleteByPrimaryKey(int id);
 
     int insert(Article record);
 
     int insertSelective(Article record);
 
-    Article selectByPrimaryKey(Long id);
+    Article selectByPrimaryKey(int id);
     
     List<Article> listArticle(@Param("startpage")int startpage, @Param("endpage")int endpage);
 

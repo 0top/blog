@@ -31,7 +31,7 @@ public class BlogServiceImpl implements BlogService {
 	}
 
 	@Override
-	public Article getArticleById(long id) {
+	public Article getArticleById(int id) {
 		return articleDao.selectByPrimaryKey(id);
 	}
 

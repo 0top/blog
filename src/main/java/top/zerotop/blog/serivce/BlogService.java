@@ -10,11 +10,11 @@ import top.zerotop.blog.domain.Article;
  */
 public interface BlogService {
 
-	public List<Article> listArticle(int pagenum, int pagesize);
+	List<Article> listArticle(int pagenum, int pagesize);
 	
-	public Article getArticleById(long id);
+	Article getArticleById(int id);
 	
-	public int insertArticle(Article article);
+	int insertArticle(Article article);
 	
-	public int updateArticleSelective(Article article);
+	int updateArticleSelective(Article article);
 }
