@@ -12,7 +12,7 @@
     <import resource="spring-mvc.xml"/>
     <import resource="classpath:spring-tx.xml"/>
     <import resource="spring-tx.xml"/>
-    <!--<import resource="shiro.xml"/>-->
+    <import resource="shiro.xml"/>
 
     <context:property-placeholder location="classpath:druid.properties"/>
     
