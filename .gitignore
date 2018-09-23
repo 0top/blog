@@ -4,20 +4,27 @@
 
 /target/
 
+.idea/
+
 .classpath
 .project
-.settings      
+.gitignore
+
+.settings/
+
  ##filter databfile、sln file##
 *.mdb  
 *.ldb  
-*.sln    
+*.sln
+
 ##class file##
 *.com  
 *.class  
 *.dll  
 *.exe  
 *.o  
-*.so  
+*.so
+
 # compression file
 *.7z  
 *.dmg  
@@ -29,7 +36,8 @@
 *.zip  
 *.via
 *.tmp
-*.err 
+*.err
+
 # OS generated files #  
 .DS_Store  
 .DS_Store?  
@@ -38,4 +46,7 @@
 .Trashes  
 Icon?  
 ehthumbs.db  
-Thumbs.db  
+Thumbs.db
+
+##other files ##
+*.iml
