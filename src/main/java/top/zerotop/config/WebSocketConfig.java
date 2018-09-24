@@ -8,10 +8,7 @@ import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.simp.config.ChannelRegistration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
-import org.springframework.messaging.simp.stomp.StompCommand;
-import org.springframework.messaging.simp.stomp.StompHeaderAccessor;
 import org.springframework.messaging.support.ChannelInterceptorAdapter;
-import org.springframework.messaging.support.MessageHeaderAccessor;
 import org.springframework.web.socket.config.annotation.*;
 import top.zerotop.websocket.SocketHandler;
 
@@ -64,8 +61,8 @@ public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer im
     }
 
     @Bean
-    public MyInterceptor newInterceptor() {
-        return new MyInterceptor();
+    public ChannelInterceptor newInterceptor() {
+        return new ChannelInterceptor();
     }
 
 }
