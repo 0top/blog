@@ -29,7 +29,8 @@ import top.zerotop.exception.BlogException;
  */
 @Api(value = "文章列表")
 @RestController
-//@RequestMapping(value = "/article", produces = "application/json;charset=utf-8")
+//@RestController(value = "/article", produces =  {MediaType.APPLICATION_JSON_VALUE})
+@RequestMapping(value = "/article", produces = {MediaType.APPLICATION_JSON_VALUE})
 public class ArticleController extends BaseController {
 
     @Autowired
@@ -37,11 +38,9 @@ public class ArticleController extends BaseController {
 
     @ApiOperation(value = "获取单篇文章的内容",
             notes = "根据id获取文章内容")
-    @GetMapping(value = "/article/get/{id}")
+    @GetMapping(value = "/get/{id}")
     @ResponseBody
     public Article getArticleById(@PathVariable("id") int id) {
-
-        System.out.println("===========");
 
         return blogService.getArticleById(id);
     }
@@ -49,7 +48,7 @@ public class ArticleController extends BaseController {
     @ApiOperation(value = "管理员添加文章",
             notes = "添加文章")
 //	@RequiresRoles("admin")
-    @PostMapping(value = "/article/insert")
+    @PostMapping(value = "/insert")
     @ResponseBody
     public String insertArticle(HttpServletRequest req,
                                 @ApiParam(value = "文章")
@@ -64,7 +63,7 @@ public class ArticleController extends BaseController {
     @ApiOperation(value = "更新文章",
             notes = "更新文章")
     @RequiresRoles("admin")
-    @PostMapping(value = "/article/update")
+    @PostMapping(value = "/update")
     public String updateArticle(
             @ApiParam(value = "文章内容")
             @RequestBody Article article) {
@@ -88,7 +87,7 @@ public class ArticleController extends BaseController {
     @ApiOperation(value = "获取文章列表",
             notes = "分页查询文章列表",
             produces = MediaType.APPLICATION_JSON_VALUE)
-    @GetMapping(value = "/article/list")
+    @GetMapping(value = "/list")
     public String listArticle(HttpServletRequest req,
                               @ApiParam(value = "pagenum")
                               @RequestParam("pagenum") int pagenum) {
