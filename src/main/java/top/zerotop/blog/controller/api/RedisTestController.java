@@ -37,6 +37,7 @@ public class RedisTestController {
         article.setContent("sakfjsdkdsfjsdfkksd");
         System.out.println(article.toString());
         try {
+            redisTemplate.opsForValue().set("val", user.toString());
             redisTemplate.opsForHash().put("user", user, article);
         } catch (Exception e) {
             e.printStackTrace();
@@ -58,6 +59,7 @@ public class RedisTestController {
         try {
             article = (Article) redisTemplate.opsForHash().get("user", user);
             System.out.println(article.toString());
+            System.out.println(redisTemplate.opsForValue().get("val"));
         }catch (Exception e) {
             e.printStackTrace();
         }
