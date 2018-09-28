@@ -1,6 +1,8 @@
 package top.zerotop.websocket;
 
-public class ResMsg {
+import java.io.Serializable;
+
+public class ResMsg implements Serializable{
 
     private String msg;
 
@@ -12,4 +14,10 @@ public class ResMsg {
         this.msg = msg;
     }
 
+    @Override
+    public String toString() {
+        return "ResMsg{" +
+                "msg='" + msg + '\'' +
+                '}';
+    }
 }
