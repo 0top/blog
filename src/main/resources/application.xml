@@ -11,20 +11,21 @@
        http://www.springframework.org/schema/cache/spring-cache.xsd">
        
 
+    <context:property-placeholder location="classpath:properties/druid.properties"/>
+    <context:property-placeholder location="classpath:properties/redis.properties"/>
+     
+
     <import resource="classpath:spring-druid.xml"/>
     <import resource="spring-mvc.xml"/>
     <import resource="classpath:spring-tx.xml"/>
     <import resource="spring-tx.xml"/>
     <import resource="shiro.xml"/>
     <import resource="spring-redis.xml"/>
-
-    <context:property-placeholder location="classpath:properties/druid.properties"/>
-    <context:property-placeholder location="classpath:properties/redis.properties"/>
     
     <context:component-scan base-package="top.zerotop.blog.dao"/>
 
-
-    <cache:annotation-driven/>
+    <!--  
+    <cache:annotation-driven cache-manager="cacheManager"/>
 
     <bean id="cacheManager" class="org.springframework.cache.support.SimpleCacheManager">
         <property name="caches">
@@ -38,5 +39,6 @@
             </set>
         </property>
     </bean>
+    -->
 
 </beans>

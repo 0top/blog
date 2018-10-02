@@ -54,7 +54,6 @@ public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer im
         registration.setInterceptors(new ChannelInterceptorAdapter() {
             @Override
             public Message<?> preSend(Message<?> message, MessageChannel channel) {
-                System.out.println("out bound channel");
                 return message;
             }
         });
