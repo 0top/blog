@@ -1,4 +1,4 @@
-package top.zerotop.blog.serivce;
+package top.zerotop.blog.service;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package top.zerotop.blog.serivce;
+package top.zerotop.blog.service;
 
 import top.zerotop.blog.domain.Admin;
 

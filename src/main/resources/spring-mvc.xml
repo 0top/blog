@@ -18,7 +18,7 @@
     <mvc:annotation-driven />
     <!-- 扫描controller包，使注解生效 -->
     <context:component-scan base-package="top.zerotop.blog.controller"/>
-    <context:component-scan base-package="top.zerotop.blog.serivce"/>
+    <context:component-scan base-package="top.zerotop.blog.service"/>
     <context:component-scan base-package="top.zerotop.config"/>
     <context:component-scan base-package="top.zerotop.websocket"/>
     <context:component-scan base-package="top.zerotop.job"/>
@@ -34,15 +34,12 @@
     <mvc:resources mapping="swagger-ui.html" location="classpath:/META-INF/resources/"/>
 
 
-
     <!-- 配置视图解析器，将ModelAndView及字符串解析为据图界面 -->
     <bean  class="org.springframework.web.servlet.view.InternalResourceViewResolver"
         p:viewClass="org.springframework.web.servlet.view.JstlView"
         p:prefix="/WEB-INF/views/"
         p:suffix=".jsp"
     />
-
-
     
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <property name="maxUploadSize" value="10240000"/>

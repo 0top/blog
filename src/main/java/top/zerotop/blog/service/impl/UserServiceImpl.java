@@ -1,11 +1,11 @@
-package top.zerotop.blog.serivce.impl;
+package top.zerotop.blog.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import top.zerotop.blog.dao.AdminMapper;
 import top.zerotop.blog.domain.Admin;
-import top.zerotop.blog.serivce.UserService;
+import top.zerotop.blog.service.UserService;
 
 /**
  *@author 作者: zerotop

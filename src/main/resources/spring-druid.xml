@@ -96,7 +96,8 @@
     </bean>
     
     <aop:config>
-        <aop:advisor advice-ref="druid-stat-interceptor" pointcut-ref="druid-stat-pointcut"/>
+        <aop:pointcut id="druid-stat-pointcut" expression="execution(* top.zerotop.blog.service.*.*(..))"/>
+        <aop:advisor advice-ref="druid-stat-interceptor"   pointcut-ref="druid-stat-pointcut"/>
     </aop:config>
    
 </beans>

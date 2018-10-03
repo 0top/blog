@@ -11,9 +11,7 @@
        http://www.springframework.org/schema/cache/spring-cache.xsd">
        
 
-    <context:property-placeholder location="classpath:properties/druid.properties"/>
-    <context:property-placeholder location="classpath:properties/redis.properties"/>
-     
+    <context:property-placeholder location="classpath:properties/*.properties"/>
 
     <import resource="classpath:spring-druid.xml"/>
     <import resource="spring-mvc.xml"/>

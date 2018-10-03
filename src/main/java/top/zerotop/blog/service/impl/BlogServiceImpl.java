@@ -1,4 +1,4 @@
-package top.zerotop.blog.serivce.impl;
+package top.zerotop.blog.service.impl;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import top.zerotop.blog.dao.ArticleMapper;
 import top.zerotop.blog.domain.Article;
-import top.zerotop.blog.serivce.BlogService;
+import top.zerotop.blog.service.BlogService;
 
 /**
  *@author 作者: zerotop
