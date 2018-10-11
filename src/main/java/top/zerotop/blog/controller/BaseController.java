@@ -3,7 +3,7 @@ package top.zerotop.blog.controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import top.zerotop.blog.util.ReMap;
+import top.zerotop.blog.util.Result;
 
 
 /**
@@ -13,10 +13,10 @@ import top.zerotop.blog.util.ReMap;
 public abstract class BaseController {
 	
 	@ExceptionHandler({Exception.class})
-	public @ResponseBody String unknowException(Exception e){
+	public @ResponseBody Result unknowException(Exception e){
 
 		e.printStackTrace();
 		
-		return ReMap.ResultMap(1, "请求出错", null);
+		return new  Result("请求出错", null);
 	}
 }

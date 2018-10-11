@@ -4,8 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import top.zerotop.blog.dao.AdminMapper;
-import top.zerotop.blog.domain.Admin;
+import top.zerotop.blog.db.model.Admin;
 import top.zerotop.blog.service.UserService;
+import top.zerotop.blog.util.EncryptUtil;
 
 /**
  *@author 作者: zerotop
@@ -15,11 +16,18 @@ import top.zerotop.blog.service.UserService;
 public class UserServiceImpl implements UserService {
 
 	@Autowired
-	private AdminMapper adminDao;
+	private AdminMapper adminMapper;
 	
 	@Override
 	public Admin selectByUsernameAndPassword(String username, String password) {
-		return adminDao.selectByUsernameAndPassword(username, password);
+		return adminMapper.selectByUsernameAndPassword(username, password);
 	}
+
+	@Override
+	public int addUser(Admin admin) {
+		admin.setId(EncryptUtil.MD5(admin.getUsername()));
+		return adminMapper.insertSelective(admin);
+	}
+
 
 }
