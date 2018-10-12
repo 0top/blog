@@ -1,12 +1,13 @@
 package top.zerotop.blog.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import top.zerotop.blog.dao.ArticleMapper;
-import top.zerotop.blog.domain.Article;
+import top.zerotop.blog.db.mapper.ArticleMapper;
+import top.zerotop.blog.db.model.Article;
 import top.zerotop.blog.service.BlogService;
 
 /**
@@ -32,17 +33,21 @@ public class BlogServiceImpl implements BlogService {
 
 	@Override
 	public Article getArticleById(int id) {
-		return articleDao.selectByPrimaryKey(id);
+		if (id < 0) {
+			throw new IllegalArgumentException();
+		}
+		return articleDao.selectByArticleId(id);
 	}
 
 	@Override
 	public int insertArticle(Article article) {
-		return articleDao.insertSelective(article);
+	    article.setCreateTime(new Date());
+		return articleDao.insertArticle(article);
 	}
 
 	@Override
-	public int updateArticleSelective(Article article) {
-		return articleDao.updateByPrimaryKeySelective(article);
+	public int updateByArticleId(Article article) {
+		return articleDao.updateByArticleId(article);
 	}
 
 }

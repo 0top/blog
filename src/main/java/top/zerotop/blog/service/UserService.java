@@ -1,6 +1,6 @@
 package top.zerotop.blog.service;
 
-import top.zerotop.blog.domain.Admin;
+import top.zerotop.blog.db.model.Admin;
 
 /**
  *@author 作者: zerotop
@@ -9,4 +9,6 @@ import top.zerotop.blog.domain.Admin;
 public interface UserService {
 
 	Admin selectByUsernameAndPassword(String username, String password);
+
+	int addUser(Admin admin);
 }

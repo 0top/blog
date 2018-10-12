@@ -1,17 +1,14 @@
-package top.zerotop.blog.domain;
+package top.zerotop.blog.db.model;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiParam;
 
 import java.io.Serializable;
 
-@ApiModel(value = "用户model")
 public class User implements Serializable {
 
-    @ApiParam(name = "用户名")
     private String username;
 
-    @ApiParam(name = "昵称")
     private String nickname;
 
     public String getUsername() {

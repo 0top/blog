@@ -1,4 +1,4 @@
-package top.zerotop.blog.dao;
+package top.zerotop.blog.db.mapper;
 
 import java.util.List;
 
@@ -13,7 +13,7 @@ public interface UserRoleMapper {
 
     UserRole selectByPrimaryKey(Long id);
     
-    List<String> selectRoleNameByUserId(Integer id);
+    List<String> selectRoleNameByUserId(String id);
 
     int updateByPrimaryKeySelective(UserRole record);
 
