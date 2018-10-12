@@ -1,6 +1,7 @@
-package top.zerotop.blog.domain;
+package top.zerotop.blog.db.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class Article implements Serializable{
 
@@ -15,6 +16,8 @@ public class Article implements Serializable{
     private String digest;
 
     private String content;
+
+    private Date createTime;
 
     public int getId() {
         return id;
@@ -64,15 +67,23 @@ public class Article implements Serializable{
         this.content = content == null ? null : content.trim();
     }
 
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
     @Override
     public String toString() {
         return "Article{" +
-                "id=" + id +
                 ", title='" + title + '\'' +
                 ", author='" + author + '\'' +
                 ", imgUrl='" + imgUrl + '\'' +
                 ", digest='" + digest + '\'' +
                 ", content='" + content + '\'' +
+                ", createTime=" + createTime +
                 '}';
     }
 }

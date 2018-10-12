@@ -36,10 +36,10 @@ public class ArticleController extends BaseController {
     @ApiOperation(value = "获取单篇文章的内容",
             notes = "根据id获取文章内容")
     @GetMapping(value = "/get/{id}")
-    public Article getArticleById(@ApiParam(value = "文章id")
+    public Result getArticleById(@ApiParam(value = "文章id")
                                   @PathVariable("id") int id) {
-
-        return blogService.getArticleById(id);
+        System.out.println("get id:"+id);
+        return new Result(blogService.getArticleById(id));
     }
 
     @ApiOperation(value = "管理员添加文章",
@@ -53,7 +53,7 @@ public class ArticleController extends BaseController {
         int id = blogService.insertArticle(article);
         article.setId(id);
 
-        return new Result("获取文章",article);
+        return new Result("获取文章成功",article);
     }
 
     @ApiOperation(value = "更新文章",
@@ -62,7 +62,7 @@ public class ArticleController extends BaseController {
     @PostMapping(value = "/update")
     public Result updateArticle(@ApiParam(value = "文章内容")
                                 @RequestBody Article article) {
-        blogService.updateArticleSelective(article);
+        blogService.updateByArticleId(article);
         return new Result("更新成功");
     }
 

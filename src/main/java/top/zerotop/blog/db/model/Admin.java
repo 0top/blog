@@ -1,7 +1,8 @@
-package top.zerotop.blog.domain;
+package top.zerotop.blog.db.model;
 
 public class Admin {
-    private Integer id;
+
+    private String code;
 
     private String username;
 
@@ -11,12 +12,12 @@ public class Admin {
 
     private String avatar;
 
-    public Integer getId() {
-        return id;
+    public String getCode() {
+        return code;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public String getUsername() {

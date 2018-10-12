@@ -1,4 +1,4 @@
-package top.zerotop.blog.dao;
+package top.zerotop.blog.db.mapper;
 
 import java.util.List;
 
@@ -9,11 +9,12 @@ import top.zerotop.blog.db.model.Article;
 
 @Mapper
 public interface ArticleMapper {
-    int deleteByPrimaryKey(int id);
+
+    int deleteArticleById(int id);
 
     int insertArticle(@Param("article") Article article);
 
-    Article selectByArticleId(@Param("id") int id);
+    Article selectByArticleId( int id);
     
     List<Article> listArticle(@Param("startpage")int startpage, @Param("endpage")int endpage);
 

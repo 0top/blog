@@ -1,4 +1,4 @@
-package top.zerotop.blog.dao;
+package top.zerotop.blog.db.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
