@@ -19,10 +19,10 @@ public class Result {
     @ApiModelProperty(value = "数据内容", position = 2)
 	private Object content;
 
-    public Result(String msg) {
+    public Result(Object content) {
         this.code = 200;
-        this.msg = msg;
-        this.content = null;
+        this.msg = "请求成功";
+        this.content = content;
     }
 
 	public Result(String msg, Object content) {
@@ -37,4 +37,27 @@ public class Result {
         this.content = content;
     }
 
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
+
+    public Object getContent() {
+        return content;
+    }
+
+    public void setContent(Object content) {
+        this.content = content;
+    }
 }

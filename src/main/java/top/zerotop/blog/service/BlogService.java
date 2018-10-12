@@ -2,7 +2,7 @@ package top.zerotop.blog.service;
 
 import java.util.List;
 
-import top.zerotop.blog.domain.Article;
+import top.zerotop.blog.db.model.Article;
 
 /**
  *@author 作者: zerotop
@@ -16,5 +16,5 @@ public interface BlogService {
 	
 	int insertArticle(Article article);
 	
-	int updateArticleSelective(Article article);
+	int updateByArticleId(Article article);
 }

@@ -3,7 +3,7 @@ package top.zerotop.blog.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import top.zerotop.blog.dao.AdminMapper;
+import top.zerotop.blog.db.mapper.AdminMapper;
 import top.zerotop.blog.db.model.Admin;
 import top.zerotop.blog.service.UserService;
 import top.zerotop.blog.util.EncryptUtil;
@@ -20,13 +20,16 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	public Admin selectByUsernameAndPassword(String username, String password) {
+	    password = EncryptUtil.MD5(password);
+
 		return adminMapper.selectByUsernameAndPassword(username, password);
 	}
 
 	@Override
 	public int addUser(Admin admin) {
-		admin.setId(EncryptUtil.MD5(admin.getUsername()));
-		return adminMapper.insertSelective(admin);
+		admin.setCode(EncryptUtil.MD5(admin.getUsername()+System.currentTimeMillis()));
+		admin.setPassword(EncryptUtil.MD5(admin.getPassword()));
+		return adminMapper.insertAdmin(admin);
 	}
 
 

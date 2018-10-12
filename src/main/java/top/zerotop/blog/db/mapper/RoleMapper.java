@@ -1,6 +1,6 @@
 package top.zerotop.blog.dao;
 
-import top.zerotop.blog.domain.Role;
+import top.zerotop.blog.db.model.Role;
 
 public interface RoleMapper {
     int deleteByPrimaryKey(Long id);
