@@ -20,7 +20,7 @@
     <import resource="shiro.xml"/>
     <import resource="spring-redis.xml"/>
     
-    <context:component-scan base-package="top.zerotop.blog.dao"/>
+    <context:component-scan base-package="top.zerotop.blog.db.mapper"/>
 
     <!--  
     <cache:annotation-driven cache-manager="cacheManager"/>
