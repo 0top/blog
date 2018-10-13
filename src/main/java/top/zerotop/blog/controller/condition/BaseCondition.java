@@ -5,7 +5,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 @ApiModel(value = "查询条件")
-public class BaseContion {
+public class BaseCondition {
 
     @ApiModelProperty(value = "当前页数", position = 0)
     private int current;
