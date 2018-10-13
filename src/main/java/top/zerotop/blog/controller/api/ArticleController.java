@@ -7,17 +7,15 @@ import javax.servlet.http.HttpServletRequest;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
-import com.alibaba.fastjson.JSON;
-
 import top.zerotop.blog.controller.BaseController;
+import top.zerotop.blog.controller.condition.ArticleCondition;
 import top.zerotop.blog.db.model.Article;
 import top.zerotop.blog.service.BlogService;
-import top.zerotop.blog.util.PageConstrant;
 import top.zerotop.blog.util.Result;
 import top.zerotop.exception.BlogException;
 
@@ -38,7 +36,6 @@ public class ArticleController extends BaseController {
     @GetMapping(value = "/get/{id}")
     public Result getArticleById(@ApiParam(value = "文章id")
                                   @PathVariable("id") int id) {
-        System.out.println("get id:"+id);
         return new Result(blogService.getArticleById(id));
     }
 
@@ -68,10 +65,11 @@ public class ArticleController extends BaseController {
 
     @ApiOperation(value = "获取文章列表",
             notes = "分页查询文章列表")
-    @GetMapping(value = "/list")
-    public Result listArticle(HttpServletRequest req,
-                              @ApiParam(value = "pagenum")
-                              @RequestParam("pagenum") int pagenum) {
-        return new Result("获取文章列表",blogService.listArticle(pagenum, PageConstrant.pagesize));
+    @PostMapping(value = "/query")
+    public Result queryArticle(@ApiParam(value = "文章查询条件")
+                              @RequestBody ArticleCondition articleCondition) throws BlogException {
+        Assert.notNull(articleCondition ,"查询条件不可为空");
+        List<Article> articles = blogService.queryArticle(articleCondition);
+        return new Result("获取文章列表", articles);
     }
 }

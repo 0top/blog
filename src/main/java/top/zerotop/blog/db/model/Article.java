@@ -1,6 +1,7 @@
 package top.zerotop.blog.db.model;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Article implements Serializable{
@@ -18,6 +19,8 @@ public class Article implements Serializable{
     private String content;
 
     private Date createTime;
+
+    private Date modifyTime;
 
     public int getId() {
         return id;
@@ -73,6 +76,14 @@ public class Article implements Serializable{
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public Date getModifyTime() {
+        return modifyTime;
+    }
+
+    public void setModifyTime(Date modifyTime) {
+        this.modifyTime = modifyTime;
     }
 
     @Override
