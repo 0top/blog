@@ -14,9 +14,10 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import top.zerotop.blog.dao.AdminMapper;
-import top.zerotop.blog.dao.UserRoleMapper;
-import top.zerotop.blog.domain.Admin;
+import top.zerotop.blog.db.mapper.AdminMapper;
+import top.zerotop.blog.db.mapper.UserRoleMapper;
+import top.zerotop.blog.db.model.Admin;
+import top.zerotop.blog.domain.UserRole;
 
 /**
  *@author 作者: zerotop
@@ -25,10 +26,10 @@ import top.zerotop.blog.domain.Admin;
 public class AdminRealm extends AuthorizingRealm {
 	
 	@Autowired
-	private AdminMapper adminDao;
+	private AdminMapper adminMapper;
 	
 	@Autowired
-	private UserRoleMapper userRoleDao;
+	private UserRoleMapper userRoleMapper;
 	
 	public String getName(){
 		return "AdminRealm";
@@ -41,10 +42,10 @@ public class AdminRealm extends AuthorizingRealm {
 		 Admin admin = (Admin) principals.getPrimaryPrincipal();
 		
 		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-		Set<String> roles = new HashSet<String>();
+		Set<String> roles = new HashSet<>();
 		
-		for(String s: userRoleDao.selectRoleNameByUserId(admin.getId())){
-			roles.add(s);
+		for(UserRole userRole: userRoleMapper.listUserRoleByUserId(admin.getId())){
+			roles.add(userRole.getRoleName());
 		}
 		
 		info.setRoles(roles);
@@ -63,7 +64,7 @@ public class AdminRealm extends AuthorizingRealm {
 		admin.setUsername(username);
 		admin.setPassword(password);
 		
-		admin = adminDao.selectByUsernameAndPassword(username, password);
+		admin = adminMapper.selectByUsernameAndPassword(username, password);
 
 
 		if(null == admin){

@@ -2,7 +2,9 @@ package top.zerotop.blog.service;
 
 import java.util.List;
 
+import top.zerotop.blog.controller.condition.ArticleCondition;
 import top.zerotop.blog.db.model.Article;
+import top.zerotop.exception.BlogException;
 
 /**
  *@author 作者: zerotop
@@ -10,7 +12,7 @@ import top.zerotop.blog.db.model.Article;
  */
 public interface BlogService {
 
-	List<Article> listArticle(int pagenum, int pagesize);
+	List<Article> queryArticle(ArticleCondition articleCondition)  throws BlogException;
 	
 	Article getArticleById(int id);
 	

@@ -4,7 +4,7 @@ import org.springframework.util.DigestUtils;
 
 import java.util.Base64;
 
-public class EncryptUtil {
+public class EncryptUtils {
 
     public static String MD5(String str) {
         if (null == str|| str.equals("")){

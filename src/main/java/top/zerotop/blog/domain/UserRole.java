@@ -3,11 +3,14 @@ package top.zerotop.blog.domain;
 import java.util.Date;
 
 public class UserRole {
+
     private Long id;
 
     private Long roleId;
 
     private Long userId;
+
+    private String roleName;
 
     private Date gtmCreate;
 
@@ -35,6 +38,14 @@ public class UserRole {
 
     public void setUserId(Long userId) {
         this.userId = userId;
+    }
+
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
     }
 
     public Date getGtmCreate() {
