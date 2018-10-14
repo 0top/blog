@@ -2,20 +2,33 @@ package top.zerotop.blog.db.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 import top.zerotop.blog.domain.UserRole;
 
 public interface UserRoleMapper {
-    int deleteByPrimaryKey(Long id);
 
-    int insert(UserRole record);
 
-    int insertSelective(UserRole record);
+    @Insert("insert into user_role(user_id, role_id, gmt_create, gmt_modified) " +
+            "values(#{userId}, #{roleId}, #{gmtCreate}, #{gmtModified})")
+    int insertUserRole(UserRole userRole);
 
-    UserRole selectByPrimaryKey(Long id);
-    
-    List<String> selectRoleNameByUserId(String id);
+    @Select("select * from role r, user_role ur " +
+            "where r.id = ur.role_id " +
+            " ur.user_id = #{userId}")
+    List<UserRole> listUserRoleByUserId(@Param("userId") long userId);
 
-    int updateByPrimaryKeySelective(UserRole record);
 
-    int updateByPrimaryKey(UserRole record);
+    @Delete("delete from user_role where id = #{id}")
+    int deleteUserRole(long id);
+
+
+    @Insert("insert into role(role_name, gmt_create, gmt_modified) " +
+            "values(#{roleName}, #{gmtCreate}, #{gmtModified})")
+    int insertRole(UserRole record);
+
+    @Select("select * from role")
+    List<UserRole> listRole();
 }

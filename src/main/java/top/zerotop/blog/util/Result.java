@@ -19,6 +19,13 @@ public class Result {
     @ApiModelProperty(value = "数据内容", position = 2)
 	private Object content;
 
+    public Result() {
+        this.code = 200;
+        this.msg = "请求成功";
+        this.content = null;
+    }
+
+
     public Result(Object content) {
         this.code = 200;
         this.msg = "请求成功";
