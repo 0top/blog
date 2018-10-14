@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-import top.zerotop.blog.domain.Article;
-import top.zerotop.blog.domain.User;
+import top.zerotop.blog.db.model.Article;
+import top.zerotop.blog.db.model.User;
 
 @Api(value = "用户请求接口")
 @RestController
