@@ -8,9 +8,12 @@ teamblog
 开发后暂时会更新前后端文章以及UI作品，届时欢迎大家讨论
 
 ### 技术栈：  
+
 前端采用： vue.js  
-后端：    ssm  
-数据库：   mysql
+后端：     spring + spring mvc + mybatis  
+数据库：   mysql, redis  
+中间件：   rabbitmq  
+接口：     swagger-ui
 
 ### 演示：
    
