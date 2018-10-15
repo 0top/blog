@@ -3,9 +3,12 @@ package top.zerotop.blog.controller.api;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
+import top.zerotop.blog.controller.BaseController;
 import top.zerotop.blog.domain.UserRole;
 import top.zerotop.blog.service.UserRoleService;
 import top.zerotop.blog.util.Result;
@@ -15,7 +18,7 @@ import java.util.List;
 @Api(value = "用户权限相关", description = "用户权限相关api")
 @RestController
 @RequestMapping(value = "/user", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
-public class UserRoleController {
+public class UserRoleController extends BaseController {
 
     @Autowired
     private UserRoleService userRoleService;
@@ -44,9 +47,11 @@ public class UserRoleController {
 
     @ApiOperation(value = "添加权限管理", notes = "添加权限")
     @PostMapping(value = "/role")
+//    @RequiresRoles("admin")
     public Result insertRole(@ApiParam(value = "权限")
-                             @RequestBody UserRole userRole) {
-        userRoleService.insertRole(userRole);
+                             @RequestParam("roleName") String roleName) {
+        Assert.notNull(roleName, "权限值不可为空");
+        userRoleService.insertRole(roleName);
         return new Result();
     }
 

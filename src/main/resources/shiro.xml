@@ -4,7 +4,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd">
        
-    <bean id="AdminRealm" class="top.zerotop.blog.releam.AdminRealm">
+    <bean id="adminRealm" class="top.zerotop.blog.releam.AdminRealm">
         <property name="authorizationCachingEnabled" value="false"/> 
     </bean>
 
@@ -12,7 +12,12 @@
     
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
          <property name="authenticator" ref="CustomModularRealmAuthenticator"/>
-         <property name="authorizer" ref="AdminRealm"/>
+         <!--<property name="authorizer" ref="AdminRealm"/>-->
+        <property name="realms">
+            <list>
+                <ref bean="adminRealm"/>
+            </list>
+        </property>
         <property name="sessionManager" ref="sessionManager" />  
     </bean>
 
@@ -45,7 +50,7 @@
         <!--<property name="unauthorizedUrl" value="/unauthor.jsp" />-->
         <property name="filterChainDefinitions">
             <value>
-                /admin = roles[admin]
+                <!--/admin = roles[admin]-->
                 /admin/** = authc  
                 /** = anon
             </value>

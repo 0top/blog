@@ -1,6 +1,5 @@
 package top.zerotop.blog.service.impl;
 
-import java.time.LocalDate;
 import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +8,7 @@ import org.springframework.stereotype.Service;
 import top.zerotop.blog.controller.condition.ArticleCondition;
 import top.zerotop.blog.db.mapper.ArticleMapper;
 import top.zerotop.blog.db.model.Article;
-import top.zerotop.blog.service.BlogService;
+import top.zerotop.blog.service.ArticleService;
 import top.zerotop.exception.ArticleException;
 import top.zerotop.exception.BlogException;
 
@@ -18,7 +17,7 @@ import top.zerotop.exception.BlogException;
  * @createDate 创建时间: 2018年5月21日下午8:36:23
  */
 @Service
-public class BlogServiceImpl implements BlogService {
+public class ArticleServiceImpl implements ArticleService {
 
     @Autowired
     private ArticleMapper articleMapper;
@@ -56,13 +55,14 @@ public class BlogServiceImpl implements BlogService {
 
     @Override
     public int insertArticle(Article article) {
-        article.setCreateTime(new Date());
+        article.setGmtCreate(new Date());
+        article.setGmtModified(new Date());
         return articleMapper.insertArticle(article);
     }
 
     @Override
-    public int updateByArticleId(Article article) {
-        article.setModifyTime(new Date());
+    public int updateArticleById(Article article) {
+        article.setGmtModified(new Date());
         return articleMapper.updateByArticleId(article);
     }
 

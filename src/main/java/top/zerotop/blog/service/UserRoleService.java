@@ -12,7 +12,7 @@ public interface UserRoleService {
 
     int deleteUserRole(long id);
 
-    int insertRole(UserRole record);
+    int insertRole(String roleName);
 
     List<UserRole> listRole();
 }
