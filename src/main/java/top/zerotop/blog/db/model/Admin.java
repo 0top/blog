@@ -1,16 +1,35 @@
 package top.zerotop.blog.db.model;
 
-public class Admin {
+import java.io.Serializable;
+import java.util.Date;
+
+public class Admin implements Serializable {
+
+    private long id;
 
     private String code;
+
+    private String nickname;
 
     private String username;
 
     private String password;
 
-    private String nickname;
-
     private String avatar;
+
+    private String description;
+
+    private Date gmtCreate;
+
+    private Date gmtModified;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getCode() {
         return code;
@@ -50,5 +69,41 @@ public class Admin {
 
     public void setAvatar(String avatar) {
         this.avatar = avatar == null ? null : avatar.trim();
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Date getGmtCreate() {
+        return gmtCreate;
+    }
+
+    public void setGmtCreate(Date gmtCreate) {
+        this.gmtCreate = gmtCreate;
+    }
+
+    public Date getGmtModified() {
+        return gmtModified;
+    }
+
+    public void setGmtModified(Date gmtModified) {
+        this.gmtModified = gmtModified;
+    }
+
+    @Override
+    public String toString() {
+        return "Admin{" +
+                "id=" + id +
+                ", code='" + code + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", nickname='" + nickname + '\'' +
+                ", avatar='" + avatar + '\'' +
+                '}';
     }
 }

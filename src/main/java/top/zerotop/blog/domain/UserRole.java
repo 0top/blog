@@ -12,9 +12,9 @@ public class UserRole {
 
     private String roleName;
 
-    private Date gtmCreate;
+    private Date gmtCreate;
 
-    private Date gtmModified;
+    private Date gmtModified;
 
     public Long getId() {
         return id;
@@ -48,19 +48,29 @@ public class UserRole {
         this.roleName = roleName;
     }
 
-    public Date getGtmCreate() {
-        return gtmCreate;
+    public Date getGmtCreate() {
+        return gmtCreate;
     }
 
-    public void setGtmCreate(Date gtmCreate) {
-        this.gtmCreate = gtmCreate;
+    public void setGmtCreate(Date gmtCreate) {
+        this.gmtCreate = gmtCreate;
     }
 
-    public Date getGtmModified() {
-        return gtmModified;
+    public Date getGmtModified() {
+        return gmtModified;
     }
 
-    public void setGtmModified(Date gtmModified) {
-        this.gtmModified = gtmModified;
+    public void setGmtModified(Date gmtModified) {
+        this.gmtModified = gmtModified;
+    }
+
+    @Override
+    public String toString() {
+        return "UserRole{" +
+                "id=" + id +
+                ", roleId=" + roleId +
+                ", userId=" + userId +
+                ", roleName='" + roleName + '\'' +
+                '}';
     }
 }

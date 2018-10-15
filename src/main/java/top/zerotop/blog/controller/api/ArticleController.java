@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import top.zerotop.blog.controller.BaseController;
 import top.zerotop.blog.controller.condition.ArticleCondition;
 import top.zerotop.blog.db.model.Article;
-import top.zerotop.blog.service.BlogService;
+import top.zerotop.blog.service.ArticleService;
 import top.zerotop.blog.util.Result;
 import top.zerotop.exception.BlogException;
 
@@ -29,13 +29,13 @@ import top.zerotop.exception.BlogException;
 public class ArticleController extends BaseController {
 
     @Autowired
-    private BlogService blogService;
+    private ArticleService blogService;
 
     @ApiOperation(value = "获取单篇文章的内容",
             notes = "根据id获取文章内容")
     @GetMapping(value = "/get/{id}")
     public Result getArticleById(@ApiParam(value = "文章id")
-                                  @PathVariable("id") int id) {
+                                 @PathVariable("id") int id) {
         return new Result(blogService.getArticleById(id));
     }
 
@@ -50,7 +50,7 @@ public class ArticleController extends BaseController {
         int id = blogService.insertArticle(article);
         article.setId(id);
 
-        return new Result("获取文章成功",article);
+        return new Result("获取文章成功", article);
     }
 
     @ApiOperation(value = "更新文章",
@@ -59,7 +59,7 @@ public class ArticleController extends BaseController {
     @PostMapping(value = "/update")
     public Result updateArticle(@ApiParam(value = "文章内容")
                                 @RequestBody Article article) {
-        blogService.updateByArticleId(article);
+        blogService.updateArticleById(article);
         return new Result("更新成功");
     }
 
@@ -67,8 +67,8 @@ public class ArticleController extends BaseController {
             notes = "分页查询文章列表")
     @PostMapping(value = "/query")
     public Result queryArticle(@ApiParam(value = "文章查询条件")
-                              @RequestBody ArticleCondition articleCondition) throws BlogException {
-        Assert.notNull(articleCondition ,"查询条件不可为空");
+                               @RequestBody ArticleCondition articleCondition) throws BlogException {
+        Assert.notNull(articleCondition, "查询条件不可为空");
         List<Article> articles = blogService.queryArticle(articleCondition);
         return new Result("获取文章列表", articles);
     }

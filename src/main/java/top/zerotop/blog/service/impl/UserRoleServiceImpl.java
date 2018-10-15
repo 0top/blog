@@ -18,8 +18,10 @@ public class UserRoleServiceImpl implements UserRoleService {
     @Override
     public int insertUserRole(UserRole userRole) {
 
-        userRole.setGtmCreate(new Date());
-        userRole.setGtmModified(new Date());
+        userRole.setGmtCreate(new Date());
+        userRole.setGmtModified(new Date());
+
+        System.out.println(userRole);
 
         return userRoleMapper.insertUserRole(userRole);
     }
@@ -36,10 +38,14 @@ public class UserRoleServiceImpl implements UserRoleService {
     }
 
     @Override
-    public int insertRole(UserRole record) {
-        record.setGtmCreate(new Date());
-        record.setGtmModified(new Date());
-        return userRoleMapper.insertRole(record);
+    public int insertRole(String roleName) {
+        UserRole userRole = new UserRole();
+        userRole.setRoleName(roleName);
+        userRole.setGmtCreate (new Date());
+        userRole.setGmtModified(new Date());
+        System.out.println(userRole);
+
+        return userRoleMapper.insertRole(userRole);
     }
 
     @Override

@@ -17,7 +17,7 @@ public interface UserRoleMapper {
 
     @Select("select * from role r, user_role ur " +
             "where r.id = ur.role_id " +
-            " ur.user_id = #{userId}")
+            " and ur.user_id = #{userId}")
     List<UserRole> listUserRoleByUserId(@Param("userId") long userId);
 
 
@@ -26,8 +26,8 @@ public interface UserRoleMapper {
 
 
     @Insert("insert into role(role_name, gmt_create, gmt_modified) " +
-            "values(#{roleName}, #{gmtCreate}, #{gmtModified})")
-    int insertRole(UserRole record);
+            "values(#{role.roleName}, #{role.gmtCreate}, #{role.gmtModified})")
+    int insertRole(@Param("role") UserRole role);
 
     @Select("select * from role")
     List<UserRole> listRole();
