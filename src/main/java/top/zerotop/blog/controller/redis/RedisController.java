@@ -1,4 +1,4 @@
-package top.zerotop.blog.controller.api;
+package top.zerotop.blog.controller.redis;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -13,7 +13,7 @@ import top.zerotop.blog.db.model.User;
 @Api(value = "用户请求接口")
 @RestController
 @RequestMapping(value = "/redis", produces = {MediaType.APPLICATION_JSON_VALUE})
-public class RedisTestController {
+public class RedisController {
 
     @Autowired
     private RedisTemplate<String, String> redisTemplate;
