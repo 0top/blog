@@ -6,7 +6,7 @@ import java.util.Date;
 
 public class Article implements Serializable{
 
-    private int id;
+    private long id;
 
     private String title;
 
@@ -18,15 +18,17 @@ public class Article implements Serializable{
 
     private String content;
 
-    private Date createTime;
+    private String category;
 
-    private Date modifyTime;
+    private Date gmtCreate;
 
-    public int getId() {
+    private Date gmtModified;
+
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -70,31 +72,39 @@ public class Article implements Serializable{
         this.content = content == null ? null : content.trim();
     }
 
-    public Date getCreateTime() {
-        return createTime;
+    public String getCategory() {
+        return category;
     }
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
+    public void setCategory(String category) {
+        this.category = category;
     }
 
-    public Date getModifyTime() {
-        return modifyTime;
+    public Date getGmtCreate() {
+        return gmtCreate;
     }
 
-    public void setModifyTime(Date modifyTime) {
-        this.modifyTime = modifyTime;
+    public void setGmtCreate(Date gmtCreate) {
+        this.gmtCreate = gmtCreate;
+    }
+
+    public Date getGmtModified() {
+        return gmtModified;
+    }
+
+    public void setGmtModified(Date gmtModified) {
+        this.gmtModified = gmtModified;
     }
 
     @Override
     public String toString() {
         return "Article{" +
+                "id=" + id +
                 ", title='" + title + '\'' +
                 ", author='" + author + '\'' +
-                ", imgUrl='" + imgUrl + '\'' +
-                ", digest='" + digest + '\'' +
-                ", content='" + content + '\'' +
-                ", createTime=" + createTime +
+                ", category='" + category + '\'' +
+                ", gmtCreate=" + gmtCreate +
+                ", gmtModified=" + gmtModified +
                 '}';
     }
 }

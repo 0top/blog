@@ -16,32 +16,37 @@
         <include refid="Base_Column_List"/>
         from admin where code = #{code}
     </select>
-    <select id="selectByUsernameAndPassword">
-        SELECT code,username,nickname, avatar
-        FROM admin
-        WHERE username = #{username} AND password = #{password}
-
-    </select>
+    <!--<select id="selectByUsernameAndPassword" resultMap="BaseResultMap">-->
+        <!--SELECT code,username,nickname, avatar-->
+        <!--FROM admin-->
+        <!--WHERE username = #{username} AND password = #{password}-->
+    <!--</select>-->
 
     <delete id="deleteByAdminCode">
         DELETE FROM admin WHERE code = #{code}
     </delete>
 
-    <insert id="insertAdmin" parameterType="top.zerotop.blog.db.model.Admin">
+    <insert id="insertAdmin" >
         insert into admin
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="code != null">code,</if>
+            <if test="nickname != null">nickname,</if>
             <if test="username != null">username,</if>
             <if test="password != null">password,</if>
-            <if test="nickname != null">nickname,</if>
             <if test="avatar != null">avatar,</if>
+            <if test="description != null">description,</if>
+            gmt_create,
+            gmt_modified
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="code != null">#{code},</if>
+            <if test="nickname != null">#{nickname},</if>
             <if test="username != null">#{username},</if>
             <if test="password != null">#{password},</if>
-            <if test="nickname != null">#{nickname},</if>
             <if test="avatar != null">#{avatar},</if>
+            <if test="description != null">#{description},</if>
+            #{gmtCreate},
+            #{gmtModified}
         </trim>
     </insert>
     <update id="updateAdminByCode" parameterType="top.zerotop.blog.db.model.Admin">
