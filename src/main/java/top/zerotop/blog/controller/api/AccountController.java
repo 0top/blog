@@ -3,29 +3,23 @@ package top.zerotop.blog.controller.api;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import org.apache.ibatis.annotations.Select;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.ExcessiveAttemptsException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
-import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
-import top.zerotop.blog.controller.BaseController;
 import top.zerotop.blog.db.model.Admin;
 import top.zerotop.blog.releam.CustomToken;
 import top.zerotop.blog.service.UserService;
-import top.zerotop.blog.util.EncryptUtils;
 import top.zerotop.blog.util.Result;
 import top.zerotop.exception.AdminLoginException;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Collection;
 
 /**
  * @author 作者: zerotop
@@ -45,7 +39,6 @@ public class AccountController extends BaseController {
                               @RequestBody Admin admin) {
         Assert.notNull(admin, "添加信息不能为空");
 
-        System.out.println("=====");
         userService.insertAdmin(admin);
         return new Result();
     }
@@ -62,10 +55,7 @@ public class AccountController extends BaseController {
         subject.checkRole("admin");
         subject.hasRole("admin");
 
-        System.out.println(username + " : " + password);
         Admin admin = userService.selectAdmin(username);
-
-
 //        Admin admin = userService.selectByUsernameAndPassword(username, password);
         return new Result(admin);
     }

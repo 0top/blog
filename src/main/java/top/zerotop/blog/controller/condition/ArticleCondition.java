@@ -4,7 +4,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 @ApiModel(value = "文章查询条件")
-public class ArticleCondition extends BaseCondition {
+public class ArticleCondition extends PageCondition {
 
     @ApiModelProperty(value = "模糊查询", position = 0)
     private String searchString;

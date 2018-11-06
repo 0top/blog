@@ -12,7 +12,6 @@ import org.springframework.http.MediaType;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
-import top.zerotop.blog.controller.BaseController;
 import top.zerotop.blog.controller.condition.ArticleCondition;
 import top.zerotop.blog.db.model.Article;
 import top.zerotop.blog.service.ArticleService;
