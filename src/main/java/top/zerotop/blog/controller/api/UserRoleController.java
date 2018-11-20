@@ -3,17 +3,13 @@ package top.zerotop.blog.controller.api;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
-import top.zerotop.blog.controller.BaseController;
 import top.zerotop.blog.domain.UserRole;
 import top.zerotop.blog.service.UserRoleService;
 import top.zerotop.blog.util.Result;
-
-import java.util.List;
 
 @Api(value = "用户权限相关", description = "用户权限相关api")
 @RestController
