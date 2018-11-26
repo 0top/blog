@@ -35,8 +35,6 @@ public class UserServiceImpl implements UserService {
 		admin.setCode(EncryptUtils.MD5(admin.getUsername()+System.currentTimeMillis()));
 		admin.setPassword(EncryptUtils.MD5(admin.getPassword()));
 
-		System.out.println(admin.toString());
-
 		return adminMapper.insertAdmin(admin);
 	}
 

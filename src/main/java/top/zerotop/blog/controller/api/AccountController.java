@@ -8,6 +8,8 @@ import org.apache.shiro.authc.ExcessiveAttemptsException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.subject.Subject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.util.Assert;
@@ -29,6 +31,7 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 @RequestMapping(value = "/account", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
 public class AccountController extends BaseController {
+    private static Logger logger = LoggerFactory.getLogger(AccountController.class);
 
     @Autowired
     private UserService userService;
@@ -37,9 +40,10 @@ public class AccountController extends BaseController {
     @PostMapping(value = "/user/insert")
     public Result insertAdmin(@ApiParam(value = "注册时提供信息")
                               @RequestBody Admin admin) {
+        logger.info("ok");
         Assert.notNull(admin, "添加信息不能为空");
 
-        userService.insertAdmin(admin);
+//        userService.insertAdmin(admin);
         return new Result();
     }
 
