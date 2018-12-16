@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.util.Assert;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import top.zerotop.blog.db.model.Admin;
@@ -37,25 +38,21 @@ public class AccountController extends BaseController {
     private UserService userService;
 
     @ApiOperation(value = "注册管理员", notes = "管理员注册")
-    @PostMapping(value = "/user/insert")
+    @PostMapping(value = "/user/regist")
     public Result insertAdmin(@ApiParam(value = "注册时提供信息")
                               @RequestBody Admin admin) {
         logger.info("ok");
         Assert.notNull(admin, "添加信息不能为空");
-
 //        userService.insertAdmin(admin);
         return new Result();
     }
 
-    @ApiOperation(value = "通过用户名和密码获取用户")
+    @ApiOperation(value = "管理员通过用户名获取用户详细信息")
     @PostMapping(value = "/user/select")
-    public Result selectAdmin(@ApiParam(value = "登录时提供用户名")
-                              @RequestParam String username,
-                              @ApiParam(value = "登录时提供密码")
-                              @RequestParam String password) {
+    public Result selectAdmin(@ApiParam(value = "登录时提供用户名", required = true)
+                              @RequestParam String username) {
 
         Subject subject = SecurityUtils.getSubject();
-
         subject.checkRole("admin");
         subject.hasRole("admin");
 
@@ -67,14 +64,14 @@ public class AccountController extends BaseController {
 
     @ApiOperation(value = "管理员登录", notes = "只有管理员能登录")
     @PostMapping(value = "/login")
-    public Result adminLogin(@ApiParam(value = "登录时提供用户名")
+    public Result adminLogin(@ApiParam(value = "登录时提供用户名", required = true)
                              @RequestParam String username,
-                             @ApiParam(value = "登录时提供密码")
+                             @ApiParam(value = "登录时提供密码", required = true)
                              @RequestParam String password,
                              HttpServletRequest req) throws AdminLoginException {
 
-        Assert.isTrue(null != username && !"".equals(username), "用户名不能为空");
-        Assert.isTrue(null != password && !"".equals(password), "密码不能为空");
+        Assert.isTrue(StringUtils.hasText(username), "用户名不能为空");
+        Assert.isTrue(StringUtils.hasText(password), "密码不能为空");
 
         Subject subject = SecurityUtils.getSubject();
 
@@ -82,7 +79,7 @@ public class AccountController extends BaseController {
             return new Result("当前用户已登录", null);
         }
 
-        System.out.println(username + " : " + password);
+        logger.info(String.format("user:[] login", username));
         CustomToken token = new CustomToken(username, password, "Admin");
         try {
             token.setRememberMe(true);

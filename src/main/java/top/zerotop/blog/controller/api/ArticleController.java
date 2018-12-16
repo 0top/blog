@@ -38,12 +38,10 @@ public class ArticleController extends BaseController {
         return new Result(blogService.getArticleById(id));
     }
 
-    @ApiOperation(value = "管理员添加文章",
-            notes = "添加文章")
-//	@RequiresRoles("admin")
+    //	@RequiresRoles("admin")
+    @ApiOperation(value = "管理员添加文章", notes = "添加文章")
     @PostMapping(value = "/insert")
-    public Result insertArticle(HttpServletRequest req,
-                                @ApiParam(value = "文章")
+    public Result insertArticle(@ApiParam(value = "文章")
                                 @RequestBody Article article) throws BlogException {
 
         int id = blogService.insertArticle(article);
@@ -52,9 +50,8 @@ public class ArticleController extends BaseController {
         return new Result("获取文章成功", article);
     }
 
-    @ApiOperation(value = "更新文章",
-            notes = "更新文章")
-//    @RequiresRoles("admin")
+    //    @RequiresRoles("admin")
+    @ApiOperation(value = "更新文章", notes = "更新文章")
     @PostMapping(value = "/update")
     public Result updateArticle(@ApiParam(value = "文章内容")
                                 @RequestBody Article article) {
@@ -62,8 +59,7 @@ public class ArticleController extends BaseController {
         return new Result("更新成功");
     }
 
-    @ApiOperation(value = "获取文章列表",
-            notes = "分页查询文章列表")
+    @ApiOperation(value = "获取文章列表", notes = "分页查询文章列表")
     @PostMapping(value = "/query")
     public Result queryArticle(@ApiParam(value = "文章查询条件")
                                @RequestBody ArticleCondition articleCondition) throws BlogException {

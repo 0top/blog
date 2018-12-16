@@ -1,8 +1,5 @@
 package top.zerotop.blog.db.model;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiParam;
-
 import java.io.Serializable;
 
 public class User implements Serializable {

@@ -41,9 +41,9 @@ public class UserRoleController extends BaseController {
         return new Result();
     }
 
+    //    @RequiresRoles("admin")
     @ApiOperation(value = "添加权限管理", notes = "添加权限")
     @PostMapping(value = "/role")
-//    @RequiresRoles("admin")
     public Result insertRole(@ApiParam(value = "权限")
                              @RequestParam("roleName") String roleName) {
         Assert.notNull(roleName, "权限值不可为空");
