@@ -43,7 +43,7 @@ public class ArticleController extends BaseController {
     @PostMapping(value = "/insert")
     public Result insertArticle(@ApiParam(value = "文章")
                                 @RequestBody Article article) throws BlogException {
-
+        Assert.notNull(article, "文章不可为空");
         int id = blogService.insertArticle(article);
         article.setId(id);
 
@@ -55,6 +55,7 @@ public class ArticleController extends BaseController {
     @PostMapping(value = "/update")
     public Result updateArticle(@ApiParam(value = "文章内容")
                                 @RequestBody Article article) {
+        Assert.notNull(article, "文章不可为空");
         blogService.updateArticleById(article);
         return new Result("更新成功");
     }

@@ -5,6 +5,7 @@ import java.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import org.springframework.util.Assert;
 import top.zerotop.blog.controller.condition.ArticleCondition;
 import top.zerotop.blog.db.mapper.ArticleMapper;
 import top.zerotop.blog.db.model.Article;
@@ -24,10 +25,7 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public List<Article> queryArticle(ArticleCondition articleCondition) throws BlogException {
-
-        if (articleCondition.getCurrent() < 0) {
-            throw new ArticleException("请求页码错误");
-        }
+        Assert.isTrue(articleCondition.getCurrent() < 0, "请求页码错误");
         int startIndex = articleCondition.getCurrent() * articleCondition.getSize();
         int endIndex = startIndex + articleCondition.getSize();
         String[] categorys = null;
@@ -47,9 +45,7 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public Article getArticleById(int id) {
-        if (id < 0) {
-            throw new IllegalArgumentException();
-        }
+        Assert.isTrue(id < 0, "id不合法");
         return articleMapper.selectByArticleId(id);
     }
 

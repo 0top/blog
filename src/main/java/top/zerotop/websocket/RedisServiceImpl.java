@@ -31,6 +31,20 @@ public class RedisServiceImpl implements RedisService {
     }
 
     @Override
+    public void getRedisMsgByIdAndTopic(String id,String topic) {
+
+        System.out.println("new send msg to subscribe:"+topic+" msg");
+
+        List<String> msgList = redisTemplate.opsForList().range(topic, 0, -1);
+
+        for (String str: msgList) {
+            template.convertAndSendToUser(id, topic, (ResMsg)JSON.parseObject(str, ResMsg.class));
+        }
+
+    }
+
+
+    @Override
     public long addRedisMsg(String topic, ResMsg msg) {
         return redisTemplate.opsForList().leftPush(topic, JSON.toJSONString(msg));
     }

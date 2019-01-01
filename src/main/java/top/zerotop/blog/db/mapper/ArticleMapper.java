@@ -21,15 +21,15 @@ public interface ArticleMapper {
 
     @Select("<script>" +
             "select * from article " +
-            "<if test=\"searchString != null or categorys != null \"> where </if>" +
-            "<if test=\"searchString != null\">title like #{searchString} </if>" +
-            "<if test=\"categorys != null \">" +
+            "<if test='searchString != null or categorys != null'> where </if>" +
+            "<if test='searchString != null'>title like #{searchString} </if>" +
+            "<if test='categorys != null'>" +
             " and category in " +
             "<foreach item=\"item\" index=\"index\" collection=\"categorys\" open=\"(\" separator=\",\" close=\")\">" +
             " #{item} " +
             "</foreach> " +
             "</if>" +
-            "<if test=\"orderBy != null \"> order by #{orderBy} </if>" +
+            "<if test='orderBy != null'> order by #{orderBy} </if>" +
             "limit #{startNum}, #{endNum} " +
             "</script>"
     )
