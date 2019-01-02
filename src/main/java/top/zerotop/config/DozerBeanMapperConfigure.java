@@ -6,7 +6,6 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class DozerBeanMapperConfigure {
-
     @Bean
     public DozerBeanMapper mapper() {
         DozerBeanMapper mapper = new DozerBeanMapper();

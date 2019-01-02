@@ -21,7 +21,6 @@ public class SocketController {
     private SimpMessagingTemplate template;
     private Message<String> res;
 
-
     @Autowired
     private RedisTemplate<String, String> redisTemplate;
 
@@ -29,7 +28,6 @@ public class SocketController {
     @SendTo("/topic/greeting")
     public @ResponseBody
     ResMsg getMsg(@Payload() String payload) {
-
         ResMsg msg = new ResMsg();
         msg.setMsg(payload.toString());
 
@@ -37,9 +35,6 @@ public class SocketController {
         List<String> msgList = redisTemplate.opsForList().range("/topic/msg", 0, -1);
 
         template.convertAndSend("/topic/msg", msg);
-
-        System.out.println("====new topic msg====");
-
         return msg;
     }
 

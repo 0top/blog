@@ -17,7 +17,9 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import top.zerotop.blog.db.model.Admin;
+import top.zerotop.blog.domain.UserRole;
 import top.zerotop.blog.releam.CustomToken;
+import top.zerotop.blog.service.UserRoleService;
 import top.zerotop.blog.service.UserService;
 import top.zerotop.blog.util.Result;
 import top.zerotop.exception.AdminLoginException;
@@ -36,14 +38,16 @@ public class AccountController extends BaseController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    UserRoleService userRoleService;
 
-    @ApiOperation(value = "注册管理员", notes = "管理员注册")
-    @PostMapping(value = "/user/regist")
-    public Result insertAdmin(@ApiParam(value = "注册时提供信息")
+    @ApiOperation(value = "超级管理员添加管理员", notes = "超级管理员添加管理员")
+    @PostMapping(value = "/admin/user/add")
+    public Result insertAdmin(@ApiParam(value = "提供注册信息")
                               @RequestBody Admin admin) {
         logger.info("ok");
         Assert.notNull(admin, "添加信息不能为空");
-//        userService.insertAdmin(admin);
+        userService.insertAdmin(admin);
         return new Result();
     }
 
@@ -63,13 +67,12 @@ public class AccountController extends BaseController {
 
 
     @ApiOperation(value = "管理员登录", notes = "只有管理员能登录")
-    @PostMapping(value = "/login")
+    @PostMapping(value = "/admin/login")
     public Result adminLogin(@ApiParam(value = "登录时提供用户名", required = true)
                              @RequestParam String username,
                              @ApiParam(value = "登录时提供密码", required = true)
                              @RequestParam String password,
                              HttpServletRequest req) throws AdminLoginException {
-
         Assert.isTrue(StringUtils.hasText(username), "用户名不能为空");
         Assert.isTrue(StringUtils.hasText(password), "密码不能为空");
 
@@ -102,7 +105,7 @@ public class AccountController extends BaseController {
      * @return
      */
     @ApiOperation(value = "管理员登出", notes = "管理员登出接口")
-    @GetMapping(value = "/logout")
+    @GetMapping(value = "/admin/logout")
     public Result adminLoginOut() {
         Subject subject = SecurityUtils.getSubject();
         if (subject.isAuthenticated() == true) {
