@@ -7,7 +7,6 @@ import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
-import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
@@ -16,10 +15,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.util.Assert;
 import top.zerotop.blog.db.mapper.AdminMapper;
 import top.zerotop.blog.db.mapper.UserRoleMapper;
 import top.zerotop.blog.db.model.Admin;
-import top.zerotop.blog.domain.UserRole;
+import top.zerotop.blog.db.model.UserRole;
 import top.zerotop.blog.util.EncryptUtils;
 
 /**
@@ -27,7 +27,6 @@ import top.zerotop.blog.util.EncryptUtils;
  *@createDate 创建时间: 2018年5月23日下午11:14:50
  */
 public class AdminRealm extends AuthorizingRealm {
-
     public static final transient Logger logger = LoggerFactory.getLogger(AdminRealm.class);
 
 	@Autowired
@@ -52,7 +51,6 @@ public class AdminRealm extends AuthorizingRealm {
 		Set<String> roles = new HashSet<>();
 
 		for(UserRole userRole: userRoleMapper.listUserRoleByUserId(admin.getId())){
-		    System.out.println(userRole.toString());
 			roles.add(userRole.getRoleName());
 		}
 		
@@ -63,29 +61,16 @@ public class AdminRealm extends AuthorizingRealm {
 
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
-		System.out.println("认证");
         logger.info(token.getPrincipal() + " : 开始认证 ");
 		
 		String username = token.getPrincipal().toString();
 		String password = String.valueOf((char[])token.getCredentials());
 
-		Admin  admin = new Admin();
-		admin.setUsername(username);
-		admin.setPassword(password);
-		
-		admin = adminMapper.selectByUsernameAndPassword(username, EncryptUtils.MD5(password));
+        Admin admin = adminMapper.selectByUsernameAndPassword(username, EncryptUtils.MD5(password));
+		Assert.notNull(admin, "认证失败");
+        logger.info(String.format("admin: [%s] 认证成功", admin.getUsername()));
 
-		System.out.println(admin.toString());
-
-		if(null == admin){
-			throw new UnknownAccountException();
-		}
-		else{
-			
-			AuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo( admin, password, getName());
-            return authenticationInfo;
-            
-		}
+        AuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo( admin, password, getName());
+		return authenticationInfo;
 	}
-
 }

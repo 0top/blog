@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
-import top.zerotop.blog.domain.UserRole;
+import top.zerotop.blog.domain.UserRoleDTO;
 import top.zerotop.blog.service.UserRoleService;
 import top.zerotop.blog.util.Result;
 
@@ -22,7 +22,7 @@ public class UserRoleController extends BaseController {
     @ApiOperation(value = "给用户更加权限", notes = "为用户增加权限")
     @PostMapping(value = "/userRole")
     public Result insertUserRole(@ApiParam(value = "用户权限")
-                                 @RequestBody UserRole userRole) {
+                                 @RequestBody UserRoleDTO userRole) {
         userRoleService.insertUserRole(userRole);
         return new Result();
     }

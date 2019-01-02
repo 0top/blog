@@ -18,6 +18,4 @@ public class CustomToken extends UsernamePasswordToken {
     public void setLogintype(String logintype) {
         this.logintype = logintype;
     }
-
-
 }

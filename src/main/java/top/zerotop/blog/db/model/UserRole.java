@@ -1,8 +1,9 @@
 package top.zerotop.blog.db.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class userRole {
+public class UserRole implements Serializable{
 
     private long id;
 
@@ -15,6 +16,12 @@ public class userRole {
     private Date gmtCreate;
 
     private Date gmtModified;
+
+    public UserRole(String roleName, Date gmtCreate, Date gmtModified) {
+        this.roleName = roleName;
+        this.gmtCreate = gmtCreate;
+        this.gmtModified = gmtModified;
+    }
 
     public long getId() {
         return id;

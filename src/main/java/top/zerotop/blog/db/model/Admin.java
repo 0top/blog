@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Admin implements Serializable {
-
     private long id;
 
     private String code;
@@ -22,6 +21,11 @@ public class Admin implements Serializable {
     private Date gmtCreate;
 
     private Date gmtModified;
+
+    public Admin(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
 
     public long getId() {
         return id;

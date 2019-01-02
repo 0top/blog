@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
-import top.zerotop.blog.domain.UserRole;
+import top.zerotop.blog.db.model.UserRole;
 
 public interface UserRoleMapper {
 
@@ -20,10 +20,8 @@ public interface UserRoleMapper {
             " and ur.user_id = #{userId}")
     List<UserRole> listUserRoleByUserId(@Param("userId") long userId);
 
-
     @Delete("delete from user_role where id = #{id}")
     int deleteUserRole(long id);
-
 
     @Insert("insert into role(role_name, gmt_create, gmt_modified) " +
             "values(#{role.roleName}, #{role.gmtCreate}, #{role.gmtModified})")
