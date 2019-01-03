@@ -7,9 +7,8 @@ import top.zerotop.blog.db.mapper.UserRoleMapper;
 import top.zerotop.blog.db.model.UserRole;
 import top.zerotop.blog.domain.UserRoleDTO;
 import top.zerotop.blog.service.UserRoleService;
+import top.zerotop.blog.util.ConvertToDTO;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -24,7 +23,7 @@ public class UserRoleServiceImpl implements UserRoleService {
     public int insertUserRole(UserRole userRole) {
         userRole.setGmtCreate(new Date());
         userRole.setGmtModified(new Date());
-        
+
         return userRoleMapper.insertUserRole(userRole);
     }
 
@@ -32,7 +31,7 @@ public class UserRoleServiceImpl implements UserRoleService {
     public List<UserRoleDTO> listUserRole(long userId) {
         List<UserRole> userRoles = userRoleMapper.listUserRoleByUserId(userId);
 
-        return convertObjectToDTO(userRoles, UserRoleDTO.class);
+        return ConvertToDTO.convertObjectToDTO(userRoles, UserRoleDTO.class);
     }
 
     @Override
@@ -50,19 +49,6 @@ public class UserRoleServiceImpl implements UserRoleService {
     public List<UserRoleDTO> listRole() {
         List<UserRole> userRoles = userRoleMapper.listRole();
 
-        return convertObjectToDTO(userRoles, UserRoleDTO.class);
-    }
-
-    public <T> List<T> convertObjectToDTO(Collection<?> collection, Class<T> tClass) {
-        if (org.springframework.util.CollectionUtils.isEmpty(collection)) {
-            List<T> lists = new ArrayList<>();
-            collection.forEach(x -> {
-                T t = dozerBeanMapper.map(x, tClass);
-                lists.add(t);
-            });
-            return lists;
-        } else {
-            return new ArrayList<>();
-        }
+        return ConvertToDTO.convertObjectToDTO(userRoles, UserRoleDTO.class);
     }
 }
