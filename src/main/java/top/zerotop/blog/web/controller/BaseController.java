@@ -1,4 +1,4 @@
-package top.zerotop.blog.controller.api;
+package top.zerotop.blog.web.controller;
 
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;

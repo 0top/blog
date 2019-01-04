@@ -1,4 +1,4 @@
-package top.zerotop.blog.controller.api;
+package top.zerotop.blog.web.controller;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

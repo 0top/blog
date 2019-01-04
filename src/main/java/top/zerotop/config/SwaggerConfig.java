@@ -28,8 +28,8 @@ public class SwaggerConfig  {
 
     private ApiInfo productApiInfo() {
         return new ApiInfoBuilder()
-                .title("blog接口测试")
-                .description("接口测试")
+                .title("blog接口")
+                .description("blog请求接口api")
                 .termsOfServiceUrl("http://localhost:8088/blog" )
                 .contact(new Contact("zerotop", "https://0top.github.io", ""))
                 .version("2.0")

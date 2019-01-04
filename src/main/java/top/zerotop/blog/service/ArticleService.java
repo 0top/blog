@@ -2,7 +2,7 @@ package top.zerotop.blog.service;
 
 import java.util.List;
 
-import top.zerotop.blog.controller.condition.ArticleCondition;
+import top.zerotop.blog.web.condition.ArticleCondition;
 import top.zerotop.blog.db.model.Article;
 import top.zerotop.exception.BlogException;
 

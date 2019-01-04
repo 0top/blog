@@ -6,7 +6,7 @@ import top.zerotop.blog.domain.UserRoleDTO;
 import java.util.List;
 
 public interface UserRoleService {
-    int insertUserRole(UserRole userRole);
+    int insertUserRole(UserRoleDTO userRoleDTO);
 
     List<UserRoleDTO> listUserRole(long userId);
 

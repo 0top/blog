@@ -5,10 +5,19 @@ package top.zerotop.exception;
  * @createDate 创建时间: 2018年8月24日下午10:20:43
  */
 public class BlogException extends Exception {
-
-    private static final long serialVersionUID = 1L;
+    public BlogException() {
+        super();
+    }
 
     public BlogException(String message) {
         super(message);
+    }
+
+    public BlogException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
+    public BlogException(Throwable cause) {
+        super(cause);
     }
 }

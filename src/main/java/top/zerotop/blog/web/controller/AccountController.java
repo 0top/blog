@@ -1,4 +1,4 @@
-package top.zerotop.blog.controller.api;
+package top.zerotop.blog.web.controller;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -21,7 +21,7 @@ import top.zerotop.blog.releam.CustomToken;
 import top.zerotop.blog.service.UserRoleService;
 import top.zerotop.blog.service.UserService;
 import top.zerotop.blog.util.Result;
-import top.zerotop.exception.AdminLoginException;
+import top.zerotop.exception.UserAccountException;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -71,7 +71,7 @@ public class AccountController extends BaseController {
                              @RequestParam String username,
                              @ApiParam(value = "登录时提供密码", required = true)
                              @RequestParam String password,
-                             HttpServletRequest req) throws AdminLoginException {
+                             HttpServletRequest req) throws UserAccountException {
         Assert.isTrue(StringUtils.hasText(username), "用户名不能为空");
         Assert.isTrue(StringUtils.hasText(password), "密码不能为空");
 

@@ -6,11 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import org.springframework.util.Assert;
-import top.zerotop.blog.controller.condition.ArticleCondition;
+import top.zerotop.blog.web.condition.ArticleCondition;
 import top.zerotop.blog.db.mapper.ArticleMapper;
 import top.zerotop.blog.db.model.Article;
 import top.zerotop.blog.service.ArticleService;
-import top.zerotop.exception.ArticleException;
 import top.zerotop.exception.BlogException;
 
 /**

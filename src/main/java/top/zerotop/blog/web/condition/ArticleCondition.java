@@ -1,4 +1,4 @@
-package top.zerotop.blog.controller.condition;
+package top.zerotop.blog.web.condition;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

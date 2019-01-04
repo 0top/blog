@@ -1,8 +1,6 @@
-package top.zerotop.blog.controller.api;
+package top.zerotop.blog.web.controller;
 
 import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -12,7 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
-import top.zerotop.blog.controller.condition.ArticleCondition;
+import top.zerotop.blog.web.condition.ArticleCondition;
 import top.zerotop.blog.db.model.Article;
 import top.zerotop.blog.service.ArticleService;
 import top.zerotop.blog.util.Result;

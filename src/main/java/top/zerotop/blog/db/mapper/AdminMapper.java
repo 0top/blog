@@ -7,8 +7,7 @@ import org.apache.ibatis.annotations.Select;
 import top.zerotop.blog.db.model.Admin;
 
 @Mapper
-public interface AdminMapper{
-
+public interface AdminMapper {
     int deleteByAdminCode(@Param("code") String code);
 
     int insertAdmin(Admin admin);
@@ -17,7 +16,7 @@ public interface AdminMapper{
     Admin selectAdmin(@Param("username") String username);
 
     @Select("select * from admin where username = #{username} and password = #{password} ")
-    Admin selectByUsernameAndPassword(@Param("username")String username, @Param("password")String password);
+    Admin selectByUsernameAndPassword(@Param("username") String username, @Param("password") String password);
 
     int updateAdminByCode(@Param("admin") Admin admin);
 }

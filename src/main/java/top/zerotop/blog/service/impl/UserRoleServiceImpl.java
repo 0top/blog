@@ -20,7 +20,8 @@ public class UserRoleServiceImpl implements UserRoleService {
     DozerBeanMapper dozerBeanMapper;
 
     @Override
-    public int insertUserRole(UserRole userRole) {
+    public int insertUserRole(UserRoleDTO userRoleDTO) {
+        UserRole userRole = dozerBeanMapper.map(userRoleDTO, UserRole.class);
         userRole.setGmtCreate(new Date());
         userRole.setGmtModified(new Date());
 
