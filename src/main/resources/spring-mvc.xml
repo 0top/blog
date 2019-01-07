@@ -17,7 +17,7 @@
 
     <mvc:annotation-driven />
     <!-- 扫描controller包，使注解生效 -->
-    <context:component-scan base-package="top.zerotop.blog.controller"/>
+    <context:component-scan base-package="top.zerotop.blog.web"/>
     <context:component-scan base-package="top.zerotop.blog.service"/>
     <context:component-scan base-package="top.zerotop.config"/>
     <context:component-scan base-package="top.zerotop.websocket"/>

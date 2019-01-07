@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="top.zerotop.blog.db.mapper.UserRoleMapper" >
-  <resultMap id="BaseResultMap" type="top.zerotop.blog.domain.UserRole" >
+  <resultMap id="BaseResultMap" type="top.zerotop.blog.db.model.UserRole" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="role_id" property="roleId" jdbcType="BIGINT" />
     <result column="user_id" property="userId" jdbcType="BIGINT" />
@@ -29,13 +29,13 @@
     delete from user_role
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="top.zerotop.blog.domain.UserRole" >
+  <insert id="insert" parameterType="top.zerotop.blog.db.model.UserRole" >
     insert into user_role (id, role_id, user_id, 
       gtm_create, gtm_modified)
     values (#{id,jdbcType=BIGINT}, #{roleId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, 
       #{gtmCreate,jdbcType=TIMESTAMP}, #{gtmModified,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="top.zerotop.blog.domain.UserRole" >
+  <insert id="insertSelective" parameterType="top.zerotop.blog.db.model.UserRole" >
     insert into user_role
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -72,7 +72,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="top.zerotop.blog.domain.UserRole" >
+  <update id="updateByPrimaryKeySelective" parameterType="top.zerotop.blog.db.model.UserRole" >
     update user_role
     <set >
       <if test="roleId != null" >
@@ -90,7 +90,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="top.zerotop.blog.domain.UserRole" >
+  <update id="updateByPrimaryKey" parameterType="top.zerotop.blog.db.model.UserRole" >
     update user_role
     set role_id = #{roleId,jdbcType=BIGINT},
       user_id = #{userId,jdbcType=BIGINT},
