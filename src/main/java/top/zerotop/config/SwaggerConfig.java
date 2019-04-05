@@ -21,7 +21,7 @@ public class SwaggerConfig  {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(productApiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("top.zerotop.blog.controller"))
+                .apis(RequestHandlerSelectors.basePackage("top.zerotop.blog.web"))
                 .paths(PathSelectors.any())
                 .build();
     }

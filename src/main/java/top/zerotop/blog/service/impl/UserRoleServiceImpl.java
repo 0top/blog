@@ -9,6 +9,7 @@ import top.zerotop.blog.domain.UserRoleDTO;
 import top.zerotop.blog.service.UserRoleService;
 import top.zerotop.blog.util.ConvertToDTO;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -22,8 +23,8 @@ public class UserRoleServiceImpl implements UserRoleService {
     @Override
     public int insertUserRole(UserRoleDTO userRoleDTO) {
         UserRole userRole = dozerBeanMapper.map(userRoleDTO, UserRole.class);
-        userRole.setGmtCreate(new Date());
-        userRole.setGmtModified(new Date());
+        userRole.setGmtCreate(LocalDateTime.now().toString());
+        userRole.setGmtModified(LocalDateTime.now().toString());
 
         return userRoleMapper.insertUserRole(userRole);
     }
@@ -42,7 +43,7 @@ public class UserRoleServiceImpl implements UserRoleService {
 
     @Override
     public int insertRole(String roleName) {
-        UserRole userRole = new UserRole(roleName, new Date(), new Date());
+        UserRole userRole = new UserRole(roleName, LocalDateTime.now().toString(), LocalDateTime.now().toString());
         return userRoleMapper.insertRole(userRole);
     }
 

@@ -13,14 +13,18 @@ public class UserRole implements Serializable{
 
     private String roleName;
 
-    private Date gmtCreate;
+    private String gmtCreate;
 
-    private Date gmtModified;
+    private String gmtModified;
 
-    public UserRole(String roleName, Date gmtCreate, Date gmtModified) {
+    public UserRole(String roleName, String gmtCreate, String gmtModified) {
         this.roleName = roleName;
         this.gmtCreate = gmtCreate;
         this.gmtModified = gmtModified;
+    }
+
+    public UserRole() {
+
     }
 
     public long getId() {
@@ -55,19 +59,19 @@ public class UserRole implements Serializable{
         this.roleName = roleName;
     }
 
-    public Date getGmtCreate() {
+    public String getGmtCreate() {
         return gmtCreate;
     }
 
-    public void setGmtCreate(Date gmtCreate) {
+    public void setGmtCreate(String gmtCreate) {
         this.gmtCreate = gmtCreate;
     }
 
-    public Date getGmtModified() {
+    public String getGmtModified() {
         return gmtModified;
     }
 
-    public void setGmtModified(Date gmtModified) {
+    public void setGmtModified(String gmtModified) {
         this.gmtModified = gmtModified;
     }
 
