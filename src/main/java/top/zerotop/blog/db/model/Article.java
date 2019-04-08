@@ -20,9 +20,9 @@ public class Article implements Serializable{
 
     private String category;
 
-    private Date gmtCreate;
+    private String gmtCreate;
 
-    private Date gmtModified;
+    private String gmtModified;
 
     public long getId() {
         return id;
@@ -80,19 +80,19 @@ public class Article implements Serializable{
         this.category = category;
     }
 
-    public Date getGmtCreate() {
+    public String getGmtCreate() {
         return gmtCreate;
     }
 
-    public void setGmtCreate(Date gmtCreate) {
+    public void setGmtCreate(String gmtCreate) {
         this.gmtCreate = gmtCreate;
     }
 
-    public Date getGmtModified() {
+    public String getGmtModified() {
         return gmtModified;
     }
 
-    public void setGmtModified(Date gmtModified) {
+    public void setGmtModified(String gmtModified) {
         this.gmtModified = gmtModified;
     }
 

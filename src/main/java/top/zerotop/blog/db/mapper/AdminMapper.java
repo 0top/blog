@@ -1,15 +1,16 @@
 package top.zerotop.blog.db.mapper;
 
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.*;
 
-import org.apache.ibatis.annotations.Select;
 import top.zerotop.blog.db.model.Admin;
 
 @Mapper
 public interface AdminMapper {
+    @Delete("delete from admin where code = #{code}")
     int deleteByAdminCode(@Param("code") String code);
 
+    @Insert("insert int admin(code, nickname, username, password, avatar, description, gmt_create, gmtModified)" +
+            "values(#{code}, #{nickname}, #{username}, #{password}, #{avatar}, #{description}, #{gmtCreate}, #{gmtModified})")
     int insertAdmin(Admin admin);
 
     @Select("select * from admin where username = #{username}")
@@ -18,5 +19,15 @@ public interface AdminMapper {
     @Select("select * from admin where username = #{username} and password = #{password} ")
     Admin selectByUsernameAndPassword(@Param("username") String username, @Param("password") String password);
 
+    @Update("<script>" +
+            "update admin" +
+            "<set>" +
+            "<if test='nickname!=null'>nickname = #{nickname}, </if>" +
+            "<if test='avatar!=null'>avatar = #{avatar}, </if>" +
+            "<if test='description!=null'>description = #{description}, </if>" +
+            "<if test='nickname!=null'>nickname = #{nickname}, </if>" +
+            "gmt_modified = #{gmtModified}" +
+            "</set>" +
+            "</script>")
     int updateAdminByCode(@Param("admin") Admin admin);
 }

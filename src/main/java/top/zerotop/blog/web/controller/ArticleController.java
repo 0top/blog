@@ -32,8 +32,9 @@ public class ArticleController extends BaseController {
             notes = "根据id获取文章内容")
     @GetMapping(value = "/get/{id}")
     public Result getArticleById(@ApiParam(value = "文章id")
-                                 @PathVariable("id") int id) {
-        return new Result(blogService.getArticleById(id));
+                                 @PathVariable("id") Integer id) {
+        Assert.notNull(id, "id不可为空");
+        return Result.make(blogService.getArticleById(id));
     }
 
     //	@RequiresRoles("admin")
@@ -45,7 +46,7 @@ public class ArticleController extends BaseController {
         int id = blogService.insertArticle(article);
         article.setId(id);
 
-        return new Result("获取文章成功", article);
+        return Result.make(article);
     }
 
     //    @RequiresRoles("admin")
@@ -55,7 +56,7 @@ public class ArticleController extends BaseController {
                                 @RequestBody Article article) {
         Assert.notNull(article, "文章不可为空");
         blogService.updateArticleById(article);
-        return new Result("更新成功");
+        return Result.SUCCESS;
     }
 
     @ApiOperation(value = "获取文章列表", notes = "分页查询文章列表")
@@ -64,6 +65,6 @@ public class ArticleController extends BaseController {
                                @RequestBody ArticleCondition articleCondition) throws BlogException {
         Assert.notNull(articleCondition, "查询条件不可为空");
         List<Article> articles = blogService.queryArticle(articleCondition);
-        return new Result("获取文章列表", articles);
+        return Result.make(articles);
     }
 }

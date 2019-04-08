@@ -17,8 +17,8 @@ public class SocketMsg {
     @Column(name = "msg")
     private String msg;
 
-    @Column(name = "create_time")
-    private String createTime;
+    @Column(name = "gmt_create")
+    private String gmtCreate;
 
     @Column(name = "topic")
     private String topic;
@@ -47,12 +47,12 @@ public class SocketMsg {
         this.msg = msg;
     }
 
-    public String getCreateTime() {
-        return createTime;
+    public String getGmtCreate() {
+        return gmtCreate;
     }
 
-    public void setCreateTime(String createTime) {
-        this.createTime = createTime;
+    public void setGmtCreate(String gmtCreate) {
+        this.gmtCreate = gmtCreate;
     }
 
     public String getTopic() {

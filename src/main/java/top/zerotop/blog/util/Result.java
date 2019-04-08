@@ -8,40 +8,45 @@ import io.swagger.annotations.ApiModelProperty;
  *@createDate 创建时间: 2018年5月28日下午10:20:26
  */
 @ApiModel(value = "返回结果")
-public class Result {
+public class Result<Content> {
+    public static Result<Boolean> SUCCESS = new Result<>(true);
 
     @ApiModelProperty(value = "返回代码", position = 0)
-    private int code;
+    private int code = 200;
 
     @ApiModelProperty(value = "返回消息", position = 1)
-    private String msg;
+    private String msg = "请求成功";
+
+    private boolean success = false;
 
     @ApiModelProperty(value = "数据内容", position = 2)
-	private Object content;
+	private Content content;
 
     public Result() {
-        this.code = 200;
-        this.msg = "请求成功";
-        this.content = null;
     }
 
 
-    public Result(Object content) {
-        this.code = 200;
-        this.msg = "请求成功";
-        this.content = content;
+    public Result(boolean success) {
+        this.success = true;
     }
 
-	public Result(String msg, Object content) {
-        this.code = 200;
+	public Result(String msg, Content content) {
         this.msg = msg;
 		this.content = content;
 	}
 
-	public Result(int code, String msg, Object content) {
-        this.code = code;
-        this.msg = msg;
-        this.content = content;
+	public static <Content> Result<Content> error(int code, String msg) {
+        Result<Content> result = new Result<>();
+        result.setCode(code);
+        result.setMsg(msg);
+        result.setSuccess(false);
+        return result;
+    }
+
+    public static <Content> Result<Content> make(Content content) {
+        Result<Content> result = new Result<Content>();
+        result.setContent(content);
+        return result;
     }
 
     public int getCode() {
@@ -60,11 +65,19 @@ public class Result {
         this.msg = msg;
     }
 
-    public Object getContent() {
+    public boolean isSuccess() {
+        return success;
+    }
+
+    public void setSuccess(boolean success) {
+        this.success = success;
+    }
+
+    public Content getContent() {
         return content;
     }
 
-    public void setContent(Object content) {
+    public void setContent(Content content) {
         this.content = content;
     }
 }

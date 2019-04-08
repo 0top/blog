@@ -33,7 +33,7 @@ public class UserRoleServiceImpl implements UserRoleService {
     public List<UserRoleDTO> listUserRole(long userId) {
         List<UserRole> userRoles = userRoleMapper.listUserRoleByUserId(userId);
 
-        return ConvertToDTO.convertObjectToDTO(userRoles, UserRoleDTO.class);
+        return ConvertToDTO.convertToDTO(userRoles, UserRoleDTO.class);
     }
 
     @Override
@@ -50,7 +50,7 @@ public class UserRoleServiceImpl implements UserRoleService {
     @Override
     public List<UserRoleDTO> listRole() {
         List<UserRole> userRoles = userRoleMapper.listRole();
-
-        return ConvertToDTO.convertObjectToDTO(userRoles, UserRoleDTO.class);
+        System.out.println();
+        return ConvertToDTO.convertToDTO(userRoles, UserRoleDTO.class);
     }
 }

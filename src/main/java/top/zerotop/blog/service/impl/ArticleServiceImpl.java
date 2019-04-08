@@ -1,5 +1,6 @@
 package top.zerotop.blog.service.impl;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,20 +45,19 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public Article getArticleById(int id) {
-        Assert.isTrue(id < 0, "id不合法");
         return articleMapper.selectByArticleId(id);
     }
 
     @Override
     public int insertArticle(Article article) {
-        article.setGmtCreate(new Date());
-        article.setGmtModified(new Date());
+        article.setGmtCreate(LocalDateTime.now().toString());
+        article.setGmtModified(LocalDateTime.now().toString());
         return articleMapper.insertArticle(article);
     }
 
     @Override
     public int updateArticleById(Article article) {
-        article.setGmtModified(new Date());
+        article.setGmtModified(LocalDateTime.now().toString());
         return articleMapper.updateByArticleId(article);
     }
 

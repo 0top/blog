@@ -61,7 +61,7 @@ public class AccountController extends BaseController {
 
         Admin admin = userService.selectAdmin(username);
 //        Admin admin = userService.selectByUsernameAndPassword(username, password);
-        return new Result(admin);
+        return Result.make(admin);
     }
 
 
@@ -78,7 +78,7 @@ public class AccountController extends BaseController {
         Subject subject = SecurityUtils.getSubject();
 
         if (subject.isAuthenticated() == true && subject.getPrincipal().equals(username)) {
-            return new Result("当前用户已登录", null);
+            return Result.error(400, "当前用户已登录");
         }
 
         logger.info(String.format("user:[] login", username));
@@ -87,15 +87,15 @@ public class AccountController extends BaseController {
             token.setRememberMe(true);
             subject.login(token);
         } catch (IncorrectCredentialsException ice) {
-            return new Result("用户名或密码错误", null);
+            return Result.error(400, "用户名或密码错误");
         } catch (UnknownAccountException uae) {
-            return new Result(1, "用户名或密码错误", null);
+            return Result.error(400, "用户名或密码错误");
         } catch (ExcessiveAttemptsException eae) {
-            return new Result(1, "请稍后尝试", null);
+            return Result.error(400, "请稍后尝试");
         }
         req.getSession().setAttribute("user", username);
 
-        return new Result(200, "登录成功", null);
+        return Result.SUCCESS;
     }
 
     /**
@@ -110,7 +110,7 @@ public class AccountController extends BaseController {
         if (subject.isAuthenticated() == true) {
             subject.logout();
         }
-        return new Result(0, "退出登录成功", null);
+        return Result.SUCCESS;
     }
 
 }

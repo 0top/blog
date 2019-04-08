@@ -16,6 +16,6 @@ public abstract class BaseController {
 	public @ResponseBody Result unknowException(Exception e){
 
 		e.printStackTrace();
-		return new  Result(500, "请求出错", null);
+		return Result.error(500, "请求出错...");
 	}
 }

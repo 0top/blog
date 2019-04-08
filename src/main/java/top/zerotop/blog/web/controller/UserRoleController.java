@@ -11,6 +11,8 @@ import top.zerotop.blog.domain.UserRoleDTO;
 import top.zerotop.blog.service.UserRoleService;
 import top.zerotop.blog.util.Result;
 
+import java.util.List;
+
 @Api(value = "用户权限相关", description = "用户权限相关api")
 @RestController
 @RequestMapping(value = "/user", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
@@ -30,7 +32,7 @@ public class UserRoleController extends BaseController {
     @ApiOperation(value = "查看当前用户所有权限", notes = "查看当前用户所有权限")
     @GetMapping(value = "/userRole")
     public Result listUserRole(long userId) {
-        return new Result(userRoleService.listUserRole(userId));
+        return Result.make(userRoleService.listUserRole(userId));
     }
 
     @ApiOperation(value = "删除用户权限", notes = "删除用户权限")
@@ -48,12 +50,12 @@ public class UserRoleController extends BaseController {
                              @RequestParam("roleName") String roleName) {
         Assert.notNull(roleName, "权限值不可为空");
         userRoleService.insertRole(roleName);
-        return new Result();
+        return Result.SUCCESS;
     }
 
     @ApiOperation(value = "列出所有权限", notes = "列出所有权限")
     @GetMapping(value = "/role")
-    public Result listRole() {
-        return new Result(userRoleService.listRole());
+    public Result<List<UserRoleDTO>> listRole() {
+        return Result.make(userRoleService.listRole());
     }
 }

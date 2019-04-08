@@ -12,9 +12,7 @@ public class UserRoleDTO implements Serializable{
 
     private String roleName;
 
-    private Date gmtCreate;
-
-    private Date gmtModified;
+    private String gmtModified;
 
     public Long getId() {
         return id;
@@ -48,19 +46,11 @@ public class UserRoleDTO implements Serializable{
         this.roleName = roleName;
     }
 
-    public Date getGmtCreate() {
-        return gmtCreate;
-    }
-
-    public void setGmtCreate(Date gmtCreate) {
-        this.gmtCreate = gmtCreate;
-    }
-
-    public Date getGmtModified() {
+    public String getGmtModified() {
         return gmtModified;
     }
 
-    public void setGmtModified(Date gmtModified) {
+    public void setGmtModified(String gmtModified) {
         this.gmtModified = gmtModified;
     }
 
