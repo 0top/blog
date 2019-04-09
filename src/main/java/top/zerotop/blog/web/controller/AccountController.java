@@ -31,7 +31,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Api(value = "用户请求接口")
 @RestController
-@RequestMapping(value = "/account", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
+@RequestMapping(value = "/api/admin/v1/account", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
 public class AccountController extends BaseController {
     private static Logger logger = LoggerFactory.getLogger(AccountController.class);
 
@@ -44,7 +44,6 @@ public class AccountController extends BaseController {
     @PostMapping(value = "/admin/user/add")
     public Result insertAdmin(@ApiParam(value = "提供注册信息")
                               @RequestBody Admin admin) {
-        logger.info("ok");
         Assert.notNull(admin, "添加信息不能为空");
         userService.insertAdmin(admin);
         return new Result();
@@ -59,8 +58,7 @@ public class AccountController extends BaseController {
         subject.checkRole("admin");
         subject.hasRole("admin");
 
-        Admin admin = userService.selectAdmin(username);
-//        Admin admin = userService.selectByUsernameAndPassword(username, password);
+        Admin admin = userService.selectAdminByUserName(username);
         return Result.make(admin);
     }
 
@@ -94,7 +92,6 @@ public class AccountController extends BaseController {
             return Result.error(400, "请稍后尝试");
         }
         req.getSession().setAttribute("user", username);
-
         return Result.SUCCESS;
     }
 

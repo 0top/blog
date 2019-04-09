@@ -1,5 +1,6 @@
 package top.zerotop.blog.service;
 
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import top.zerotop.blog.db.model.UserRole;
 import top.zerotop.blog.domain.UserRoleDTO;
 
@@ -14,5 +15,6 @@ public interface UserRoleService {
 
     int insertRole(String roleName);
 
+    @RequiresRoles("admin")
     List<UserRoleDTO> listRole();
 }

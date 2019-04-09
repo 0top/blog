@@ -12,7 +12,7 @@ public interface UserService {
     Admin selectByUsernameAndPassword(String username, String password);
 
     @RequiresRoles("admin")
-    Admin selectAdmin(String username);
+    Admin selectAdminByUserName(String username);
 
     int insertAdmin(Admin admin);
 

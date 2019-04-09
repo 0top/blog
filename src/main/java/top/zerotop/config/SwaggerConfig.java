@@ -17,12 +17,24 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableWebMvc
 public class SwaggerConfig  {
     @Bean
+    public Docket AdminApi(){
+        return new Docket(DocumentationType.SWAGGER_2)
+                .apiInfo(productApiInfo())
+                .groupName("admin")
+                .select()
+                .apis(RequestHandlerSelectors.basePackage("top.zerotop.blog.web"))
+                .paths(PathSelectors.regex("/api/admin/v1.*"))
+                .build();
+    }
+
+    @Bean
     public Docket ProductApi(){
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(productApiInfo())
+                .groupName("api")
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("top.zerotop.blog.web"))
-                .paths(PathSelectors.any())
+                .paths(PathSelectors.regex("/api/v1.*"))
                 .build();
     }
 

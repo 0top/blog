@@ -22,7 +22,7 @@ import top.zerotop.exception.BlogException;
  */
 @Api(value = "文章列表")
 @RestController
-@RequestMapping(value = "/article", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
+@RequestMapping(value = "/api/v1/article", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
 public class ArticleController extends BaseController {
 
     @Autowired

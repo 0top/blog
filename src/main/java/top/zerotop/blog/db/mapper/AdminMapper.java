@@ -28,6 +28,7 @@ public interface AdminMapper {
             "<if test='nickname!=null'>nickname = #{nickname}, </if>" +
             "gmt_modified = #{gmtModified}" +
             "</set>" +
+            "where code=#{code}" +
             "</script>")
     int updateAdminByCode(@Param("admin") Admin admin);
 }

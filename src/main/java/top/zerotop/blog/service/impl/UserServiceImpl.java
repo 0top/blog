@@ -3,6 +3,7 @@ package top.zerotop.blog.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import org.springframework.util.StringUtils;
 import top.zerotop.blog.db.mapper.AdminMapper;
 import top.zerotop.blog.db.model.Admin;
 import top.zerotop.blog.service.UserService;
@@ -20,13 +21,15 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	public Admin selectByUsernameAndPassword(String username, String password) {
+		if (!StringUtils.hasText(username) || !StringUtils.hasText(password)) {
+			return null;
+		}
 	    password = EncryptUtils.MD5(password);
-
 		return adminMapper.selectByUsernameAndPassword(username, password);
 	}
 
 	@Override
-	public Admin selectAdmin(String username) {
+	public Admin selectAdminByUserName(String username) {
 		return adminMapper.selectAdmin(username);
 	}
 
