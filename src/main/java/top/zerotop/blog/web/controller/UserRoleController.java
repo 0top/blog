@@ -3,6 +3,7 @@ package top.zerotop.blog.web.controller;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.util.Assert;
@@ -43,7 +44,7 @@ public class UserRoleController extends BaseController {
         return new Result();
     }
 
-    //    @RequiresRoles("admin")
+    @RequiresRoles("admin")
     @ApiOperation(value = "添加权限管理", notes = "添加权限")
     @PostMapping(value = "/role")
     public Result insertRole(@ApiParam(value = "权限")

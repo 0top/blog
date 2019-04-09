@@ -41,8 +41,7 @@ public class AdminRealm extends AuthorizingRealm {
 
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-		System.out.println("授权");
-		logger.info("user authorization");
+		logger.info(" =====> user authorization");
 		
 		 Admin admin = (Admin) principals.getPrimaryPrincipal();
 		System.out.println(admin.toString());
@@ -67,10 +66,13 @@ public class AdminRealm extends AuthorizingRealm {
 		String password = String.valueOf((char[])token.getCredentials());
 
         Admin admin = adminMapper.selectByUsernameAndPassword(username, EncryptUtils.MD5(password));
-		Assert.notNull(admin, "认证失败");
-        logger.info(String.format("admin: [%s] 认证成功", admin.getUsername()));
+		if (null != admin) {
+			logger.info(String.format("admin: [%s] 认证成功", admin.getUsername()));
 
-        AuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo( admin, password, getName());
-		return authenticationInfo;
+			AuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(admin, password, getName());
+			return authenticationInfo;
+		} else {
+			throw new AuthenticationException("认证失败");
+		}
 	}
 }

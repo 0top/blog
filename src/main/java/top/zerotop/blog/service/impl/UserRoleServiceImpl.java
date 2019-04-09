@@ -1,5 +1,6 @@
 package top.zerotop.blog.service.impl;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -48,6 +49,7 @@ public class UserRoleServiceImpl implements UserRoleService {
     }
 
     @Override
+    @RequiresPermissions("admin:role")
     public List<UserRoleDTO> listRole() {
         List<UserRole> userRoles = userRoleMapper.listRole();
         System.out.println();
