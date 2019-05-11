@@ -1,6 +1,7 @@
 package top.zerotop.blog.service.impl;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,7 +12,6 @@ import top.zerotop.blog.service.UserRoleService;
 import top.zerotop.blog.util.ConvertToDTO;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -49,10 +49,8 @@ public class UserRoleServiceImpl implements UserRoleService {
     }
 
     @Override
-    @RequiresPermissions("admin:role")
     public List<UserRoleDTO> listRole() {
         List<UserRole> userRoles = userRoleMapper.listRole();
-        System.out.println();
         return ConvertToDTO.convertToDTO(userRoles, UserRoleDTO.class);
     }
 }

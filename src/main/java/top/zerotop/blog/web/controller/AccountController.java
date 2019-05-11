@@ -55,8 +55,7 @@ public class AccountController extends BaseController {
                               @RequestParam String username) {
 
         Subject subject = SecurityUtils.getSubject();
-        subject.checkRole("admin");
-        subject.hasRole("admin");
+        subject.checkRole("admin:article:select");
 
         Admin admin = userService.selectAdminByUserName(username);
         return Result.make(admin);
@@ -72,6 +71,7 @@ public class AccountController extends BaseController {
                              HttpServletRequest req) throws UserAccountException {
         Assert.isTrue(StringUtils.hasText(username), "用户名不能为空");
         Assert.isTrue(StringUtils.hasText(password), "密码不能为空");
+
 
         Subject subject = SecurityUtils.getSubject();
 

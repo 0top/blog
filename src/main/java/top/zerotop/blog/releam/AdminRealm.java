@@ -1,6 +1,7 @@
 package top.zerotop.blog.releam;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.apache.shiro.authc.AuthenticationException;
@@ -16,11 +17,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.util.Assert;
+import org.springframework.util.CollectionUtils;
 import top.zerotop.blog.db.mapper.AdminMapper;
 import top.zerotop.blog.db.mapper.UserRoleMapper;
 import top.zerotop.blog.db.model.Admin;
 import top.zerotop.blog.db.model.UserRole;
 import top.zerotop.blog.util.EncryptUtils;
+import top.zerotop.blog.util.JsonUtils;
 
 /**
  *@author 作者: zerotop
@@ -42,18 +45,22 @@ public class AdminRealm extends AuthorizingRealm {
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
 		logger.info(" =====> user authorization");
-		
-		 Admin admin = (Admin) principals.getPrimaryPrincipal();
-		System.out.println(admin.toString());
+
+		Admin admin = (Admin) principals.getPrimaryPrincipal();
+		System.out.println("===>" + JsonUtils.toJson(admin));
 		
 		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
 		Set<String> roles = new HashSet<>();
 
-		for(UserRole userRole: userRoleMapper.listUserRoleByUserId(admin.getId())){
-			roles.add(userRole.getRoleName());
-		}
-		
-		info.setRoles(roles);
+        List<UserRole> userRoles = userRoleMapper.listUserRoleByUserId(admin.getId());
+        if (!CollectionUtils.isEmpty(userRoles)) {
+            System.out.println("--->:" + JsonUtils.toJson(admin));
+            for (UserRole userRole : userRoles) {
+                roles.add(userRole.getRoleName());
+            }
+            System.out.println("--->" + JsonUtils.toJson(roles));
+            info.setRoles(roles);
+        }
 		
 		return info;
 	}
@@ -61,11 +68,14 @@ public class AdminRealm extends AuthorizingRealm {
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
         logger.info(token.getPrincipal() + " : 开始认证 ");
-		
+
 		String username = token.getPrincipal().toString();
 		String password = String.valueOf((char[])token.getCredentials());
 
-        Admin admin = adminMapper.selectByUsernameAndPassword(username, EncryptUtils.MD5(password));
+		System.out.println("===>" + username + " passwd:" + EncryptUtils.MD5(password));
+
+
+		Admin admin = adminMapper.selectByUsernameAndPassword(username, EncryptUtils.MD5(password));
 		if (null != admin) {
 			logger.info(String.format("admin: [%s] 认证成功", admin.getUsername()));
 

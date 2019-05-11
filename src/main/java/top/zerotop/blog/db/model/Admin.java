@@ -22,6 +22,9 @@ public class Admin implements Serializable {
 
     private String gmtModified;
 
+    public Admin() {
+    }
+
     public Admin(String username, String password) {
         this.username = username;
         this.password = password;

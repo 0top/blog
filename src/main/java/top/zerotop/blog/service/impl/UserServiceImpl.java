@@ -1,5 +1,6 @@
 package top.zerotop.blog.service.impl;
 
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
