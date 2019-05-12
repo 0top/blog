@@ -9,7 +9,7 @@ public interface AdminMapper {
     @Delete("delete from admin where code = #{code}")
     int deleteByAdminCode(@Param("code") String code);
 
-    @Insert("insert int admin(code, nickname, username, password, avatar, description, gmt_create, gmtModified)" +
+    @Insert("insert int admin(code, nickname, username, password, avatar, description, gmt_create, gmt_modified)" +
             "values(#{code}, #{nickname}, #{username}, #{password}, #{avatar}, #{description}, #{gmtCreate}, #{gmtModified})")
     int insertAdmin(Admin admin);
 

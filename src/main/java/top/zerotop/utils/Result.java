@@ -1,4 +1,4 @@
-package top.zerotop.blog.util;
+package top.zerotop.utils;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

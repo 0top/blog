@@ -1,4 +1,4 @@
-package top.zerotop.blog.util;
+package top.zerotop.utils;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
@@ -11,10 +11,8 @@ import javax.servlet.http.HttpServletRequest;
  * @createDate 创建时间: 2018年5月16日下午11:51:28
  */
 public class ReqJson {
-
 	public static String Json(HttpServletRequest req) {
-
-		StringBuffer jsonString = new java.lang.StringBuffer();
+		StringBuffer jsonString = new StringBuffer();
 		try {
 			InputStream in = req.getInputStream();
 			BufferedInputStream buf = new BufferedInputStream(in);

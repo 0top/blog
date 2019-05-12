@@ -1,4 +1,4 @@
-package top.zerotop.blog.util;
+package top.zerotop.utils;
 
 import org.dozer.DozerBeanMapper;
 import org.springframework.util.CollectionUtils;

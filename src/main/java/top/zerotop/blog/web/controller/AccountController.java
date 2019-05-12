@@ -20,7 +20,9 @@ import top.zerotop.blog.db.model.Admin;
 import top.zerotop.blog.releam.CustomToken;
 import top.zerotop.blog.service.UserRoleService;
 import top.zerotop.blog.service.UserService;
-import top.zerotop.blog.util.Result;
+import top.zerotop.utils.Result;
+import top.zerotop.blog.web.Request.AdminRequest;
+import top.zerotop.exception.BlogException;
 import top.zerotop.exception.UserAccountException;
 
 import javax.servlet.http.HttpServletRequest;
@@ -43,9 +45,10 @@ public class AccountController extends BaseController {
     @ApiOperation(value = "超级管理员添加管理员", notes = "超级管理员添加管理员")
     @PostMapping(value = "/admin/user/add")
     public Result insertAdmin(@ApiParam(value = "提供注册信息")
-                              @RequestBody Admin admin) {
-        Assert.notNull(admin, "添加信息不能为空");
-        userService.insertAdmin(admin);
+                              @RequestBody AdminRequest adminRequest) throws BlogException {
+        Assert.notNull(adminRequest, "添加信息不能为空");
+
+        userService.insertAdmin(adminRequest);
         return new Result();
     }
 
@@ -53,9 +56,7 @@ public class AccountController extends BaseController {
     @PostMapping(value = "/user/select")
     public Result selectAdmin(@ApiParam(value = "登录时提供用户名", required = true)
                               @RequestParam String username) {
-
-        Subject subject = SecurityUtils.getSubject();
-        subject.checkRole("admin:article:select");
+        Assert.notNull(username, "用户名不可为空");
 
         Admin admin = userService.selectAdminByUserName(username);
         return Result.make(admin);
@@ -72,14 +73,12 @@ public class AccountController extends BaseController {
         Assert.isTrue(StringUtils.hasText(username), "用户名不能为空");
         Assert.isTrue(StringUtils.hasText(password), "密码不能为空");
 
-
         Subject subject = SecurityUtils.getSubject();
-
-        if (subject.isAuthenticated() == true && subject.getPrincipal().equals(username)) {
+        if (subject.isAuthenticated() && subject.getPrincipal().equals(username)) {
             return Result.error(400, "当前用户已登录");
         }
 
-        logger.info(String.format("user:[] login", username));
+        logger.info(String.format("user:{%s} login.", username));
         CustomToken token = new CustomToken(username, password, "Admin");
         try {
             token.setRememberMe(true);
@@ -104,7 +103,7 @@ public class AccountController extends BaseController {
     @GetMapping(value = "/admin/logout")
     public Result adminLoginOut() {
         Subject subject = SecurityUtils.getSubject();
-        if (subject.isAuthenticated() == true) {
+        if (subject.isAuthenticated()) {
             subject.logout();
         }
         return Result.SUCCESS;

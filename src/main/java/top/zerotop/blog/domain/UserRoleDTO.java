@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class UserRoleDTO implements Serializable{
-    private Long id;
-
     private Long roleId;
 
     private Long userId;
@@ -13,14 +11,6 @@ public class UserRoleDTO implements Serializable{
     private String roleName;
 
     private String gmtModified;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public Long getRoleId() {
         return roleId;
@@ -57,7 +47,6 @@ public class UserRoleDTO implements Serializable{
     @Override
     public String toString() {
         return "UserRole{" +
-                "id=" + id +
                 ", roleId=" + roleId +
                 ", userId=" + userId +
                 ", roleName='" + roleName + '\'' +

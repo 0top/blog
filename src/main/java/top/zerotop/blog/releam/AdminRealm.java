@@ -16,14 +16,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
 import top.zerotop.blog.db.mapper.AdminMapper;
 import top.zerotop.blog.db.mapper.UserRoleMapper;
 import top.zerotop.blog.db.model.Admin;
 import top.zerotop.blog.db.model.UserRole;
-import top.zerotop.blog.util.EncryptUtils;
-import top.zerotop.blog.util.JsonUtils;
+import top.zerotop.utils.EncryptUtils;
+import top.zerotop.utils.JsonUtils;
 
 /**
  *@author 作者: zerotop

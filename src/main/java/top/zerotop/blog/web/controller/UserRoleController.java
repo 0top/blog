@@ -10,7 +10,8 @@ import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 import top.zerotop.blog.domain.UserRoleDTO;
 import top.zerotop.blog.service.UserRoleService;
-import top.zerotop.blog.util.Result;
+import top.zerotop.blog.web.Request.UserRoleRequest;
+import top.zerotop.utils.Result;
 
 import java.util.List;
 
@@ -25,8 +26,8 @@ public class UserRoleController extends BaseController {
     @ApiOperation(value = "给用户更加权限", notes = "为用户增加权限")
     @PostMapping(value = "/userRole")
     public Result insertUserRole(@ApiParam(value = "用户权限")
-                                 @RequestBody UserRoleDTO userRole) {
-        userRoleService.insertUserRole(userRole);
+                                 @RequestBody UserRoleRequest userRoleRequest) {
+        userRoleService.insertUserRole(userRoleRequest);
         return new Result();
     }
 
@@ -39,7 +40,9 @@ public class UserRoleController extends BaseController {
     @ApiOperation(value = "删除用户权限", notes = "删除用户权限")
     @DeleteMapping(value = "/userRole/{id}")
     public Result deleteUserRole(@ApiParam(value = "权限id")
-                                 @PathVariable("id") long id) {
+                                 @PathVariable("id") Long id) {
+        Assert.notNull(id, "id不可为空");
+
         userRoleService.deleteUserRole(id);
         return new Result();
     }

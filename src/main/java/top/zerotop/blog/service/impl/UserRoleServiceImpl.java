@@ -1,7 +1,5 @@
 package top.zerotop.blog.service.impl;
 
-import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,7 +7,8 @@ import top.zerotop.blog.db.mapper.UserRoleMapper;
 import top.zerotop.blog.db.model.UserRole;
 import top.zerotop.blog.domain.UserRoleDTO;
 import top.zerotop.blog.service.UserRoleService;
-import top.zerotop.blog.util.ConvertToDTO;
+import top.zerotop.blog.web.Request.UserRoleRequest;
+import top.zerotop.utils.ConvertToDTO;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -22,8 +21,8 @@ public class UserRoleServiceImpl implements UserRoleService {
     DozerBeanMapper dozerBeanMapper;
 
     @Override
-    public int insertUserRole(UserRoleDTO userRoleDTO) {
-        UserRole userRole = dozerBeanMapper.map(userRoleDTO, UserRole.class);
+    public int insertUserRole(UserRoleRequest userRoleRequest) {
+        UserRole userRole = dozerBeanMapper.map(userRoleRequest, UserRole.class);
         userRole.setGmtCreate(LocalDateTime.now().toString());
         userRole.setGmtModified(LocalDateTime.now().toString());
 

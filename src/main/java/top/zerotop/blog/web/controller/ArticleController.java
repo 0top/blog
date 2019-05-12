@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import top.zerotop.blog.web.condition.ArticleCondition;
 import top.zerotop.blog.db.model.Article;
 import top.zerotop.blog.service.ArticleService;
-import top.zerotop.blog.util.Result;
+import top.zerotop.utils.Result;
 import top.zerotop.exception.BlogException;
 
 /**
