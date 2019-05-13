@@ -57,6 +57,4 @@ public class UserServiceImpl implements UserService {
 
 		return adminMapper.insertAdmin(admin);
 	}
-
-
 }

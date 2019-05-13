@@ -18,7 +18,7 @@ import java.util.List;
 @Api(value = "用户权限相关", description = "用户权限相关api")
 @RestController
 @RequestMapping(value = "/api/admin/v1/user", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
-public class UserRoleController extends BaseController {
+public class UserController extends BaseController {
 
     @Autowired
     private UserRoleService userRoleService;

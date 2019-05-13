@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class UserRole implements Serializable{
-
     private long id;
 
     private long roleId;

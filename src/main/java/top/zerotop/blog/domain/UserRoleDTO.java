@@ -1,7 +1,7 @@
 package top.zerotop.blog.domain;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.util.Set;
 
 public class UserRoleDTO implements Serializable{
     private Long roleId;
@@ -11,6 +11,8 @@ public class UserRoleDTO implements Serializable{
     private String roleName;
 
     private String gmtModified;
+
+    private Set<String> permissions;
 
     public Long getRoleId() {
         return roleId;
@@ -44,12 +46,11 @@ public class UserRoleDTO implements Serializable{
         this.gmtModified = gmtModified;
     }
 
-    @Override
-    public String toString() {
-        return "UserRole{" +
-                ", roleId=" + roleId +
-                ", userId=" + userId +
-                ", roleName='" + roleName + '\'' +
-                '}';
+    public Set<String> getPermissions() {
+        return permissions;
+    }
+
+    public void setPermissions(Set<String> permissions) {
+        this.permissions = permissions;
     }
 }

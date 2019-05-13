@@ -31,7 +31,7 @@ import javax.servlet.http.HttpServletRequest;
  * @author 作者: zerotop
  * @createDate 创建时间: 2018年5月31日下午11:29:14
  */
-@Api(value = "用户请求接口")
+@Api(value = "用户请求接口", description = "用户请求接口")
 @RestController
 @RequestMapping(value = "/api/admin/v1/account", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
 public class AccountController extends BaseController {
