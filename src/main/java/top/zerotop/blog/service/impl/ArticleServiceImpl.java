@@ -3,13 +3,15 @@ package top.zerotop.blog.service.impl;
 import java.time.LocalDateTime;
 import java.util.*;
 
+import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import org.springframework.util.Assert;
+import top.zerotop.blog.domain.ArticleDTO;
 import top.zerotop.blog.web.condition.ArticleCondition;
-import top.zerotop.blog.db.mapper.ArticleMapper;
-import top.zerotop.blog.db.model.Article;
+import top.zerotop.blog.data.mapper.ArticleMapper;
+import top.zerotop.blog.data.model.Article;
 import top.zerotop.blog.service.ArticleService;
 import top.zerotop.exception.BlogException;
 
@@ -22,6 +24,8 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Autowired
     private ArticleMapper articleMapper;
+    @Autowired
+    private DozerBeanMapper dozerMapper;
 
     @Override
     public List<Article> queryArticle(ArticleCondition articleCondition) throws BlogException {
@@ -49,7 +53,8 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public int insertArticle(Article article) {
+    public int insertArticle(ArticleDTO articleDTO) {
+        Article article = dozerMapper.map(articleDTO, Article.class);
         article.setGmtCreate(LocalDateTime.now().toString());
         article.setGmtModified(LocalDateTime.now().toString());
         return articleMapper.insertArticle(article);

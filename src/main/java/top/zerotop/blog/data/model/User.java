@@ -1,11 +1,9 @@
-package top.zerotop.blog.db.model;
+package top.zerotop.blog.data.model;
 
 import java.io.Serializable;
 
 public class User implements Serializable {
-
     private String username;
-
     private String nickname;
 
     public String getUsername() {

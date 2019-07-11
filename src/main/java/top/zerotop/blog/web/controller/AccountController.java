@@ -16,7 +16,7 @@ import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
-import top.zerotop.blog.db.model.Admin;
+import top.zerotop.blog.data.model.Admin;
 import top.zerotop.blog.releam.CustomToken;
 import top.zerotop.blog.service.UserRoleService;
 import top.zerotop.blog.service.UserService;

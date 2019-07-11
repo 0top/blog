@@ -5,8 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import org.springframework.util.StringUtils;
-import top.zerotop.blog.db.mapper.AdminMapper;
-import top.zerotop.blog.db.model.Admin;
+import top.zerotop.blog.data.mapper.AdminMapper;
+import top.zerotop.blog.data.model.Admin;
 import top.zerotop.blog.service.UserService;
 import top.zerotop.utils.EncryptUtils;
 import top.zerotop.blog.web.Request.AdminRequest;

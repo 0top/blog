@@ -1,4 +1,4 @@
-package top.zerotop.blog.db.model;
+package top.zerotop.blog.data.model;
 
 /**
  * Created by:zerotop  date:2019/5/13

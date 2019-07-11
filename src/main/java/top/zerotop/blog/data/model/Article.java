@@ -1,27 +1,16 @@
-package top.zerotop.blog.db.model;
+package top.zerotop.blog.data.model;
 
 import java.io.Serializable;
-import java.time.LocalDate;
-import java.util.Date;
 
 public class Article implements Serializable{
-
     private long id;
-
     private String title;
-
     private String author;
-
     private String imgUrl;
-
     private String digest;
-
     private String content;
-
     private String category;
-
     private String gmtCreate;
-
     private String gmtModified;
 
     public long getId() {

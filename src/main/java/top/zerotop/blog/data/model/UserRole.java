@@ -1,19 +1,13 @@
-package top.zerotop.blog.db.model;
+package top.zerotop.blog.data.model;
 
 import java.io.Serializable;
-import java.util.Date;
 
 public class UserRole implements Serializable{
     private long id;
-
     private long roleId;
-
     private long userId;
-
     private String roleName;
-
     private String gmtCreate;
-
     private String gmtModified;
 
     public UserRole(String roleName, String gmtCreate, String gmtModified) {

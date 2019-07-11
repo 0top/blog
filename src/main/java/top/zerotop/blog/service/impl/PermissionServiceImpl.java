@@ -3,9 +3,9 @@ package top.zerotop.blog.service.impl;
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import top.zerotop.blog.db.mapper.PermissionMapper;
-import top.zerotop.blog.db.model.Permission;
-import top.zerotop.blog.db.model.RolePermission;
+import top.zerotop.blog.data.mapper.PermissionMapper;
+import top.zerotop.blog.data.model.Permission;
+import top.zerotop.blog.data.model.RolePermission;
 import top.zerotop.blog.domain.UserRoleDTO;
 import top.zerotop.blog.service.PermissionService;
 import top.zerotop.blog.web.Request.PermissionRequest;
@@ -32,7 +32,7 @@ public class PermissionServiceImpl implements PermissionService {
 
         Permission permission1 = permissionMapper.selectPermissionByCode(permission.getCode());
 
-        RolePermission rolePermission  = new RolePermission(permissionRequest.getRoleId(), permission1.getId());
+        RolePermission rolePermission = new RolePermission(permissionRequest.getRoleId(), permission1.getId());
         rolePermission.setGmtCreate(LocalDateTime.now().toString());
         permissionMapper.insertRolePermission(rolePermission);
 
@@ -43,7 +43,7 @@ public class PermissionServiceImpl implements PermissionService {
     public UserRoleDTO selectRolePermission(int roleId) {
         Set<String> permissions = permissionMapper.selectPermissionByRoleId(roleId);
         UserRoleDTO userRoleDTO = new UserRoleDTO();
-        userRoleDTO.setRoleName(Long.valueOf(roleId));
+        userRoleDTO.setRoleId((long) roleId);
         userRoleDTO.setPermissions(permissions);
 
         return userRoleDTO;

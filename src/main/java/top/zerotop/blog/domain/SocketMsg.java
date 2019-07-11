@@ -1,4 +1,4 @@
-package top.zerotop.blog.db;
+package top.zerotop.blog.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Id;

@@ -2,8 +2,7 @@ package top.zerotop.blog.service;
 
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.apache.shiro.authz.annotation.RequiresRoles;
-import org.apache.shiro.authz.annotation.RequiresUser;
-import top.zerotop.blog.db.model.Admin;
+import top.zerotop.blog.data.model.Admin;
 import top.zerotop.blog.web.Request.AdminRequest;
 import top.zerotop.exception.BlogException;
 

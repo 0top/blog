@@ -1,8 +1,8 @@
-package top.zerotop.blog.db.mapper;
+package top.zerotop.blog.data.mapper;
 
 import org.apache.ibatis.annotations.*;
 
-import top.zerotop.blog.db.model.Admin;
+import top.zerotop.blog.data.model.Admin;
 
 @Mapper
 public interface AdminMapper {

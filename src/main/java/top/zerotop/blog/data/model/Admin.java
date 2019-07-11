@@ -1,25 +1,16 @@
-package top.zerotop.blog.db.model;
+package top.zerotop.blog.data.model;
 
 import java.io.Serializable;
-import java.util.Date;
 
 public class Admin implements Serializable {
     private long id;
-
     private String code;
-
     private String nickname;
-
     private String username;
-
     private String password;
-
     private String avatar;
-
     private String description;
-
     private String gmtCreate;
-
     private String gmtModified;
 
     public Admin() {

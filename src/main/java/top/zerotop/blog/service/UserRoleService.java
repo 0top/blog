@@ -1,7 +1,5 @@
 package top.zerotop.blog.service;
 
-import org.apache.shiro.authz.annotation.RequiresAuthentication;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import top.zerotop.blog.domain.UserRoleDTO;
 import top.zerotop.blog.web.Request.UserRoleRequest;

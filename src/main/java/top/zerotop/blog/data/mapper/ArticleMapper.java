@@ -1,10 +1,10 @@
-package top.zerotop.blog.db.mapper;
+package top.zerotop.blog.data.mapper;
 
 import java.util.List;
 
 import org.apache.ibatis.annotations.*;
 
-import top.zerotop.blog.db.model.Article;
+import top.zerotop.blog.data.model.Article;
 
 @Mapper
 public interface ArticleMapper {
@@ -15,7 +15,7 @@ public interface ArticleMapper {
     @Insert("insert into " +
             "article(title, author, img_url, digest, content, category, gmt_create, gmt_modified)" +
             "values(#{title}, #{author}, #{imgUrl}, #{digest}, #{content}, #{category}, #{gmtCreate}, #{gmtModified})")
-    int insertArticle(@Param("article") Article article);
+    int insertArticle(Article article);
 
     @Select("select * from article where id = #{id}")
     Article selectByArticleId(int id);

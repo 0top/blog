@@ -1,5 +1,6 @@
 package top.zerotop.exception;
 
+import org.apache.shiro.authz.UnauthenticatedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -26,10 +27,16 @@ public class GlobalException {
         return Result.error(500, e.getMessage());
     }
 
+    @ExceptionHandler(UnauthenticatedException.class)
+    public Result errorResult() {
+        System.out.println("un authenicate exception");
+        return Result.error(50003, "请登录后认证");
+    }
+
     @ExceptionHandler({Exception.class})
     public @ResponseBody Result unknowException(Exception e){
 
         e.printStackTrace();
-        return Result.error(500, "请求出错...");
+        return Result.error(500, "系统响应,请求出错...");
     }
 }

@@ -10,8 +10,9 @@ import org.springframework.http.MediaType;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
+import top.zerotop.blog.domain.ArticleDTO;
 import top.zerotop.blog.web.condition.ArticleCondition;
-import top.zerotop.blog.db.model.Article;
+import top.zerotop.blog.data.model.Article;
 import top.zerotop.blog.service.ArticleService;
 import top.zerotop.utils.Result;
 import top.zerotop.exception.BlogException;
@@ -41,12 +42,12 @@ public class ArticleController extends BaseController {
     @ApiOperation(value = "管理员添加文章", notes = "添加文章")
     @PostMapping(value = "/insert")
     public Result insertArticle(@ApiParam(value = "文章")
-                                @RequestBody Article article) throws BlogException {
-        Assert.notNull(article, "文章不可为空");
-        int id = blogService.insertArticle(article);
-        article.setId(id);
+                                @RequestBody ArticleDTO articleDTO) throws BlogException {
+        Assert.notNull(articleDTO, "文章不可为空");
+        int id = blogService.insertArticle(articleDTO);
+        articleDTO.setId(id);
 
-        return Result.make(article);
+        return Result.make(articleDTO);
     }
 
     //    @RequiresRoles("admin")

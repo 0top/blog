@@ -1,4 +1,4 @@
-package top.zerotop.blog.db.mapper;
+package top.zerotop.blog.data.mapper;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
-import top.zerotop.blog.db.model.UserRole;
+import top.zerotop.blog.data.model.UserRole;
 
 public interface UserRoleMapper {
     @Insert("insert into user_role(user_id, role_id, gmt_create, gmt_modified) " +

@@ -3,12 +3,12 @@ package top.zerotop.blog.service.impl;
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import top.zerotop.blog.db.mapper.UserRoleMapper;
-import top.zerotop.blog.db.model.UserRole;
+import top.zerotop.blog.data.mapper.UserRoleMapper;
+import top.zerotop.blog.data.model.UserRole;
 import top.zerotop.blog.domain.UserRoleDTO;
 import top.zerotop.blog.service.UserRoleService;
 import top.zerotop.blog.web.Request.UserRoleRequest;
-import top.zerotop.utils.ConvertToDTO;
+import top.zerotop.utils.ConvertUtils;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -33,7 +33,7 @@ public class UserRoleServiceImpl implements UserRoleService {
     public List<UserRoleDTO> listUserRole(long userId) {
         List<UserRole> userRoles = userRoleMapper.listUserRoleByUserId(userId);
 
-        return ConvertToDTO.convertToDTO(userRoles, UserRoleDTO.class);
+        return ConvertUtils.convertToDTO(userRoles, UserRoleDTO.class);
     }
 
     @Override
@@ -50,6 +50,6 @@ public class UserRoleServiceImpl implements UserRoleService {
     @Override
     public List<UserRoleDTO> listRole() {
         List<UserRole> userRoles = userRoleMapper.listRole();
-        return ConvertToDTO.convertToDTO(userRoles, UserRoleDTO.class);
+        return ConvertUtils.convertToDTO(userRoles, UserRoleDTO.class);
     }
 }

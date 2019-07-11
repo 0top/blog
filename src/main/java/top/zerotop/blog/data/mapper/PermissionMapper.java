@@ -1,10 +1,10 @@
-package top.zerotop.blog.db.mapper;
+package top.zerotop.blog.data.mapper;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
-import top.zerotop.blog.db.model.Permission;
-import top.zerotop.blog.db.model.RolePermission;
+import top.zerotop.blog.data.model.Permission;
+import top.zerotop.blog.data.model.RolePermission;
 
 import java.util.Set;
 
