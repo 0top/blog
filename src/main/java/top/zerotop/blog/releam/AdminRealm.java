@@ -73,7 +73,6 @@ public class AdminRealm extends AuthorizingRealm {
 
 		System.out.println("===>" + username + " passwd:" + EncryptUtils.MD5(password));
 
-
 		Admin admin = adminMapper.selectByUsernameAndPassword(username, EncryptUtils.MD5(password));
 		if (null != admin) {
 			logger.info(String.format("admin: [%s] 认证成功", admin.getUsername()));

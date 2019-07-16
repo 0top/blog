@@ -83,9 +83,7 @@ public class AccountController extends BaseController {
         try {
             token.setRememberMe(true);
             subject.login(token);
-        } catch (IncorrectCredentialsException ice) {
-            return Result.error(400, "用户名或密码错误");
-        } catch (UnknownAccountException uae) {
+        } catch (IncorrectCredentialsException | UnknownAccountException ice) {
             return Result.error(400, "用户名或密码错误");
         } catch (ExcessiveAttemptsException eae) {
             return Result.error(400, "请稍后尝试");

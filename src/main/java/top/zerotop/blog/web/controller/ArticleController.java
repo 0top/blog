@@ -25,7 +25,6 @@ import top.zerotop.exception.BlogException;
 @RestController
 @RequestMapping(value = "/api/v1/article", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
 public class ArticleController extends BaseController {
-
     @Autowired
     private ArticleService blogService;
 

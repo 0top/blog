@@ -17,10 +17,10 @@
     <import resource="spring-mvc.xml"/>
     <import resource="classpath:spring-tx.xml"/>
     <import resource="spring-tx.xml"/>
-    <import resource="shiro.xml"/>
+    <!--<import resource="shiro.xml"/>-->
     <import resource="spring-redis.xml"/>
     
-    <context:component-scan base-package="top.zerotop.blog.db.mapper"/>
+    <context:component-scan base-package="top.zerotop.blog.data.mapper"/>
 
     <!--  
     <cache:annotation-driven cache-manager="cacheManager"/>

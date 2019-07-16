@@ -21,7 +21,6 @@ import top.zerotop.exception.BlogException;
  */
 @Service
 public class ArticleServiceImpl implements ArticleService {
-
     @Autowired
     private ArticleMapper articleMapper;
     @Autowired

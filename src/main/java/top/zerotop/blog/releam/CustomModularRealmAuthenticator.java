@@ -19,7 +19,7 @@ public class CustomModularRealmAuthenticator extends ModularRealmAuthenticator {
 
         CustomToken customizedToken = (CustomToken)authenticationToken;
 
-        String logintype = customizedToken.getLogintype();
+        String logintype = customizedToken.getLoginType();
         Collection<Realm> realms = getRealms();
 
         Collection<Realm> typeRealms = new ArrayList<>();
