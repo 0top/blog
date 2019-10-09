@@ -21,20 +21,19 @@ import top.zerotop.exception.BlogException;
  * @author 作者: zerotop
  * @createDate 创建时间: 2018年5月21日下午8:42:50
  */
-@Api(value = "文章列表")
+@Api(value = "文章列表", description = "文章请求相应API")
 @RestController
 @RequestMapping(value = "/api/v1/article", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
 public class ArticleController extends BaseController {
     @Autowired
     private ArticleService blogService;
 
-    @ApiOperation(value = "获取单篇文章的内容",
-            notes = "根据id获取文章内容")
+    @ApiOperation(value = "获取单篇文章的内容", notes = "根据articleId获取文章详细内容")
     @GetMapping(value = "/get/{id}")
     public Result getArticleById(@ApiParam(value = "文章id")
-                                 @PathVariable("id") Integer id) {
-        Assert.notNull(id, "id不可为空");
-        return Result.make(blogService.getArticleById(id));
+                                 @PathVariable("articleId") String articleId) {
+        Assert.notNull(articleId, "文章id不可为空");
+        return Result.make(blogService.getArticleById(articleId));
     }
 
     //	@RequiresRoles("admin")
@@ -43,8 +42,8 @@ public class ArticleController extends BaseController {
     public Result insertArticle(@ApiParam(value = "文章")
                                 @RequestBody ArticleDTO articleDTO) throws BlogException {
         Assert.notNull(articleDTO, "文章不可为空");
-        int id = blogService.insertArticle(articleDTO);
-        articleDTO.setId(id);
+        String articleId = blogService.insertArticle(articleDTO);
+        articleDTO.setArticleId(articleId);
 
         return Result.make(articleDTO);
     }

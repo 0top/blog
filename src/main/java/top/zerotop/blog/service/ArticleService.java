@@ -15,9 +15,9 @@ public interface ArticleService {
 
 	List<Article> queryArticle(ArticleCondition articleCondition)  throws BlogException;
 	
-	Article getArticleById(int id);
+	Article getArticleById(String articleId);
 	
-	int insertArticle(ArticleDTO articleDTO);
+	String insertArticle(ArticleDTO articleDTO);
 	
 	int updateArticleById(Article article);
 }

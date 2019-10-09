@@ -3,7 +3,7 @@ package top.zerotop.blog.data.model;
 import java.io.Serializable;
 
 public class Article implements Serializable{
-    private long id;
+    private String articleId;
     private String title;
     private String author;
     private String imgUrl;
@@ -13,12 +13,12 @@ public class Article implements Serializable{
     private String gmtCreate;
     private String gmtModified;
 
-    public long getId() {
-        return id;
+    public String getArticleId() {
+        return articleId;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setArticleId(String articleId) {
+        this.articleId = articleId;
     }
 
     public String getTitle() {
@@ -88,7 +88,7 @@ public class Article implements Serializable{
     @Override
     public String toString() {
         return "Article{" +
-                "id=" + id +
+                "articleId=" + articleId +
                 ", title='" + title + '\'' +
                 ", author='" + author + '\'' +
                 ", category='" + category + '\'' +

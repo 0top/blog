@@ -17,29 +17,16 @@ public interface ArticleMapper {
             "values(#{title}, #{author}, #{imgUrl}, #{digest}, #{content}, #{category}, #{gmtCreate}, #{gmtModified})")
     int insertArticle(Article article);
 
-    @Select("select * from article where id = #{id}")
-    Article selectByArticleId(int id);
+    @Select("select * from article where article_id = #{articleId}")
+    Article selectByArticleId(String articleId);
 
 
     @Select("<script>" +
             "select * from article " +
-            "<if test='searchString != null or categorys != null'> where </if>" +
-            "<if test='searchString != null'>title like #{searchString} </if>" +
-            "<if test='categorys != null'>" +
-            " and category in " +
-            "<foreach item='item' index='index' collection='categorys' open='(' separator=',' close=')'>" +
-            " #{item} " +
-            "</foreach> " +
-            "</if>" +
             "<if test='orderBy != null'> order by #{orderBy} </if>" +
-            "limit #{startNum}, #{endNum} " +
             "</script>"
     )
-    List<Article> queryArticle(@Param("orderBy") String orderBy,
-                               @Param("searchString") String searchString,
-                               @Param("categorys") String[] categorys,
-                               @Param("startNum") int startNum,
-                               @Param("endNum") int endNum);
+    List<Article> queryArticle(@Param("orderBy") String orderBy);
 
     @Update("<script>" +
             "update article" +
@@ -50,7 +37,8 @@ public interface ArticleMapper {
             "<if test='digest!=null'>digest = #{digest}, </if>" +
             "<if test='content!=null'>content = #{content}, </if>" +
             "gmt_modified = #{gmtModified}" +
-            "</set>" +
+            "</set> " +
+            "where article_id = #{articleId} " +
             "</script>")
     int updateByArticleId(@Param("article") Article article);
 }

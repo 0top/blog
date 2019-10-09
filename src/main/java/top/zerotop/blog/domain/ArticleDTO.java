@@ -8,8 +8,8 @@ import io.swagger.annotations.ApiModelProperty;
  */
 @ApiModel(value = "文章dto")
 public class ArticleDTO {
-    @ApiModelProperty(value = "id", position = 0)
-    private int id;
+    @ApiModelProperty(value = "articleId", position = 0)
+    private String articleId;
 
     @ApiModelProperty(value = "文章标题", position = 1)
     private String title;
@@ -29,12 +29,12 @@ public class ArticleDTO {
     @ApiModelProperty(value = "类别", position = 6)
     private String category;
 
-    public int getId() {
-        return id;
+    public String getArticleId() {
+        return articleId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setArticleId(String articleId) {
+        this.articleId = articleId;
     }
 
     public String getTitle() {

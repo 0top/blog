@@ -32,7 +32,7 @@ public class ArticleCondition extends PageCondition {
     }
 
     public String getCategory() {
-        return category;
+        return category == null ? "" : category;
     }
 
     public void setCategory(String category) {
