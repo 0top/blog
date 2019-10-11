@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import top.zerotop.blog.data.mapper.PermissionMapper;
 import top.zerotop.blog.data.model.Permission;
 import top.zerotop.blog.data.model.RolePermission;
-import top.zerotop.blog.domain.UserRoleDTO;
+import top.zerotop.blog.dto.UserRoleDTO;
 import top.zerotop.blog.service.PermissionService;
 import top.zerotop.blog.web.Request.PermissionRequest;
 

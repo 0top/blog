@@ -2,7 +2,8 @@ package top.zerotop.blog.service;
 
 import java.util.List;
 
-import top.zerotop.blog.domain.ArticleDTO;
+import top.zerotop.blog.dto.ArticleDTO;
+import top.zerotop.blog.web.Request.ArticleRequest;
 import top.zerotop.blog.web.condition.ArticleCondition;
 import top.zerotop.blog.data.model.Article;
 import top.zerotop.exception.BlogException;
@@ -17,7 +18,7 @@ public interface ArticleService {
 	
 	Article getArticleById(String articleId);
 	
-	String insertArticle(ArticleDTO articleDTO);
+	String insertArticle(ArticleRequest articleRequest);
 	
 	int updateArticleById(Article article);
 }

@@ -1,6 +1,6 @@
 package top.zerotop.blog.service;
 
-import top.zerotop.blog.domain.UserRoleDTO;
+import top.zerotop.blog.dto.UserRoleDTO;
 import top.zerotop.blog.web.Request.PermissionRequest;
 
 /**

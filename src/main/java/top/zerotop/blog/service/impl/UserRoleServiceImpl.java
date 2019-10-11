@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import top.zerotop.blog.data.mapper.UserRoleMapper;
 import top.zerotop.blog.data.model.UserRole;
-import top.zerotop.blog.domain.UserRoleDTO;
+import top.zerotop.blog.dto.UserRoleDTO;
 import top.zerotop.blog.service.UserRoleService;
 import top.zerotop.blog.web.Request.UserRoleRequest;
 import top.zerotop.utils.ConvertUtils;

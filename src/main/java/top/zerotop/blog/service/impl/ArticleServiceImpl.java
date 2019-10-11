@@ -8,15 +8,14 @@ import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
-import top.zerotop.blog.domain.ArticleDTO;
+import top.zerotop.blog.dto.ArticleDTO;
+import top.zerotop.blog.web.Request.ArticleRequest;
 import top.zerotop.blog.web.condition.ArticleCondition;
 import top.zerotop.blog.data.mapper.ArticleMapper;
 import top.zerotop.blog.data.model.Article;
 import top.zerotop.blog.service.ArticleService;
-import top.zerotop.exception.BlogException;
 import top.zerotop.utils.EncryptUtils;
 import top.zerotop.utils.PageInfo;
 
@@ -33,13 +32,16 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public List<Article> queryArticle(ArticleCondition articleCondition) {
-        Assert.isTrue(articleCondition.getCurrent() < 0, "请求页码错误");
+        if (articleCondition == null || articleCondition.getCurrent() < 0) {
+            return new ArrayList<>();
+        }
         int startIndex = articleCondition.getCurrent() * articleCondition.getSize();
         int endIndex = startIndex + articleCondition.getSize();
         String[] categorys = articleCondition.getCategory().split("\\|");
         List<String> categorySet = CollectionUtils.arrayToList(categorys);
 
-        List<Article> articles = articleMapper.queryArticle(articleCondition.getOrderBy());
+        String orderBy = articleCondition.getOrderBy() == null ? "gmt_create" : articleCondition.getOrderBy();
+        List<Article> articles = articleMapper.queryArticle(orderBy);
         if (!CollectionUtils.isEmpty(articles) && StringUtils.hasText(articleCondition.getSearchString())) {
             articles = articles.stream().filter(a -> {
                 if (categorySet.size() > 0 && !categorySet.contains(a.getCategory())) {
@@ -57,8 +59,8 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public String insertArticle(ArticleDTO articleDTO) {
-        Article article = dozerMapper.map(articleDTO, Article.class);
+    public String insertArticle(ArticleRequest articleRequest) {
+        Article article = dozerMapper.map(articleRequest, Article.class);
         String articleId = EncryptUtils.getUuid();
         article.setArticleId(articleId);
         article.setGmtCreate(LocalDateTime.now().toString());
@@ -71,6 +73,9 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public int updateArticleById(Article article) {
+        if (article == null || !StringUtils.hasText(article.getArticleId())) {
+            return 0;
+        }
         article.setGmtModified(LocalDateTime.now().toString());
         return articleMapper.updateByArticleId(article);
     }

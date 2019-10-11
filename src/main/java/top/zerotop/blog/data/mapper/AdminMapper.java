@@ -14,7 +14,7 @@ public interface AdminMapper {
     int insertAdmin(Admin admin);
 
     @Select("select * from admin where username = #{username}")
-    Admin selectAdmin(@Param("username") String username);
+    Admin selectAdminByUserName(@Param("username") String username);
 
     @Select("select * from admin where username = #{username} and password = #{password} ")
     Admin selectByUsernameAndPassword(@Param("username") String username, @Param("password") String password);

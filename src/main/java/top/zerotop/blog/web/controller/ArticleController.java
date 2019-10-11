@@ -10,7 +10,8 @@ import org.springframework.http.MediaType;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
-import top.zerotop.blog.domain.ArticleDTO;
+import top.zerotop.blog.dto.ArticleDTO;
+import top.zerotop.blog.web.Request.ArticleRequest;
 import top.zerotop.blog.web.condition.ArticleCondition;
 import top.zerotop.blog.data.model.Article;
 import top.zerotop.blog.service.ArticleService;
@@ -29,7 +30,7 @@ public class ArticleController extends BaseController {
     private ArticleService blogService;
 
     @ApiOperation(value = "获取单篇文章的内容", notes = "根据articleId获取文章详细内容")
-    @GetMapping(value = "/get/{id}")
+    @GetMapping(value = "/get/{articleId}")
     public Result getArticleById(@ApiParam(value = "文章id")
                                  @PathVariable("articleId") String articleId) {
         Assert.notNull(articleId, "文章id不可为空");
@@ -40,22 +41,18 @@ public class ArticleController extends BaseController {
     @ApiOperation(value = "管理员添加文章", notes = "添加文章")
     @PostMapping(value = "/insert")
     public Result insertArticle(@ApiParam(value = "文章")
-                                @RequestBody ArticleDTO articleDTO) throws BlogException {
-        Assert.notNull(articleDTO, "文章不可为空");
-        String articleId = blogService.insertArticle(articleDTO);
-        articleDTO.setArticleId(articleId);
-
-        return Result.make(articleDTO);
+                                @RequestBody ArticleRequest articleRequest) throws BlogException {
+        Assert.notNull(articleRequest, "文章不可为空");
+        return Result.make(blogService.insertArticle(articleRequest));
     }
 
     //    @RequiresRoles("admin")
     @ApiOperation(value = "更新文章", notes = "更新文章")
     @PostMapping(value = "/update")
-    public Result updateArticle(@ApiParam(value = "文章内容")
+    public Result<Boolean> updateArticle(@ApiParam(value = "文章内容")
                                 @RequestBody Article article) {
         Assert.notNull(article, "文章不可为空");
-        blogService.updateArticleById(article);
-        return Result.SUCCESS;
+        return Result.make(blogService.updateArticleById(article) > 0);
     }
 
     @ApiOperation(value = "获取文章列表", notes = "分页查询文章列表")

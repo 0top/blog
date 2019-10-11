@@ -8,17 +8,16 @@ import top.zerotop.blog.data.model.Article;
 
 @Mapper
 public interface ArticleMapper {
-
-    @Insert("delete from article where id = #{id} ")
-    int deleteArticleById(int id);
+    @Insert("delete from article where article_id = #{articleId} ")
+    int deleteArticleById(String articleId);
 
     @Insert("insert into " +
-            "article(title, author, img_url, digest, content, category, gmt_create, gmt_modified)" +
+            "article(title, author, img_url, digest, content, category, gmt_create, gmt_modified) " +
             "values(#{title}, #{author}, #{imgUrl}, #{digest}, #{content}, #{category}, #{gmtCreate}, #{gmtModified})")
     int insertArticle(Article article);
 
     @Select("select * from article where article_id = #{articleId}")
-    Article selectByArticleId(String articleId);
+    Article selectByArticleId(@Param("articleId") String articleId);
 
 
     @Select("<script>" +
@@ -29,14 +28,14 @@ public interface ArticleMapper {
     List<Article> queryArticle(@Param("orderBy") String orderBy);
 
     @Update("<script>" +
-            "update article" +
+            "update article " +
             "<set>" +
             "<if test='title!=null'>title = #{title}, </if>" +
             "<if test='author!=null'>author = #{author}, </if>" +
             "<if test='imgUrl!=null'>img_url = #{imgUrl}, </if>" +
             "<if test='digest!=null'>digest = #{digest}, </if>" +
             "<if test='content!=null'>content = #{content}, </if>" +
-            "gmt_modified = #{gmtModified}" +
+            "gmt_modified = #{gmtModified} " +
             "</set> " +
             "where article_id = #{articleId} " +
             "</script>")

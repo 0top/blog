@@ -1,4 +1,4 @@
-package top.zerotop.blog.domain;
+package top.zerotop.blog.web.Request;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -6,11 +6,8 @@ import io.swagger.annotations.ApiModelProperty;
 /**
  * Created by:zerotop  date:2019/7/10
  */
-@ApiModel(value = "文章dto")
-public class ArticleDTO {
-    @ApiModelProperty(value = "articleId", position = 0)
-    private String articleId;
-
+@ApiModel(value = "文章model")
+public class ArticleRequest {
     @ApiModelProperty(value = "文章标题", position = 1)
     private String title;
 
@@ -26,16 +23,8 @@ public class ArticleDTO {
     @ApiModelProperty(value = "内容", position = 5)
     private String content;
 
-    @ApiModelProperty(value = "类别", position = 6)
+    @ApiModelProperty(value = "类别, 选填", position = 6)
     private String category;
-
-    public String getArticleId() {
-        return articleId;
-    }
-
-    public void setArticleId(String articleId) {
-        this.articleId = articleId;
-    }
 
     public String getTitle() {
         return title;

@@ -1,4 +1,4 @@
-package top.zerotop.blog.domain;
+package top.zerotop.blog.dto;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

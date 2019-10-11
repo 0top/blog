@@ -38,14 +38,17 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public Admin selectAdminByUserName(String username) {
-		return adminMapper.selectAdmin(username);
+		if (StringUtils.hasText(username)) {
+			return adminMapper.selectAdminByUserName(username);
+		}
+		return null;
 	}
 
 	@Override
 	public int insertAdmin(AdminRequest adminRequest) throws BlogException {
 		Admin admin = dozerMapper.map(adminRequest, Admin.class);
 
-		Admin admin1 = adminMapper.selectAdmin(admin.getUsername());
+		Admin admin1 = adminMapper.selectAdminByUserName(admin.getUsername());
 		if (null != admin1) {
             throw new UserAccountException("用户名已存在。");
         }
