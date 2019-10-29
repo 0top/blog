@@ -1,23 +1,19 @@
 # blog
-teamblog
+zerotop team blog
 
 ### 简介: 
 
-最近准备和队友一起搭建一下团队博客   
+
 博客主要用于团队资源展示，以及新学习功能的一个展示  
 开发后暂时会更新前后端文章以及UI作品，届时欢迎大家讨论
 
-### 详细
-
-项目将重构，敬请期待。。。
-
 ### 技术栈：  
 
-前端采用： vue.js  
+前端采用：  vue.js  
 后端：     spring + spring mvc + mybatis  
 数据库：   mysql  redis  
 中间件：   rabbitmq  
-接口：     swagger-ui
+接口文档：     swagger-ui
 
 ### 演示：
    
