@@ -11,8 +11,8 @@ import org.springframework.stereotype.Component;
 public class TestJob {
     private static Logger logger = LoggerFactory.getLogger(TestJob.class);
 
-    @Scheduled(cron = "0 0/1 * * * ?")
+    @Scheduled(cron = "0 0/5 * * * ?")
     public void testScheduledJob() {
-        logger.info("job is run");
+        logger.info("job is run...");
     }
 }

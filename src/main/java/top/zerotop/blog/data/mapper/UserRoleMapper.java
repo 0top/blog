@@ -25,6 +25,6 @@ public interface UserRoleMapper {
             "values(#{role.roleName}, #{role.gmtCreate}, #{role.gmtModified})")
     int insertRole(@Param("role") UserRole role);
 
-    @Select("select * from role")
+    @Select("select * from role ")
     List<UserRole> listRole();
 }

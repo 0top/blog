@@ -39,20 +39,20 @@
         <!-- 删除失效的session --> 
         <property name="deleteInvalidSessions" value="true"/>  
         <!--<property name="sessionDAO" ref="sessionDAO"/>-->
-            
         <property name="sessionValidationInterval" value="1000000"/>    
     </bean>
 
     <!-- Shiro的Web过滤器 -->
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <property name="securityManager" ref="securityManager" />
-        <!--<property name="loginUrl" value="/login.jsp" />-->
+        <property name="loginUrl" value="/login.jsp" />
         <!--<property name="unauthorizedUrl" value="/unauthor.jsp" />-->
         <property name="filterChainDefinitions">
             <value>
                 <!--/admin = roles[admin]-->
-                /admin/** = authc  
-                /** = anon
+                <!--/admin/** = authc  -->
+                <!--/** = anon-->
+                <!--/api/admin/v1/user/** = authc-->
             </value>
         </property>
     </bean>

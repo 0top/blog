@@ -8,7 +8,7 @@ import top.zerotop.blog.data.model.Article;
 
 @Mapper
 public interface ArticleMapper {
-    @Insert("delete from article where article_id = #{articleId} ")
+    @Update("update article set del_flag = '1' where article_id = #{articleId} ")
     int deleteArticleById(String articleId);
 
     @Insert("insert into " +
@@ -21,7 +21,7 @@ public interface ArticleMapper {
 
 
     @Select("<script>" +
-            "select * from article " +
+            "select * from article where del_flag = '0' " +
             "<if test='orderBy != null'> order by #{orderBy} </if>" +
             "</script>"
     )

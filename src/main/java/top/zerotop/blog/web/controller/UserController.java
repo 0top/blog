@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
-import top.zerotop.blog.domain.UserRoleDTO;
+import top.zerotop.blog.dto.UserRoleDTO;
 import top.zerotop.blog.service.UserRoleService;
 import top.zerotop.blog.web.Request.UserRoleRequest;
 import top.zerotop.utils.Result;
@@ -60,6 +60,14 @@ public class UserController extends BaseController {
     @ApiOperation(value = "列出所有权限", notes = "列出所有权限")
     @GetMapping(value = "/role")
     public Result<List<UserRoleDTO>> listRole() {
-        return Result.make(userRoleService.listRole());
+        List<UserRoleDTO> list = userRoleService.listRole();
+        return Result.make(list);
+//        try {
+//            List<UserRoleDTO> list = userRoleService.listRole();
+//            return Result.make(list);
+//        } catch (UnauthenticatedException ue) {
+//            System.out.println("un authenticated ...");
+//            return Result.error(50003, "请登录后认证");
+//        }
     }
 }

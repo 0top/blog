@@ -47,5 +47,6 @@ public class RedisServiceImpl implements RedisService {
     @Override
     public long addRedisMsg(String topic, ResMsg msg) {
         return redisTemplate.opsForList().leftPush(topic, JSON.toJSONString(msg));
+//        return 1L;
     }
 }

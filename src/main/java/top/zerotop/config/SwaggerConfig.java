@@ -38,6 +38,17 @@ public class SwaggerConfig  {
                 .build();
     }
 
+    @Bean
+    public Docket TestApi(){
+        return new Docket(DocumentationType.SWAGGER_2)
+                .apiInfo(productApiInfo())
+                .groupName("test")
+                .select()
+                .apis(RequestHandlerSelectors.basePackage("top.zerotop.blog.web"))
+                .paths(PathSelectors.regex("/test/api.*"))
+                .build();
+    }
+
     private ApiInfo productApiInfo() {
         return new ApiInfoBuilder()
                 .title("blog接口")
