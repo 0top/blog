@@ -60,6 +60,9 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public String insertArticle(ArticleRequest articleRequest) {
+        if (articleRequest == null) {
+            return "";
+        }
         Article article = dozerMapper.map(articleRequest, Article.class);
         String articleId = EncryptUtils.getUuid();
         article.setArticleId(articleId);
@@ -68,7 +71,7 @@ public class ArticleServiceImpl implements ArticleService {
         if (articleMapper.insertArticle(article) > 0) {
             return articleId;
         }
-        return null;
+        return "";
     }
 
     @Override

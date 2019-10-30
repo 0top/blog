@@ -17,14 +17,14 @@ public class CustomModularRealmAuthenticator extends ModularRealmAuthenticator {
 
         assertRealmsConfigured();
 
-        CustomToken customizedToken = (CustomToken)authenticationToken;
+        CustomToken customizedToken = (CustomToken) authenticationToken;
 
-        String logintype = customizedToken.getLoginType();
+        String userRoleType = customizedToken.getUserRoleType();
         Collection<Realm> realms = getRealms();
 
         Collection<Realm> typeRealms = new ArrayList<>();
-        for(Realm realm: realms){
-            if(realm.getName().contains(logintype)){
+        for (Realm realm : realms) {
+            if (realm.getName().contains(userRoleType)) {
                 typeRealms.add(realm);
             }
         }

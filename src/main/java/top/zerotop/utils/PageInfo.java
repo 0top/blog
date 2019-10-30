@@ -15,7 +15,7 @@ public class PageInfo {
 
     public static <T> List<T> getPage(List<T> list, int start, int end) {
         if (CollectionUtils.isEmpty(list)) {
-            return list;
+            return new ArrayList<>();
         }
         if (start < 0 || end < 0 || start > end) {
             logger.error("get page param error: start:[{}], end:[{}]", start, end);

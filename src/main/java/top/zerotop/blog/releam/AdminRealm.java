@@ -25,62 +25,58 @@ import top.zerotop.utils.EncryptUtils;
 import top.zerotop.utils.JsonUtils;
 
 /**
- *@author 作者: zerotop
- *@createDate 创建时间: 2018年5月23日下午11:14:50
+ * @author 作者: zerotop
+ * @createDate 创建时间: 2018年5月23日下午11:14:50
  */
 public class AdminRealm extends AuthorizingRealm {
     public static final transient Logger logger = LoggerFactory.getLogger(AdminRealm.class);
 
-	@Autowired
-	private AdminMapper adminMapper;
-	
-	@Autowired
-	private UserRoleMapper userRoleMapper;
-	
-	public String getName(){
-		return "AdminRealm";
-	}
+    @Autowired
+    private AdminMapper adminMapper;
+    @Autowired
+    private UserRoleMapper userRoleMapper;
 
-	@Override
-	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-		logger.info(" =====> user authorization");
+    public String getName() {
+        return "AdminRealm";
+    }
 
-		Admin admin = (Admin) principals.getPrimaryPrincipal();
-		System.out.println("===>" + JsonUtils.toJson(admin));
-		
-		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-		Set<String> roles = new HashSet<>();
+    @Override
+    protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
+        logger.info(" ========> user authorization <======== ");
+
+        Admin admin = (Admin) principals.getPrimaryPrincipal();
+        logger.info("===>" + JsonUtils.toJson(admin));
+
+        SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
+        Set<String> roles = new HashSet<>();
 
         List<UserRole> userRoles = userRoleMapper.listUserRoleByUserId(admin.getId());
         if (!CollectionUtils.isEmpty(userRoles)) {
-            System.out.println("--->:" + JsonUtils.toJson(admin));
             for (UserRole userRole : userRoles) {
                 roles.add(userRole.getRoleName());
             }
-            System.out.println("--->" + JsonUtils.toJson(roles));
-            info.setRoles(roles);
+            authorizationInfo.setRoles(roles);
         }
-		
-		return info;
-	}
 
-	@Override
-	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
-        logger.info(token.getPrincipal() + " : 开始认证 ");
+        return authorizationInfo;
+    }
 
-		String username = token.getPrincipal().toString();
-		String password = String.valueOf((char[])token.getCredentials());
+    @Override
+    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
+        logger.info("========> " + token.getPrincipal() + " 开始认证 <======== ");
 
-		System.out.println("===>" + username + " passwd:" + EncryptUtils.MD5(password));
+        String username = token.getPrincipal().toString();
+        String password = String.valueOf((char[]) token.getCredentials());
 
-		Admin admin = adminMapper.selectByUsernameAndPassword(username, EncryptUtils.MD5(password));
-		if (null != admin) {
-			logger.info(String.format("admin: [%s] 认证成功", admin.getUsername()));
+        Admin admin = adminMapper.selectByUsernameAndPassword(username, EncryptUtils.MD5(password));
+        if (null != admin) {
+            logger.info(String.format("admin: [%s] 认证成功", username));
 
-			AuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(admin, password, getName());
-			return authenticationInfo;
-		} else {
-			throw new AuthenticationException("认证失败");
-		}
-	}
+            AuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(admin, password, getName());
+            return authenticationInfo;
+        } else {
+            logger.error(token.getPrincipal() + " 用户认证失败<===");
+            throw new AuthenticationException(token.getPrincipal() + "认证失败");
+        }
+    }
 }

@@ -20,18 +20,21 @@ import top.zerotop.blog.data.model.Admin;
 import top.zerotop.blog.releam.CustomToken;
 import top.zerotop.blog.service.UserRoleService;
 import top.zerotop.blog.service.UserService;
-import top.zerotop.utils.Result;
+import top.zerotop.global.enums.UserRoleEnum;
+import top.zerotop.utils.ServiceResult;
 import top.zerotop.blog.web.Request.AdminRequest;
-import top.zerotop.exception.BlogException;
-import top.zerotop.exception.UserAccountException;
+import top.zerotop.global.exception.BlogException;
+import top.zerotop.global.exception.UserAccountException;
 
 import javax.servlet.http.HttpServletRequest;
+
+import static top.zerotop.global.enums.UserRoleEnum.ADMIN;
 
 /**
  * @author 作者: zerotop
  * @createDate 创建时间: 2018年5月31日下午11:29:14
  */
-@Api(value = "用户请求接口", description = "用户请求接口")
+@Api(value = "管理员请求接口", description = "管理员请求接口")
 @RestController
 @RequestMapping(value = "/api/admin/v1/account", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
 public class AccountController extends BaseController {
@@ -43,53 +46,52 @@ public class AccountController extends BaseController {
     UserRoleService userRoleService;
 
     @ApiOperation(value = "超级管理员添加管理员", notes = "超级管理员添加管理员")
-    @PostMapping(value = "/admin/user/add")
-    public Result insertAdmin(@ApiParam(value = "提供注册信息")
-                              @RequestBody AdminRequest adminRequest) throws BlogException {
-        Assert.notNull(adminRequest, "添加信息不能为空");
+    @PostMapping(value = "/admin/user/register")
+    public ServiceResult insertAdmin(@ApiParam(value = "提供注册信息")
+                                     @RequestBody AdminRequest adminRequest) throws BlogException {
+        Assert.isTrue(adminRequest != null && StringUtils.hasText(adminRequest.getUsername())
+                && StringUtils.hasText(adminRequest.getPassword()), "注册信息缺失");
 
         userService.insertAdmin(adminRequest);
-        return new Result();
+        return ServiceResult.SUCCESS;
     }
 
     @ApiOperation(value = "管理员通过用户名获取用户详细信息")
     @PostMapping(value = "/user/select")
-    public Result selectAdmin(@ApiParam(value = "登录时提供用户名", required = true)
-                              @RequestParam String username) {
+    public ServiceResult selectAdmin(@ApiParam(value = "登录时提供用户名", required = true)
+                                     @RequestParam String username) {
         Assert.notNull(username, "用户名不可为空");
 
-        Admin admin = userService.selectAdminByUserName(username);
-        return Result.make(admin);
+        return ServiceResult.make(userService.selectAdminByUserName(username));
     }
 
 
     @ApiOperation(value = "管理员登录", notes = "只有管理员能登录")
     @PostMapping(value = "/admin/login")
-    public Result adminLogin(@ApiParam(value = "登录时提供用户名", required = true)
-                             @RequestParam String username,
-                             @ApiParam(value = "登录时提供密码", required = true)
-                             @RequestParam String password,
-                             HttpServletRequest req) throws UserAccountException {
-        Assert.isTrue(StringUtils.hasText(username), "用户名不能为空");
-        Assert.isTrue(StringUtils.hasText(password), "密码不能为空");
+    public ServiceResult adminLogin(@ApiParam(value = "登录时提供用户名", required = true)
+                                    @RequestParam String username,
+                                    @ApiParam(value = "登录时提供密码", required = true)
+                                    @RequestParam String password,
+                                    HttpServletRequest req) {
+        Assert.isTrue(StringUtils.hasText(username) && StringUtils.hasText(password), "用户名或密码不能为空");
 
         Subject subject = SecurityUtils.getSubject();
         if (subject.isAuthenticated() && subject.getPrincipal().equals(username)) {
-            return Result.error(400, "当前用户已登录");
+            return ServiceResult.error(400, "当前用户已登录");
         }
 
         logger.info(String.format("user:{%s} login.", username));
-        CustomToken token = new CustomToken(username, password, "Admin");
+        CustomToken token = new CustomToken(username, password, ADMIN.getRoleType());
         try {
             token.setRememberMe(true);
             subject.login(token);
         } catch (IncorrectCredentialsException | UnknownAccountException ice) {
-            return Result.error(400, "用户名或密码错误");
+            return ServiceResult.error(400, "用户名或密码错误");
         } catch (ExcessiveAttemptsException eae) {
-            return Result.error(400, "请稍后尝试");
+            return ServiceResult.error(400, "请稍后尝试");
         }
         req.getSession().setAttribute("user", username);
-        return Result.SUCCESS;
+        return ServiceResult.SUCCESS;
     }
 
     /**
@@ -99,12 +101,12 @@ public class AccountController extends BaseController {
      */
     @ApiOperation(value = "管理员登出", notes = "管理员登出接口")
     @GetMapping(value = "/admin/logout")
-    public Result adminLoginOut() {
+    public ServiceResult adminLoginOut() {
         Subject subject = SecurityUtils.getSubject();
         if (subject.isAuthenticated()) {
             subject.logout();
         }
-        return Result.SUCCESS;
+        return ServiceResult.SUCCESS;
     }
 
 }

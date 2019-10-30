@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import top.zerotop.blog.dto.UserRoleDTO;
 import top.zerotop.blog.service.UserRoleService;
 import top.zerotop.blog.web.Request.UserRoleRequest;
-import top.zerotop.utils.Result;
+import top.zerotop.utils.ServiceResult;
 
 import java.util.List;
 
@@ -25,43 +25,43 @@ public class UserController extends BaseController {
 
     @ApiOperation(value = "给用户更加权限", notes = "为用户增加权限")
     @PostMapping(value = "/userRole")
-    public Result insertUserRole(@ApiParam(value = "用户权限")
+    public ServiceResult insertUserRole(@ApiParam(value = "用户权限")
                                  @RequestBody UserRoleRequest userRoleRequest) {
         userRoleService.insertUserRole(userRoleRequest);
-        return new Result();
+        return new ServiceResult();
     }
 
     @ApiOperation(value = "查看当前用户所有权限", notes = "查看当前用户所有权限")
     @GetMapping(value = "/userRole")
-    public Result listUserRole(long userId) {
-        return Result.make(userRoleService.listUserRole(userId));
+    public ServiceResult listUserRole(long userId) {
+        return ServiceResult.make(userRoleService.listUserRole(userId));
     }
 
     @ApiOperation(value = "删除用户权限", notes = "删除用户权限")
     @DeleteMapping(value = "/userRole/{id}")
-    public Result deleteUserRole(@ApiParam(value = "权限id")
+    public ServiceResult deleteUserRole(@ApiParam(value = "权限id")
                                  @PathVariable("id") Long id) {
         Assert.notNull(id, "id不可为空");
 
         userRoleService.deleteUserRole(id);
-        return new Result();
+        return new ServiceResult();
     }
 
     @RequiresRoles("admin")
     @ApiOperation(value = "添加权限管理", notes = "添加权限")
     @PostMapping(value = "/role")
-    public Result insertRole(@ApiParam(value = "权限")
+    public ServiceResult insertRole(@ApiParam(value = "权限")
                              @RequestParam("roleName") String roleName) {
         Assert.notNull(roleName, "权限值不可为空");
         userRoleService.insertRole(roleName);
-        return Result.SUCCESS;
+        return ServiceResult.SUCCESS;
     }
 
     @ApiOperation(value = "列出所有权限", notes = "列出所有权限")
     @GetMapping(value = "/role")
-    public Result<List<UserRoleDTO>> listRole() {
+    public ServiceResult<List<UserRoleDTO>> listRole() {
         List<UserRoleDTO> list = userRoleService.listRole();
-        return Result.make(list);
+        return ServiceResult.make(list);
 //        try {
 //            List<UserRoleDTO> list = userRoleService.listRole();
 //            return Result.make(list);

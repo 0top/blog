@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import top.zerotop.blog.service.PermissionService;
 import top.zerotop.blog.web.Request.PermissionRequest;
-import top.zerotop.exception.BlogException;
-import top.zerotop.utils.Result;
+import top.zerotop.global.exception.BlogException;
+import top.zerotop.utils.ServiceResult;
 
 /**
  * Created by:zerotop  date:2019/5/13
@@ -27,20 +27,20 @@ public class PermissionController {
 
     @ApiOperation(value = "添加角色权限", notes = "添加角色权限")
     @PostMapping(value = "/permission")
-    public Result insertAdmin(@ApiParam(value = "角色权限")
+    public ServiceResult insertAdmin(@ApiParam(value = "角色权限")
                               @RequestBody PermissionRequest permissionRequest) throws BlogException {
         Assert.notNull(permissionRequest, "添加信息不能为空");
 
         permissionService.addRolePermission(permissionRequest);
-        return Result.SUCCESS;
+        return ServiceResult.SUCCESS;
     }
 
     @ApiOperation(value = "获取角色权限", notes = "获取")
     @PostMapping(value = "/permission/query")
-    public Result insertAdmin(@ApiParam(value = "角色权限")
+    public ServiceResult insertAdmin(@ApiParam(value = "角色权限")
                               @RequestBody Integer roleId) throws BlogException {
         Assert.notNull(roleId, "id信息不能为空");
 
-        return Result.make(permissionService.selectRolePermission(roleId));
+        return ServiceResult.make(permissionService.selectRolePermission(roleId));
     }
 }

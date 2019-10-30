@@ -1,4 +1,4 @@
-package top.zerotop.exception;
+package top.zerotop.global.exception;
 
 public class ArticleException extends BlogException {
     public ArticleException() {

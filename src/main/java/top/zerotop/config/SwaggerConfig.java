@@ -15,9 +15,9 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @EnableSwagger2
 @EnableWebMvc
-public class SwaggerConfig  {
+public class SwaggerConfig {
     @Bean
-    public Docket AdminApi(){
+    public Docket AdminApi() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(productApiInfo())
                 .groupName("admin")
@@ -28,7 +28,7 @@ public class SwaggerConfig  {
     }
 
     @Bean
-    public Docket ProductApi(){
+    public Docket ProductApi() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(productApiInfo())
                 .groupName("api")
@@ -39,7 +39,7 @@ public class SwaggerConfig  {
     }
 
     @Bean
-    public Docket TestApi(){
+    public Docket TestApi() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(productApiInfo())
                 .groupName("test")
@@ -53,7 +53,7 @@ public class SwaggerConfig  {
         return new ApiInfoBuilder()
                 .title("blog接口")
                 .description("blog请求接口api")
-                .termsOfServiceUrl("http://localhost:8088/blog" )
+                .termsOfServiceUrl("http://localhost:8088/blog")
                 .contact(new Contact("zerotop", "https://0top.github.io", ""))
                 .version("2.0")
                 .build();

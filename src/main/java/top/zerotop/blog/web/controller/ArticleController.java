@@ -10,13 +10,12 @@ import org.springframework.http.MediaType;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
-import top.zerotop.blog.dto.ArticleDTO;
 import top.zerotop.blog.web.Request.ArticleRequest;
 import top.zerotop.blog.web.condition.ArticleCondition;
 import top.zerotop.blog.data.model.Article;
 import top.zerotop.blog.service.ArticleService;
-import top.zerotop.utils.Result;
-import top.zerotop.exception.BlogException;
+import top.zerotop.utils.ServiceResult;
+import top.zerotop.global.exception.BlogException;
 
 /**
  * @author 作者: zerotop
@@ -31,36 +30,37 @@ public class ArticleController extends BaseController {
 
     @ApiOperation(value = "获取单篇文章的内容", notes = "根据articleId获取文章详细内容")
     @GetMapping(value = "/get/{articleId}")
-    public Result getArticleById(@ApiParam(value = "文章id")
-                                 @PathVariable("articleId") String articleId) {
+    public ServiceResult getArticleById(@ApiParam(value = "文章id")
+                                        @PathVariable("articleId") String articleId) {
         Assert.notNull(articleId, "文章id不可为空");
-        return Result.make(blogService.getArticleById(articleId));
+        return ServiceResult.make(blogService.getArticleById(articleId));
     }
 
     //	@RequiresRoles("admin")
     @ApiOperation(value = "管理员添加文章", notes = "添加文章")
     @PostMapping(value = "/insert")
-    public Result insertArticle(@ApiParam(value = "文章")
-                                @RequestBody ArticleRequest articleRequest) throws BlogException {
+    public ServiceResult insertArticle(@ApiParam(value = "文章")
+                                       @RequestBody ArticleRequest articleRequest) throws BlogException {
         Assert.notNull(articleRequest, "文章不可为空");
-        return Result.make(blogService.insertArticle(articleRequest));
+
+        return ServiceResult.make(blogService.insertArticle(articleRequest));
     }
 
     //    @RequiresRoles("admin")
     @ApiOperation(value = "更新文章", notes = "更新文章")
     @PostMapping(value = "/update")
-    public Result<Boolean> updateArticle(@ApiParam(value = "文章内容")
-                                @RequestBody Article article) {
+    public ServiceResult<Boolean> updateArticle(@ApiParam(value = "文章内容")
+                                                @RequestBody Article article) {
         Assert.notNull(article, "文章不可为空");
-        return Result.make(blogService.updateArticleById(article) > 0);
+        return ServiceResult.make(blogService.updateArticleById(article) > 0);
     }
 
     @ApiOperation(value = "获取文章列表", notes = "分页查询文章列表")
     @PostMapping(value = "/query")
-    public Result queryArticle(@ApiParam(value = "文章查询条件")
-                               @RequestBody ArticleCondition articleCondition) throws BlogException {
+    public ServiceResult queryArticle(@ApiParam(value = "文章查询条件")
+                                      @RequestBody ArticleCondition articleCondition) throws BlogException {
         Assert.notNull(articleCondition, "查询条件不可为空");
         List<Article> articles = blogService.queryArticle(articleCondition);
-        return Result.make(articles);
+        return ServiceResult.make(articles);
     }
 }

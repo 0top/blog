@@ -3,18 +3,18 @@ package top.zerotop.blog.releam;
 import org.apache.shiro.authc.UsernamePasswordToken;
 
 public class CustomToken extends UsernamePasswordToken {
-    private String loginType;
+    private String userRoleType;
 
-    public CustomToken(final String username, final String password, String loginType) {
+    public CustomToken(final String username, final String password, String userRoleType) {
         super(username, password);
-        this.loginType = loginType;
+        this.userRoleType = userRoleType;
     }
 
-    public String getLoginType() {
-        return loginType;
+    public String getUserRoleType() {
+        return userRoleType;
     }
 
-    public void setLoginType(String loginType) {
-        this.loginType = loginType;
+    public void setUserRoleType(String userRoleType) {
+        this.userRoleType = userRoleType;
     }
 }

@@ -8,8 +8,8 @@ import io.swagger.annotations.ApiModelProperty;
  *@createDate 创建时间: 2018年5月28日下午10:20:26
  */
 @ApiModel(value = "返回结果")
-public class Result<Content> {
-    public static Result<Boolean> SUCCESS = new Result<>(true);
+public class ServiceResult<Content> {
+    public static ServiceResult<Boolean> SUCCESS = new ServiceResult<>(true);
 
     @ApiModelProperty(value = "返回代码", position = 0)
     private int code = 200;
@@ -22,29 +22,29 @@ public class Result<Content> {
     @ApiModelProperty(value = "数据内容", position = 2)
 	private Content content;
 
-    public Result() {
+    public ServiceResult() {
     }
 
 
-    public Result(boolean success) {
+    public ServiceResult(boolean success) {
         this.success = true;
     }
 
-	public Result(String msg, Content content) {
+	public ServiceResult(String msg, Content content) {
         this.msg = msg;
 		this.content = content;
 	}
 
-	public static <Content> Result<Content> error(int code, String msg) {
-        Result<Content> result = new Result<>();
+	public static <Content> ServiceResult<Content> error(int code, String msg) {
+        ServiceResult<Content> result = new ServiceResult<>();
         result.setCode(code);
         result.setMsg(msg);
         result.setSuccess(false);
         return result;
     }
 
-    public static <Content> Result<Content> make(Content content) {
-        Result<Content> result = new Result<Content>();
+    public static <Content> ServiceResult<Content> make(Content content) {
+        ServiceResult<Content> result = new ServiceResult<Content>();
         result.setContent(content);
         return result;
     }
