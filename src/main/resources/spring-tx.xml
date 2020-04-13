@@ -28,9 +28,9 @@
     </tx:advice>
 
     <!-- 切面  -->
-    <aop:config>
-        <aop:advisor advice-ref="txAdvice"
-                     pointcut="execution(* top.zerotop.blog.service.*.*(..))"/>
-    </aop:config>
+    <!--<aop:config proxy-target-class="true">-->
+        <!--<aop:advisor advice-ref="txAdvice"-->
+                     <!--pointcut="execution(* top.zerotop.blog.service.*.*(..))"/>-->
+    <!--</aop:config>-->
 
 </beans>

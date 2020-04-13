@@ -15,7 +15,7 @@ import top.zerotop.websocket.SocketHandler;
  * Created by zerotop on 2018/9/11.
  */
 @Configuration
-//@EnableWebSocket
+@EnableWebSocket
 @EnableWebSocketMessageBroker
 public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer implements WebSocketConfigurer {
     @Override
@@ -33,7 +33,7 @@ public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer im
     @Override
     public void configureMessageBroker(MessageBrokerRegistry registry) {
         registry.setApplicationDestinationPrefixes("/app");
-        registry.enableSimpleBroker("/topic","/queue");
+        registry.enableSimpleBroker("/topic", "/queue");
     }
 
     @Override

@@ -17,9 +17,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.util.CollectionUtils;
-import top.zerotop.blog.data.mapper.AdminMapper;
+import top.zerotop.blog.data.mapper.BlogAdminMapper;
 import top.zerotop.blog.data.mapper.UserRoleMapper;
-import top.zerotop.blog.data.model.Admin;
+import top.zerotop.blog.data.model.BlogAdmin;
 import top.zerotop.blog.data.model.UserRole;
 import top.zerotop.utils.EncryptUtils;
 import top.zerotop.utils.JsonUtils;
@@ -32,7 +32,7 @@ public class AdminRealm extends AuthorizingRealm {
     public static final transient Logger logger = LoggerFactory.getLogger(AdminRealm.class);
 
     @Autowired
-    private AdminMapper adminMapper;
+    private BlogAdminMapper blogAdminMapper;
     @Autowired
     private UserRoleMapper userRoleMapper;
 
@@ -44,13 +44,13 @@ public class AdminRealm extends AuthorizingRealm {
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         logger.info(" ========> user authorization <======== ");
 
-        Admin admin = (Admin) principals.getPrimaryPrincipal();
-        logger.info("===>" + JsonUtils.toJson(admin));
+        BlogAdmin blogAdmin = (BlogAdmin) principals.getPrimaryPrincipal();
+        logger.info("===>" + JsonUtils.toJson(blogAdmin));
 
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
         Set<String> roles = new HashSet<>();
 
-        List<UserRole> userRoles = userRoleMapper.listUserRoleByUserId(admin.getId());
+        List<UserRole> userRoles = userRoleMapper.listUserRoleByUserId(blogAdmin.getId());
         if (!CollectionUtils.isEmpty(userRoles)) {
             for (UserRole userRole : userRoles) {
                 roles.add(userRole.getRoleName());
@@ -68,11 +68,11 @@ public class AdminRealm extends AuthorizingRealm {
         String username = token.getPrincipal().toString();
         String password = String.valueOf((char[]) token.getCredentials());
 
-        Admin admin = adminMapper.selectByUsernameAndPassword(username, EncryptUtils.MD5(password));
-        if (null != admin) {
+        BlogAdmin blogAdmin = blogAdminMapper.selectByUsernameAndPassword(username, EncryptUtils.MD5(password));
+        if (null != blogAdmin) {
             logger.info(String.format("admin: [%s] 认证成功", username));
 
-            AuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(admin, password, getName());
+            AuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(blogAdmin, password, getName());
             return authenticationInfo;
         } else {
             logger.error(token.getPrincipal() + " 用户认证失败<===");

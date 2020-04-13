@@ -5,6 +5,8 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import org.dozer.DozerBeanMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +27,8 @@ import top.zerotop.utils.PageInfo;
  */
 @Service
 public class ArticleServiceImpl implements ArticleService {
+    private static Logger logger = LoggerFactory.getLogger(ArticleServiceImpl.class);
+
     @Autowired
     private ArticleMapper articleMapper;
     @Autowired
@@ -60,23 +64,24 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public String insertArticle(ArticleRequest articleRequest) {
-        if (articleRequest == null) {
-            return "";
+        if (articleRequest != null) {
+            Article article = dozerMapper.map(articleRequest, Article.class);
+            String articleId = EncryptUtils.getUuid();
+            article.setArticleId(articleId);
+            article.setGmtCreate(LocalDateTime.now().toString());
+            article.setGmtModified(LocalDateTime.now().toString());
+            if (articleMapper.insertArticle(article) > 0) {
+                return articleId;
+            }
         }
-        Article article = dozerMapper.map(articleRequest, Article.class);
-        String articleId = EncryptUtils.getUuid();
-        article.setArticleId(articleId);
-        article.setGmtCreate(LocalDateTime.now().toString());
-        article.setGmtModified(LocalDateTime.now().toString());
-        if (articleMapper.insertArticle(article) > 0) {
-            return articleId;
-        }
+        logger.warn("insert article failed, article request is null.");
         return "";
     }
 
     @Override
     public int updateArticleById(Article article) {
         if (article == null || !StringUtils.hasText(article.getArticleId())) {
+            logger.warn("article is null or article id is empty, return");
             return 0;
         }
         article.setGmtModified(LocalDateTime.now().toString());

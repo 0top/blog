@@ -38,7 +38,7 @@ public class SocketController {
         return msg;
     }
 
-    @MessageMapping ("/greeting")
+    @MessageMapping("/greeting")
     public String handler(@Payload() String payload) {
         System.out.println("enter greeting");
 
@@ -47,12 +47,6 @@ public class SocketController {
 
         template.convertAndSend("/topic/greet", msg);
 
-        return "[" + System.currentTimeMillis() + ": " ;
+        return "[" + System.currentTimeMillis() + ": ";
     }
-
-    @ExceptionHandler(value = Exception.class)
-    public void getException(Exception e) {
-        System.out.println("something wrong "+e.getClass()+" : "+e.getMessage());
-    }
-
 }

@@ -16,15 +16,12 @@ import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
-import top.zerotop.blog.data.model.Admin;
 import top.zerotop.blog.releam.CustomToken;
 import top.zerotop.blog.service.UserRoleService;
 import top.zerotop.blog.service.UserService;
-import top.zerotop.global.enums.UserRoleEnum;
 import top.zerotop.utils.ServiceResult;
 import top.zerotop.blog.web.Request.AdminRequest;
 import top.zerotop.global.exception.BlogException;
-import top.zerotop.global.exception.UserAccountException;
 
 import javax.servlet.http.HttpServletRequest;
 

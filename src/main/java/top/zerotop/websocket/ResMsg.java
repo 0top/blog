@@ -2,7 +2,7 @@ package top.zerotop.websocket;
 
 import java.io.Serializable;
 
-public class ResMsg implements Serializable{
+public class ResMsg implements Serializable {
 
     private String msg;
 

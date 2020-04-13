@@ -2,7 +2,7 @@ package top.zerotop.blog.data.model;
 
 import java.io.Serializable;
 
-public class Admin implements Serializable {
+public class BlogAdmin implements Serializable {
     private long id;
     private String code;
     private String nickname;
@@ -13,10 +13,10 @@ public class Admin implements Serializable {
     private String gmtCreate;
     private String gmtModified;
 
-    public Admin() {
+    public BlogAdmin() {
     }
 
-    public Admin(String username, String password) {
+    public BlogAdmin(String username, String password) {
         this.username = username;
         this.password = password;
     }

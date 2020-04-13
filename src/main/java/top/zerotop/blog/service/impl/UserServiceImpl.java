@@ -5,14 +5,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import org.springframework.util.StringUtils;
-import top.zerotop.blog.data.mapper.AdminMapper;
-import top.zerotop.blog.data.model.Admin;
+import top.zerotop.blog.data.mapper.BlogAdminMapper;
+import top.zerotop.blog.data.model.BlogAdmin;
 import top.zerotop.blog.service.UserService;
 import top.zerotop.global.exception.UserHasExistException;
 import top.zerotop.utils.EncryptUtils;
 import top.zerotop.blog.web.Request.AdminRequest;
 import top.zerotop.global.exception.BlogException;
-import top.zerotop.global.exception.UserAccountException;
 
 import java.time.LocalDateTime;
 
@@ -24,41 +23,41 @@ import java.time.LocalDateTime;
 public class UserServiceImpl implements UserService {
 
 	@Autowired
-	private AdminMapper adminMapper;
+	private BlogAdminMapper blogAdminMapper;
 	@Autowired
 	private DozerBeanMapper dozerMapper;
 	
 	@Override
-	public Admin selectByUsernameAndPassword(String username, String password) {
+	public BlogAdmin selectByUsernameAndPassword(String username, String password) {
 		if (StringUtils.hasText(username) && StringUtils.hasText(password)) {
 			password = EncryptUtils.MD5(password);
-			return adminMapper.selectByUsernameAndPassword(username, password);
+			return blogAdminMapper.selectByUsernameAndPassword(username, password);
 		}
 	    return null;
 	}
 
 	@Override
-	public Admin selectAdminByUserName(String username) {
+	public BlogAdmin selectAdminByUserName(String username) {
 		if (StringUtils.hasText(username)) {
-			return adminMapper.selectAdminByUserName(username);
+			return blogAdminMapper.selectAdminByUserName(username);
 		}
 		return null;
 	}
 
 	@Override
 	public int insertAdmin(AdminRequest adminRequest) throws BlogException {
-		Admin admin = dozerMapper.map(adminRequest, Admin.class);
+		BlogAdmin blogAdmin = dozerMapper.map(adminRequest, BlogAdmin.class);
 
-		Admin admin1 = adminMapper.selectAdminByUserName(admin.getUsername());
-		if (null != admin1) {
+		BlogAdmin blogAdmin1 = blogAdminMapper.selectAdminByUserName(blogAdmin.getUsername());
+		if (null != blogAdmin1) {
             throw new UserHasExistException("用户名已存在。");
         }
 
-		admin.setCode(EncryptUtils.MD5(admin.getUsername()+System.currentTimeMillis()));
-		admin.setPassword(EncryptUtils.MD5(admin.getPassword()));
-		admin.setGmtCreate(LocalDateTime.now().toString());
-		admin.setGmtModified(LocalDateTime.now().toString());
+		blogAdmin.setCode(EncryptUtils.MD5(blogAdmin.getUsername()+System.currentTimeMillis()));
+		blogAdmin.setPassword(EncryptUtils.MD5(blogAdmin.getPassword()));
+		blogAdmin.setGmtCreate(LocalDateTime.now().toString());
+		blogAdmin.setGmtModified(LocalDateTime.now().toString());
 
-		return adminMapper.insertAdmin(admin);
+		return blogAdminMapper.insertBlogAdmin(blogAdmin);
 	}
 }

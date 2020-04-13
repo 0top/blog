@@ -49,10 +49,10 @@
         <!--<property name="unauthorizedUrl" value="/unauthor.jsp" />-->
         <property name="filterChainDefinitions">
             <value>
-                <!--/admin = roles[admin]-->
-                <!--/admin/** = authc  -->
+                <!--/blogAdmin = roles[blogAdmin]-->
+                <!--/blogAdmin/** = authc  -->
                 <!--/** = anon-->
-                <!--/api/admin/v1/user/** = authc-->
+                <!--/api/blogAdmin/v1/user/** = authc-->
             </value>
         </property>
     </bean>

@@ -1,6 +1,8 @@
 package top.zerotop.websocket;
 
 import com.alibaba.fastjson.JSON;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
@@ -10,35 +12,34 @@ import java.util.List;
 
 @Service
 public class RedisServiceImpl implements RedisService {
+    private static Logger logger = LoggerFactory.getLogger(RedisServiceImpl.class);
 
     @Autowired
     private SimpMessagingTemplate template;
-
     @Autowired
     private RedisTemplate<String, String> redisTemplate;
 
     @Override
     public void getRedisMsgByTopic(String topic) {
-
-        System.out.println("new send msg to subscribe:"+topic+" msg");
+        logger.info("===> query history message from topic: {}", topic);
 
         List<String> msgList = redisTemplate.opsForList().range(topic, 0, -1);
 
-        for (String str: msgList) {
-            template.convertAndSend(topic, (ResMsg)JSON.parseObject(str, ResMsg.class));
+        for (String str : msgList) {
+            template.convertAndSend(topic, (ResMsg) JSON.parseObject(str, ResMsg.class));
         }
-
     }
 
     @Override
-    public void getRedisMsgByIdAndTopic(String id,String topic) {
-
-        System.out.println("new send msg to subscribe:"+topic+" msg");
+    public void getRedisMsgByIdAndTopic(String id, String topic) {
+        logger.info("===> receive subscribe message: id: {}, topic: {}", id, topic);
 
         List<String> msgList = redisTemplate.opsForList().range(topic, 0, -1);
+        System.out.println(msgList.size());
 
-        for (String str: msgList) {
-            template.convertAndSendToUser(id, topic, (ResMsg)JSON.parseObject(str, ResMsg.class));
+        for (String str : msgList) {
+            System.out.println(str);
+            template.convertAndSendToUser(id, topic, (ResMsg) JSON.parseObject(str, ResMsg.class));
         }
 
     }
