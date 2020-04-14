@@ -28,7 +28,7 @@ public class PermissionServiceImpl implements PermissionService {
         Permission permission = dozerBeanMapper.map(permissionRequest, Permission.class);
         permission.setGmtCreate(LocalDateTime.now().toString());
         permission.setGmtModified(LocalDateTime.now().toString());
-        permissionMapper.insertPermission(permission);
+        permissionMapper.addPermission(permission);
 
         Permission permission1 = permissionMapper.selectPermissionByCode(permission.getCode());
 

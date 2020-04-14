@@ -26,7 +26,6 @@ public class RedisController {
     @ResponseBody
     public String testRedisAdd(@ApiParam(name = "用户")
                                @RequestBody User user) {
-
         if (user == null) {
             user = new User();
             user.setNickname("nick1135");

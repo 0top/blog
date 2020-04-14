@@ -6,7 +6,7 @@ import io.swagger.annotations.ApiModelProperty;
 /**
  * Created by:zerotop  date:2019/5/13
  */
-@ApiModel(value = "权限")
+@ApiModel(value = "权限Model")
 public class PermissionRequest {
     @ApiModelProperty(value = "权限名")
     private String name;

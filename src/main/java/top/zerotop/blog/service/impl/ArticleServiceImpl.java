@@ -28,7 +28,6 @@ import top.zerotop.utils.PageInfo;
 @Service
 public class ArticleServiceImpl implements ArticleService {
     private static Logger logger = LoggerFactory.getLogger(ArticleServiceImpl.class);
-
     @Autowired
     private ArticleMapper articleMapper;
     @Autowired
@@ -41,11 +40,10 @@ public class ArticleServiceImpl implements ArticleService {
         }
         int startIndex = articleCondition.getCurrent() * articleCondition.getSize();
         int endIndex = startIndex + articleCondition.getSize();
-        String[] categorys = articleCondition.getCategory().split("\\|");
-        List<String> categorySet = CollectionUtils.arrayToList(categorys);
+        List<String> categorySet = Arrays.asList(articleCondition.getCategory().split("\\|"));
 
         String orderBy = articleCondition.getOrderBy() == null ? "gmt_create" : articleCondition.getOrderBy();
-        List<Article> articles = articleMapper.queryArticle(orderBy);
+        List<Article> articles = articleMapper.findAllArticle(orderBy);
         if (!CollectionUtils.isEmpty(articles) && StringUtils.hasText(articleCondition.getSearchString())) {
             articles = articles.stream().filter(a -> {
                 if (categorySet.size() > 0 && !categorySet.contains(a.getCategory())) {
@@ -75,7 +73,7 @@ public class ArticleServiceImpl implements ArticleService {
             }
         }
         logger.warn("insert article failed, article request is null.");
-        return "";
+        return null;
     }
 
     @Override

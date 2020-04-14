@@ -6,7 +6,7 @@ import io.swagger.annotations.ApiModelProperty;
 /**
  * Created by:zerotop  date:2019/5/12
  */
-@ApiModel(value = "用户角色model")
+@ApiModel(value = "用户角色Model")
 public class UserRoleRequest {
     @ApiModelProperty(value = "角色id", position = 0)
     private Long roleId;

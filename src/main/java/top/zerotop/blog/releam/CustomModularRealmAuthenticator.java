@@ -29,10 +29,10 @@ public class CustomModularRealmAuthenticator extends ModularRealmAuthenticator {
             }
         }
 
-        if (typeRealms.size() == 1)
+        if (typeRealms.size() == 1) {
             return doSingleRealmAuthentication(typeRealms.iterator().next(), customizedToken);
-        else
+        } else {
             return doMultiRealmAuthentication(typeRealms, customizedToken);
-
+        }
     }
 }

@@ -53,7 +53,7 @@ public class SwaggerConfig {
         return new ApiInfoBuilder()
                 .title("blog接口")
                 .description("blog请求接口api")
-                .termsOfServiceUrl("http://localhost:8088/blog")
+                .termsOfServiceUrl("http://localhost:8088/blog-server")
                 .contact(new Contact("zerotop", "https://0top.github.io", ""))
                 .version("2.0")
                 .build();

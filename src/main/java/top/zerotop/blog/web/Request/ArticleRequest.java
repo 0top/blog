@@ -6,7 +6,7 @@ import io.swagger.annotations.ApiModelProperty;
 /**
  * Created by:zerotop  date:2019/7/10
  */
-@ApiModel(value = "文章model")
+@ApiModel(value = "文章Model")
 public class ArticleRequest {
     @ApiModelProperty(value = "文章标题", position = 1)
     private String title;

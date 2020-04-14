@@ -57,7 +57,6 @@ public class AdminRealm extends AuthorizingRealm {
             }
             authorizationInfo.setRoles(roles);
         }
-
         return authorizationInfo;
     }
 

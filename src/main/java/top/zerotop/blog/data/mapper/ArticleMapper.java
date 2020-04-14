@@ -8,24 +8,22 @@ import top.zerotop.blog.data.model.Article;
 
 @Mapper
 public interface ArticleMapper {
-    @Update("update article set del_flag = '1' where article_id = #{articleId} ")
-    int deleteArticleById(String articleId);
+    @Update("UPDATE `article` SET `del_flag`='1' WHERE `article_id`=#{articleId} ")
+    int deleteArticleById(@Param("articleId") String articleId);
 
-    @Insert("insert into " +
-            "article(title, author, img_url, digest, content, category, gmt_create, gmt_modified) " +
+    @Insert("INSERT INTO " +
+            "`article`(title, author, img_url, digest, content, category, gmt_create, gmt_modified) " +
             "values(#{title}, #{author}, #{imgUrl}, #{digest}, #{content}, #{category}, #{gmtCreate}, #{gmtModified})")
     int insertArticle(Article article);
 
-    @Select("select * from article where article_id = #{articleId}")
+    @Select("SELECT * FROM `article` WHERE `article_id`=#{articleId}")
     Article selectByArticleId(@Param("articleId") String articleId);
 
-
-    @Select("<script>" +
-            "select * from article where del_flag = '0' " +
-            "<if test='orderBy != null'> order by #{orderBy} </if>" +
-            "</script>"
-    )
-    List<Article> queryArticle(@Param("orderBy") String orderBy);
+    @Select("<SCRIPT>" +
+            "SELECT * FROM `article` WHERE `del_flag`='0' " +
+            "<if test='orderBy!=null'> order by #{orderBy} </if>" +
+            "</SCRIPT>")
+    List<Article> findAllArticle(@Param("orderBy") String orderBy);
 
     @Update("<script>" +
             "update article " +

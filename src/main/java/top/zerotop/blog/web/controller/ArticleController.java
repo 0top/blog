@@ -39,7 +39,7 @@ public class ArticleController extends BaseController {
     //	@RequiresRoles("admin")
     @ApiOperation(value = "管理员添加文章", notes = "添加文章")
     @PostMapping(value = "/insert")
-    public ServiceResult insertArticle(@ApiParam(value = "文章")
+    public ServiceResult<String> insertArticle(@ApiParam(value = "文章")
                                        @RequestBody ArticleRequest articleRequest) throws BlogException {
         Assert.notNull(articleRequest, "文章不可为空");
 

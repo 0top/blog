@@ -6,7 +6,7 @@ import io.swagger.annotations.ApiModelProperty;
 /**
  * Created by:zerotop  date:2019/5/12
  */
-@ApiModel(value = "管理员")
+@ApiModel(value = "管理员Model")
 public class AdminRequest {
     @ApiModelProperty(value = "昵称", position = 0)
     private String nickname;
