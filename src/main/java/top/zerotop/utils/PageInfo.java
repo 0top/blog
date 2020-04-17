@@ -13,17 +13,16 @@ import java.util.List;
 public class PageInfo {
     private static Logger logger = LoggerFactory.getLogger(PageInfo.class);
 
-    public static <T> List<T> getPage(List<T> list, int start, int end) {
-        if (CollectionUtils.isEmpty(list)) {
+    public static <T> List<T> getPage(List<T> list, int page, int pageSize) {
+        if (CollectionUtils.isEmpty(list) || page < 0 || pageSize < 0) {
+            logger.warn("get page param error: start:[{}], end:[{}]", page, pageSize);
             return new ArrayList<>();
         }
-        if (start < 0 || end < 0 || start > end) {
-            logger.error("get page param error: start:[{}], end:[{}]", start, end);
-            return new ArrayList<>();
+        int startIndex = page * pageSize;
+        int endIndex = startIndex + pageSize;
+        if (startIndex < list.size()) {
+            return list.subList(startIndex, endIndex >= list.size() ? list.size() - 1 : endIndex);
         }
-        if (start >= list.size()) {
-            return list;
-        }
-        return list.subList(start, end >= list.size() ? list.size() - 1 : end);
+        return new ArrayList<>();
     }
 }

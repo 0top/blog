@@ -24,7 +24,6 @@ public class RedisServiceImpl implements RedisService {
         logger.info("===> query history message from topic: {}", topic);
 
         List<String> msgList = redisTemplate.opsForList().range(topic, 0, -1);
-
         for (String str : msgList) {
             template.convertAndSend(topic, (ResMsg) JSON.parseObject(str, ResMsg.class));
         }
@@ -35,13 +34,11 @@ public class RedisServiceImpl implements RedisService {
         logger.info("===> receive subscribe message: id: {}, topic: {}", id, topic);
 
         List<String> msgList = redisTemplate.opsForList().range(topic, 0, -1);
-        System.out.println(msgList.size());
 
         for (String str : msgList) {
             System.out.println(str);
             template.convertAndSendToUser(id, topic, (ResMsg) JSON.parseObject(str, ResMsg.class));
         }
-
     }
 
 

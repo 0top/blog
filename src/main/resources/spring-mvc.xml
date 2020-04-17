@@ -25,7 +25,6 @@
     <context:component-scan base-package="top.zerotop.global.exception"/>
 
     <import resource="shiro.xml"/>
-
     <bean class="top.zerotop.config.SwaggerConfig"/>
 
     <task:executor id="executor" pool-size="5"/>

@@ -13,7 +13,6 @@ import org.springframework.messaging.support.MessageHeaderAccessor;
 import top.zerotop.websocket.RedisService;
 import top.zerotop.websocket.User;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +20,7 @@ public class JsonUtils {
 
     private static ObjectMapper objectMapper = new ObjectMapper();
 
-    public static ObjectMapper objectMapper() {
+    private static ObjectMapper objectMapper() {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
         objectMapper.findAndRegisterModules();
@@ -35,7 +36,6 @@ public class JsonUtils {
             return "";
         }
     }
-
 
     public static <T> T toObject(String json, Class<T> clazz) {
         try {
@@ -93,8 +93,7 @@ public class JsonUtils {
     }
 
     public static String toJsonString(HttpServletRequest req) {
-
-        StringBuffer jsonString = new StringBuffer();
+        StringBuilder json = new StringBuilder();
         try {
             InputStream in = req.getInputStream();
             BufferedInputStream buf = new BufferedInputStream(in);
@@ -102,11 +101,11 @@ public class JsonUtils {
             int iRead;
 
             while ((iRead = buf.read(buffer)) != -1) {
-                jsonString.append(new String(buffer, 0, iRead, "utf-8"));
+                json.append(new String(buffer, 0, iRead, StandardCharsets.UTF_8));
             }
         } catch (IOException e1) {
             e1.printStackTrace();
         }
-        return jsonString.toString();
+        return json.toString();
     }
 }

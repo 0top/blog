@@ -32,7 +32,6 @@
                   value="${druid.maxPoolPreparedStatementPerConnectionSize}"/>
 
         <property name="filters" value="${druid.filters}"/>
-
         <property name="proxyFilters">
             <list>
                 <ref bean="wall-filter"/>

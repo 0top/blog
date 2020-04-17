@@ -25,17 +25,17 @@ public interface ArticleMapper {
             "</SCRIPT>")
     List<Article> findAllArticle(@Param("orderBy") String orderBy);
 
-    @Update("<script>" +
-            "update article " +
+    @Update("<SCRIPT>" +
+            "UPDATE `article` " +
             "<set>" +
-            "<if test='title!=null'>title = #{title}, </if>" +
-            "<if test='author!=null'>author = #{author}, </if>" +
-            "<if test='imgUrl!=null'>img_url = #{imgUrl}, </if>" +
-            "<if test='digest!=null'>digest = #{digest}, </if>" +
-            "<if test='content!=null'>content = #{content}, </if>" +
-            "gmt_modified = #{gmtModified} " +
-            "</set> " +
-            "where article_id = #{articleId} " +
-            "</script>")
+            "<if test='title!=null'>title=#{title}, </if>" +
+            "<if test='author!=null'>author=#{author}, </if>" +
+            "<if test='imgUrl!=null'>img_url=#{imgUrl}, </if>" +
+            "<if test='digest!=null'>digest=#{digest}, </if>" +
+            "<if test='content!=null'>content=#{content}, </if>" +
+            "gmt_modified=#{gmtModified} " +
+            "</SET> " +
+            "WHERE `article_id` = #{articleId} " +
+            "</SCRIPT>")
     int updateByArticleId(@Param("article") Article article);
 }

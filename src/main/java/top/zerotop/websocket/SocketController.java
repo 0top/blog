@@ -26,10 +26,9 @@ public class SocketController {
 
     @MessageMapping("/getmsg")
     @SendTo("/topic/greeting")
-    public @ResponseBody
-    ResMsg getMsg(@Payload() String payload) {
+    public @ResponseBody ResMsg getMsg(@Payload() String payload) {
         ResMsg msg = new ResMsg();
-        msg.setMsg(payload.toString());
+        msg.setMsg(payload);
 
         redisTemplate.opsForList().leftPush("/topic/msg", JSON.toJSONString(msg));
         List<String> msgList = redisTemplate.opsForList().range("/topic/msg", 0, -1);
