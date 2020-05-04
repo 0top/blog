@@ -3,6 +3,7 @@ package top.zerotop.blog.service.impl;
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import top.zerotop.blog.data.mapper.PermissionMapper;
 import top.zerotop.blog.data.model.Permission;
 import top.zerotop.blog.data.model.RolePermission;
@@ -24,6 +25,7 @@ public class PermissionServiceImpl implements PermissionService {
     private DozerBeanMapper dozerBeanMapper;
 
     @Override
+    @Transactional
     public int addRolePermission(PermissionRequest permissionRequest) {
         Permission permission = dozerBeanMapper.map(permissionRequest, Permission.class);
         permission.setGmtCreate(LocalDateTime.now().toString());
@@ -34,9 +36,7 @@ public class PermissionServiceImpl implements PermissionService {
 
         RolePermission rolePermission = new RolePermission(permissionRequest.getRoleId(), permission1.getId());
         rolePermission.setGmtCreate(LocalDateTime.now().toString());
-        permissionMapper.insertRolePermission(rolePermission);
-
-        return 0;
+        return permissionMapper.insertRolePermission(rolePermission);
     }
 
     @Override

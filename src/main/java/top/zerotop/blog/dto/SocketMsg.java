@@ -6,7 +6,6 @@ import javax.persistence.Table;
 
 @Table(name = "socket_msg")
 public class SocketMsg {
-
     @Id
     @Column(name = "id")
     private int id;

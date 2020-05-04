@@ -43,7 +43,6 @@ public class AdminRealm extends AuthorizingRealm {
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         logger.info(" ========> user authorization <======== ");
-
         BlogAdmin blogAdmin = (BlogAdmin) principals.getPrimaryPrincipal();
         logger.info("===>" + JsonUtils.toJson(blogAdmin));
 

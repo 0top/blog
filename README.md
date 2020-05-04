@@ -13,7 +13,7 @@ zerotop team blog
 后端：     spring + spring mvc + mybatis  
 数据库：   mysql  redis  
 中间件：   rabbitmq  
-接口文档：     swagger-ui
+接口文档： swagger-ui
 
 ### 演示：
    

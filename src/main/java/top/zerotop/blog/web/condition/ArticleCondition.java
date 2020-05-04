@@ -47,4 +47,8 @@ public class ArticleCondition extends PageCondition {
                 ", category='" + category + '\'' +
                 '}';
     }
+
+    public boolean check() {
+        return this.getCurrent() > 0 && this.getSize() >= 0;
+    }
 }

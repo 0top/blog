@@ -35,11 +35,9 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public List<Article> queryArticle(ArticleCondition articleCondition) {
-        if (articleCondition == null || articleCondition.getCurrent() < 0) {
+        if (!articleCondition.check()) {
             return new ArrayList<>();
         }
-        int startIndex = articleCondition.getCurrent() * articleCondition.getSize();
-        int endIndex = startIndex + articleCondition.getSize();
         List<String> categorySet = Arrays.asList(articleCondition.getCategory().split("\\|"));
 
         String orderBy = articleCondition.getOrderBy() == null ? "gmt_create" : articleCondition.getOrderBy();
@@ -52,7 +50,7 @@ public class ArticleServiceImpl implements ArticleService {
                 return a.getTitle().contains(articleCondition.getSearchString());
             }).collect(Collectors.toList());
         }
-        return PageInfo.getPage(articles, startIndex, endIndex);
+        return PageInfo.getPage(articles, articleCondition);
     }
 
     @Override

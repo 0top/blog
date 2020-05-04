@@ -14,9 +14,7 @@ public class CustomModularRealmAuthenticator extends ModularRealmAuthenticator {
     @Override
     protected AuthenticationInfo doAuthenticate(AuthenticationToken authenticationToken)
             throws AuthenticationException {
-
         assertRealmsConfigured();
-
         CustomToken customizedToken = (CustomToken) authenticationToken;
 
         String userRoleType = customizedToken.getUserRoleType();
