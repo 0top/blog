@@ -12,7 +12,7 @@
         <org.springframework.version>5.2.0.RELEASE</org.springframework.version>
         <io.springfox.version>2.9.2</io.springfox.version>
         <com.fasterxml.jackson.core.version>2.10.0</com.fasterxml.jackson.core.version>
-        <org.apache.shiro.version>1.4.0</org.apache.shiro.version>
+        <org.apache.shiro.version>1.8.0</org.apache.shiro.version>
     </properties>
     <dependencies>
         <dependency>
